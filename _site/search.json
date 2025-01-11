@@ -12,5 +12,47 @@
     "title": "About",
     "section": "",
     "text": "When you row your boat gently through the barn, you might encounter piranhas. Make sure to scream.\nJust kidding. This webpage contains the deliverables of my course in ISSS608 Visual Analytics at SMU."
+  },
+  {
+    "objectID": "HandsOnE/HOE00/HOE00.html",
+    "href": "HandsOnE/HOE00/HOE00.html",
+    "title": "Hands On Ex 00: Working with Tidyverse",
+    "section": "",
+    "text": "pacman::p_load(tidyverse)\n\nImporting data (Old way - deprecated)\n\nrealis_csv &lt;- read.csv(\"data/REALIS2019.csv\")\n\n\n\n\n\nrealis2019 &lt;- read_csv(\"data/REALIS2019.csv\")\n\n\npopdata_fat &lt;- read_csv(\"data/PopData2019_fat.csv\")\n\n\n\n\n\npopdata_long = popdata_fat %&gt;%\n  pivot_longer(c(3:21),\n               names_to = \"Age Group\",\n               values_to = \"Population\")\n\n\n\n\n\nwrite_rds(popdata_long, \"rds/popdata_long.rds\")\n\n\npopdata_long = read_rds(\"rds/popdata_long.rds\")\n\n\n\n\n\n\n\nrealis2019_selected = realis2019 %&gt;%\n  select('Project Name',\n         'Type of Sale',\n         'Unit Price ($ psm)',\n         'Property Type')\nrealis2019_selected\n\n# A tibble: 19,515 × 4\n   `Project Name`           `Type of Sale` `Unit Price ($ psm)` `Property Type` \n   &lt;chr&gt;                    &lt;chr&gt;                         &lt;dbl&gt; &lt;chr&gt;           \n 1 PEIRCE VIEW              Resale                         7434 Condominium     \n 2 FLORIDA PARK             Resale                         9737 Semi-Detached H…\n 3 BULLION PARK             Resale                        11467 Condominium     \n 4 CASTLE GREEN             Resale                         9346 Condominium     \n 5 HAPPY ESTATE             Resale                        10183 Semi-Detached H…\n 6 TEACHER'S HOUSING ESTATE Resale                        12659 Terrace House   \n 7 THE PANORAMA             Resale                        16064 Condominium     \n 8 THE PANORAMA             Resale                        16905 Condominium     \n 9 CHIP THYE GARDEN         Resale                        13500 Terrace House   \n10 TEACHER'S HOUSING ESTATE Resale                         9935 Terrace House   \n# ℹ 19,505 more rows\n\n\n\n\n\n\nrealis2019_filtered = realis2019_selected %&gt;%\n  filter('Property Type' ==\"Condominium\" |\n          'Property Type'== \"Apartment\") %&gt;%\n  filter('Type of Sale' == \"New Sale\") %&gt;%\n  filter('Unit Price ($ psm)' &lt;= 13000)\n\n###combining both functions\n\nrealis2019_combined = realis2019 %&gt;%\n  select('Project Name',\n         'Type of Sale',\n         'Unit Price ($ psm)',\n         'Property Type') %&gt;%\n  filter('Property Type' ==\"Condominium\" |\n          'Property Type'== \"Apartment\") %&gt;%\n  filter('Type of Sale' == \"New Sale\") %&gt;%\n  filter('Unit Price ($ psm)' &lt;= 13000)\nrealis2019_combined\n\n# A tibble: 0 × 4\n# ℹ 4 variables: Project Name &lt;chr&gt;, Type of Sale &lt;chr&gt;,\n#   Unit Price ($ psm) &lt;dbl&gt;, Property Type &lt;chr&gt;"
+  },
+  {
+    "objectID": "HandsOnE/HOE00/HOE00.html#load-tidyverse-into-r-env-by-using-code-chunk-below",
+    "href": "HandsOnE/HOE00/HOE00.html#load-tidyverse-into-r-env-by-using-code-chunk-below",
+    "title": "Hands On Ex 00: Working with Tidyverse",
+    "section": "",
+    "text": "pacman::p_load(tidyverse)\n\nImporting data (Old way - deprecated)\n\nrealis_csv &lt;- read.csv(\"data/REALIS2019.csv\")"
+  },
+  {
+    "objectID": "HandsOnE/HOE00/HOE00.html#importing-data-new-way---uses-readr-to-import-as-a-tibble-data.frame",
+    "href": "HandsOnE/HOE00/HOE00.html#importing-data-new-way---uses-readr-to-import-as-a-tibble-data.frame",
+    "title": "Hands On Ex 00: Working with Tidyverse",
+    "section": "",
+    "text": "realis2019 &lt;- read_csv(\"data/REALIS2019.csv\")\n\n\npopdata_fat &lt;- read_csv(\"data/PopData2019_fat.csv\")"
+  },
+  {
+    "objectID": "HandsOnE/HOE00/HOE00.html#pivoting-data-the-indented-function-is-processed-on-popdata_fat-called-pipe",
+    "href": "HandsOnE/HOE00/HOE00.html#pivoting-data-the-indented-function-is-processed-on-popdata_fat-called-pipe",
+    "title": "Hands On Ex 00: Working with Tidyverse",
+    "section": "",
+    "text": "popdata_long = popdata_fat %&gt;%\n  pivot_longer(c(3:21),\n               names_to = \"Age Group\",\n               values_to = \"Population\")"
+  },
+  {
+    "objectID": "HandsOnE/HOE00/HOE00.html#writing-the-file-to-a-r-data-serialisation-remember-to-add-rds-folder-to-.gitignore-as-it-is-a-data-folder",
+    "href": "HandsOnE/HOE00/HOE00.html#writing-the-file-to-a-r-data-serialisation-remember-to-add-rds-folder-to-.gitignore-as-it-is-a-data-folder",
+    "title": "Hands On Ex 00: Working with Tidyverse",
+    "section": "",
+    "text": "write_rds(popdata_long, \"rds/popdata_long.rds\")\n\n\npopdata_long = read_rds(\"rds/popdata_long.rds\")"
+  },
+  {
+    "objectID": "HandsOnE/HOE00/HOE00.html#working-with-dplyr",
+    "href": "HandsOnE/HOE00/HOE00.html#working-with-dplyr",
+    "title": "Hands On Ex 00: Working with Tidyverse",
+    "section": "",
+    "text": "realis2019_selected = realis2019 %&gt;%\n  select('Project Name',\n         'Type of Sale',\n         'Unit Price ($ psm)',\n         'Property Type')\nrealis2019_selected\n\n# A tibble: 19,515 × 4\n   `Project Name`           `Type of Sale` `Unit Price ($ psm)` `Property Type` \n   &lt;chr&gt;                    &lt;chr&gt;                         &lt;dbl&gt; &lt;chr&gt;           \n 1 PEIRCE VIEW              Resale                         7434 Condominium     \n 2 FLORIDA PARK             Resale                         9737 Semi-Detached H…\n 3 BULLION PARK             Resale                        11467 Condominium     \n 4 CASTLE GREEN             Resale                         9346 Condominium     \n 5 HAPPY ESTATE             Resale                        10183 Semi-Detached H…\n 6 TEACHER'S HOUSING ESTATE Resale                        12659 Terrace House   \n 7 THE PANORAMA             Resale                        16064 Condominium     \n 8 THE PANORAMA             Resale                        16905 Condominium     \n 9 CHIP THYE GARDEN         Resale                        13500 Terrace House   \n10 TEACHER'S HOUSING ESTATE Resale                         9935 Terrace House   \n# ℹ 19,505 more rows\n\n\n\n\n\n\nrealis2019_filtered = realis2019_selected %&gt;%\n  filter('Property Type' ==\"Condominium\" |\n          'Property Type'== \"Apartment\") %&gt;%\n  filter('Type of Sale' == \"New Sale\") %&gt;%\n  filter('Unit Price ($ psm)' &lt;= 13000)\n\n###combining both functions\n\nrealis2019_combined = realis2019 %&gt;%\n  select('Project Name',\n         'Type of Sale',\n         'Unit Price ($ psm)',\n         'Property Type') %&gt;%\n  filter('Property Type' ==\"Condominium\" |\n          'Property Type'== \"Apartment\") %&gt;%\n  filter('Type of Sale' == \"New Sale\") %&gt;%\n  filter('Unit Price ($ psm)' &lt;= 13000)\nrealis2019_combined\n\n# A tibble: 0 × 4\n# ℹ 4 variables: Project Name &lt;chr&gt;, Type of Sale &lt;chr&gt;,\n#   Unit Price ($ psm) &lt;dbl&gt;, Property Type &lt;chr&gt;"
   }
 ]

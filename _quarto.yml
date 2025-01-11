@@ -5,6 +5,19 @@ website:
   title: "ISSS608"
   navbar:
     left:
+    - text: "Hands On Exercise"
+      menu:
+      - text: "Hands On Exercise 0"
+        href: HandsOnE/HOE00/HOE00.html
+    - text: "In-class Exercise"
+      menu:
+      - text: "In-class Exercise 1"
+        href: InClassE/ICE01/ICE01.html
+    - text: "Take-home Exercise"
+      menu:
+      - text: "Take-home Exercise 1"
+        href: TakeHomeE/THE01/THE01.html
+    right:
       - href: index.qmd
         text: Home
       - about.qmd
