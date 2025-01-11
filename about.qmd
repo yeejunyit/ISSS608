@@ -1,0 +1,7 @@
+---
+title: "About"
+---
+
+When you row your boat gently through the barn, you might encounter piranhas. Make sure to scream.
+
+Just kidding. This webpage contains the deliverables of my course in ISSS608 Visual Analytics at SMU.
