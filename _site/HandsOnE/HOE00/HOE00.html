@@ -123,6 +123,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-hands-on-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Hands On Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-hands-on-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../HandsOnE/HOE00/HOE00.html">
+ <span class="dropdown-text">Hands On Exercise 0</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-in-class-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">In-class Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-in-class-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../InClassE/ICE01/ICE01.html">
+ <span class="dropdown-text">In-class Exercise 1</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Take-home Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../TakeHomeE/THE01/THE01.html">
+ <span class="dropdown-text">Take-home Exercise 1</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
@@ -147,17 +182,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting started:</a>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting started</a></li>
+  <li><a href="#importing-data-new-way" id="toc-importing-data-new-way" class="nav-link" data-scroll-target="#importing-data-new-way">Importing data (New way)</a></li>
+  <li><a href="#pivoting-data" id="toc-pivoting-data" class="nav-link" data-scroll-target="#pivoting-data">Pivoting data</a></li>
+  <li><a href="#writing-and-reading-the-file" id="toc-writing-and-reading-the-file" class="nav-link" data-scroll-target="#writing-and-reading-the-file">Writing and reading the file</a></li>
+  <li><a href="#working-with-dplyr-package" id="toc-working-with-dplyr-package" class="nav-link" data-scroll-target="#working-with-dplyr-package">Working with dplyr package</a>
   <ul class="collapse">
-  <li><a href="#load-tidyverse-into-r-env-by-using-code-chunk-below" id="toc-load-tidyverse-into-r-env-by-using-code-chunk-below" class="nav-link" data-scroll-target="#load-tidyverse-into-r-env-by-using-code-chunk-below">Load tidyverse into r env by using code chunk below</a></li>
-  <li><a href="#importing-data-new-way---uses-readr-to-import-as-a-tibble-data.frame" id="toc-importing-data-new-way---uses-readr-to-import-as-a-tibble-data.frame" class="nav-link" data-scroll-target="#importing-data-new-way---uses-readr-to-import-as-a-tibble-data.frame">Importing data (New way) - uses readr to import as a tibble data.frame</a></li>
-  <li><a href="#pivoting-data-the-indented-function-is-processed-on-popdata_fat-called-pipe" id="toc-pivoting-data-the-indented-function-is-processed-on-popdata_fat-called-pipe" class="nav-link" data-scroll-target="#pivoting-data-the-indented-function-is-processed-on-popdata_fat-called-pipe">Pivoting data (the indented function is processed on popdata_fat, called “pipe”)</a></li>
-  <li><a href="#writing-the-file-to-a-r-data-serialisation-remember-to-add-rds-folder-to-.gitignore-as-it-is-a-data-folder" id="toc-writing-the-file-to-a-r-data-serialisation-remember-to-add-rds-folder-to-.gitignore-as-it-is-a-data-folder" class="nav-link" data-scroll-target="#writing-the-file-to-a-r-data-serialisation-remember-to-add-rds-folder-to-.gitignore-as-it-is-a-data-folder">Writing the file to a r data serialisation, remember to add rds folder to .gitignore as it is a data folder</a></li>
-  <li><a href="#working-with-dplyr" id="toc-working-with-dplyr" class="nav-link" data-scroll-target="#working-with-dplyr">Working with dplyr:</a>
-  <ul class="collapse">
-  <li><a href="#select-function" id="toc-select-function" class="nav-link" data-scroll-target="#select-function">select function</a></li>
-  <li><a href="#filter-function" id="toc-filter-function" class="nav-link" data-scroll-target="#filter-function">filter function</a></li>
-  </ul></li>
+  <li><a href="#select-function" id="toc-select-function" class="nav-link" data-scroll-target="#select-function">select() function</a></li>
+  <li><a href="#filter-function" id="toc-filter-function" class="nav-link" data-scroll-target="#filter-function">filter() function</a></li>
+  <li><a href="#combining-both-functions" id="toc-combining-both-functions" class="nav-link" data-scroll-target="#combining-both-functions">combining both functions</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -196,10 +229,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="getting-started" class="level1">
-<h1>Getting started:</h1>
-<section id="load-tidyverse-into-r-env-by-using-code-chunk-below" class="level2">
-<h2 class="anchored" data-anchor-id="load-tidyverse-into-r-env-by-using-code-chunk-below">Load tidyverse into r env by using code chunk below</h2>
+<section id="getting-started" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started">Getting started</h2>
+<p>Load tidyverse into r env by using code chunk below freeze parameter prevents running of code chunks</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -208,8 +240,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>realis_csv <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/REALIS2019.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="importing-data-new-way---uses-readr-to-import-as-a-tibble-data.frame" class="level2">
-<h2 class="anchored" data-anchor-id="importing-data-new-way---uses-readr-to-import-as-a-tibble-data.frame">Importing data (New way) - uses readr to import as a tibble data.frame</h2>
+<section id="importing-data-new-way" class="level2">
+<h2 class="anchored" data-anchor-id="importing-data-new-way">Importing data (New way)</h2>
+<p>Uses readr to import csv as a tibble data.frame</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>realis2019 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/REALIS2019.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -217,8 +250,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>popdata_fat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/PopData2019_fat.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="pivoting-data-the-indented-function-is-processed-on-popdata_fat-called-pipe" class="level2">
-<h2 class="anchored" data-anchor-id="pivoting-data-the-indented-function-is-processed-on-popdata_fat-called-pipe">Pivoting data (the indented function is processed on popdata_fat, called “pipe”)</h2>
+<section id="pivoting-data" class="level2">
+<h2 class="anchored" data-anchor-id="pivoting-data">Pivoting data</h2>
+<p>%&gt;% sequentially processes functions, called “pipe”</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>popdata_long <span class="ot">=</span> popdata_fat <span class="sc">%&gt;%</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(<span class="dv">3</span><span class="sc">:</span><span class="dv">21</span>),</span>
@@ -226,8 +260,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"Population"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="writing-the-file-to-a-r-data-serialisation-remember-to-add-rds-folder-to-.gitignore-as-it-is-a-data-folder" class="level2">
-<h2 class="anchored" data-anchor-id="writing-the-file-to-a-r-data-serialisation-remember-to-add-rds-folder-to-.gitignore-as-it-is-a-data-folder">Writing the file to a r data serialisation, remember to add rds folder to .gitignore as it is a data folder</h2>
+<section id="writing-and-reading-the-file" class="level2">
+<h2 class="anchored" data-anchor-id="writing-and-reading-the-file">Writing and reading the file</h2>
+<p>rds is a r data serialisation *Remember to add rds folder to .gitignore as it is a data folder</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_rds</span>(popdata_long, <span class="st">"rds/popdata_long.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -235,16 +270,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>popdata_long <span class="ot">=</span> <span class="fu">read_rds</span>(<span class="st">"rds/popdata_long.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="working-with-dplyr" class="level2">
-<h2 class="anchored" data-anchor-id="working-with-dplyr">Working with dplyr:</h2>
+<section id="working-with-dplyr-package" class="level2">
+<h2 class="anchored" data-anchor-id="working-with-dplyr-package">Working with dplyr package</h2>
 <section id="select-function" class="level3">
-<h3 class="anchored" data-anchor-id="select-function">select function</h3>
+<h3 class="anchored" data-anchor-id="select-function">select() function</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>realis2019_selected <span class="ot">=</span> realis2019 <span class="sc">%&gt;%</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">'Project Name'</span>,</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">'Type of Sale'</span>,</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">'Unit Price ($ psm)'</span>,</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">'Property Type'</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">`</span><span class="at">Project Name</span><span class="st">`</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Type of Sale</span><span class="st">`</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Unit Price ($ psm)</span><span class="st">`</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Property Type</span><span class="st">`</span>)</span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>realis2019_selected</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 19,515 × 4
@@ -265,36 +300,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 <section id="filter-function" class="level3">
-<h3 class="anchored" data-anchor-id="filter-function">filter function</h3>
+<h3 class="anchored" data-anchor-id="filter-function">filter() function</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>realis2019_filtered <span class="ot">=</span> realis2019_selected <span class="sc">%&gt;%</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">'Property Type'</span> <span class="sc">==</span><span class="st">"Condominium"</span> <span class="sc">|</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>          <span class="st">'Property Type'</span><span class="sc">==</span> <span class="st">"Apartment"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">'Type of Sale'</span> <span class="sc">==</span> <span class="st">"New Sale"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">'Unit Price ($ psm)'</span> <span class="sc">&lt;=</span> <span class="dv">13000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Property Type</span><span class="st">`</span> <span class="sc">==</span><span class="st">"Condominium"</span> <span class="sc">|</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>          <span class="st">`</span><span class="at">Property Type</span><span class="st">`</span><span class="sc">==</span> <span class="st">"Apartment"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Type of Sale</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"New Sale"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Unit Price ($ psm)</span><span class="st">`</span> <span class="sc">&lt;=</span> <span class="dv">13000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>###combining both functions</p>
+</section>
+<section id="combining-both-functions" class="level3">
+<h3 class="anchored" data-anchor-id="combining-both-functions">combining both functions</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>realis2019_combined <span class="ot">=</span> realis2019 <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">'Project Name'</span>,</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">'Type of Sale'</span>,</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">'Unit Price ($ psm)'</span>,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">'Property Type'</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">'Property Type'</span> <span class="sc">==</span><span class="st">"Condominium"</span> <span class="sc">|</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>          <span class="st">'Property Type'</span><span class="sc">==</span> <span class="st">"Apartment"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">'Type of Sale'</span> <span class="sc">==</span> <span class="st">"New Sale"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">'Unit Price ($ psm)'</span> <span class="sc">&lt;=</span> <span class="dv">13000</span>)</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>realis2019_combined</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">`</span><span class="at">Project Name</span><span class="st">`</span>,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Type of Sale</span><span class="st">`</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Unit Price ($ psm)</span><span class="st">`</span>,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Property Type</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Property Type</span><span class="st">`</span> <span class="sc">==</span><span class="st">"Condominium"</span> <span class="sc">|</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>          <span class="st">`</span><span class="at">Property Type</span><span class="st">`</span><span class="sc">==</span> <span class="st">"Apartment"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Type of Sale</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"New Sale"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Unit Price ($ psm)</span><span class="st">`</span> <span class="sc">&lt;=</span> <span class="dv">13000</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>realis2019_filtered</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 0 × 4
-# ℹ 4 variables: Project Name &lt;chr&gt;, Type of Sale &lt;chr&gt;,
-#   Unit Price ($ psm) &lt;dbl&gt;, Property Type &lt;chr&gt;</code></pre>
+<pre><code># A tibble: 87 × 4
+   `Project Name`        `Type of Sale` `Unit Price ($ psm)` `Property Type`
+   &lt;chr&gt;                 &lt;chr&gt;                         &lt;dbl&gt; &lt;chr&gt;          
+ 1 RIVERFRONT RESIDENCES New Sale                      12863 Apartment      
+ 2 RIVERFRONT RESIDENCES New Sale                      12809 Apartment      
+ 3 RIVERFRONT RESIDENCES New Sale                      12848 Apartment      
+ 4 RIVERFRONT RESIDENCES New Sale                      12875 Apartment      
+ 5 RIVERFRONT RESIDENCES New Sale                      12962 Apartment      
+ 6 RIVERFRONT RESIDENCES New Sale                      12915 Apartment      
+ 7 RIVERFRONT RESIDENCES New Sale                      12513 Apartment      
+ 8 RIVERFRONT RESIDENCES New Sale                      12838 Apartment      
+ 9 RIVERFRONT RESIDENCES New Sale                      12970 Apartment      
+10 RIVERFRONT RESIDENCES New Sale                      13000 Apartment      
+# ℹ 77 more rows</code></pre>
 </div>
 </div>
 <hr>
 
 
-</section>
 </section>
 </section>
 

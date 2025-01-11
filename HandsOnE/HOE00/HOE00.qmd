@@ -9,22 +9,22 @@ execute:
   freeze: true
 ---
 
-# Getting started:
-
-## Load tidyverse into r env by using code chunk below
+## Getting started
+Load tidyverse into r env by using code chunk below
+freeze parameter prevents running of code chunks 
 
 ```{r}
 pacman::p_load(tidyverse)
 ```
 
 Importing data (Old way - deprecated)
-
 ```{r}
 #| eval: FALSE
 realis_csv <- read.csv("data/REALIS2019.csv")
 ```
 
-## Importing data (New way) - uses readr to import as a tibble data.frame
+## Importing data (New way)
+Uses readr to import csv as a tibble data.frame
 
 ```{r}
 realis2019 <- read_csv("data/REALIS2019.csv")
@@ -32,7 +32,8 @@ realis2019 <- read_csv("data/REALIS2019.csv")
 ```{r}
 popdata_fat <- read_csv("data/PopData2019_fat.csv")
 ```
-## Pivoting data (the indented function is processed on popdata_fat, called "pipe")
+## Pivoting data
+%>% sequentially processes functions, called "pipe"
 ```{r}
 popdata_long = popdata_fat %>%
   pivot_longer(c(3:21),
@@ -40,7 +41,9 @@ popdata_long = popdata_fat %>%
                values_to = "Population")
 ```
 
-## Writing the file to a r data serialisation, remember to add rds folder to .gitignore as it is a data folder
+## Writing and reading the file
+rds is a r data serialisation
+*Remember to add rds folder to .gitignore as it is a data folder
 
 ```{r}
 write_rds(popdata_long, "rds/popdata_long.rds")
@@ -50,36 +53,37 @@ write_rds(popdata_long, "rds/popdata_long.rds")
 popdata_long = read_rds("rds/popdata_long.rds")
 ```
 
-## Working with dplyr:
+## Working with dplyr package
 
-### select function
+### select() function
 ```{r}
 realis2019_selected = realis2019 %>%
-  select('Project Name',
-         'Type of Sale',
-         'Unit Price ($ psm)',
-         'Property Type')
+  select(`Project Name`,
+         `Type of Sale`,
+         `Unit Price ($ psm)`,
+         `Property Type`)
 realis2019_selected
 ```
-### filter function
+### filter() function
 ```{r}
 realis2019_filtered = realis2019_selected %>%
-  filter('Property Type' =="Condominium" |
-          'Property Type'== "Apartment") %>%
-  filter('Type of Sale' == "New Sale") %>%
-  filter('Unit Price ($ psm)' <= 13000)
+  filter(`Property Type` =="Condominium" |
+          `Property Type`== "Apartment") %>%
+  filter(`Type of Sale` == "New Sale") %>%
+  filter(`Unit Price ($ psm)` <= 13000)
 ```
-###combining both functions
+
+### combining both functions
 ```{r}
 realis2019_combined = realis2019 %>%
-  select('Project Name',
-         'Type of Sale',
-         'Unit Price ($ psm)',
-         'Property Type') %>%
-  filter('Property Type' =="Condominium" |
-          'Property Type'== "Apartment") %>%
-  filter('Type of Sale' == "New Sale") %>%
-  filter('Unit Price ($ psm)' <= 13000)
-realis2019_combined
+  select(`Project Name`,
+         `Type of Sale`,
+         `Unit Price ($ psm)`,
+         `Property Type`) %>%
+  filter(`Property Type` =="Condominium" |
+          `Property Type`== "Apartment") %>%
+  filter(`Type of Sale` == "New Sale") %>%
+  filter(`Unit Price ($ psm)` <= 13000)
+realis2019_filtered
 ```
 ------------------------------------------------------------------------
