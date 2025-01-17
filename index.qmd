@@ -2,4 +2,8 @@
 title: "ISSS608"
 ---
 
-Welcome to **ISSS608 Visual Analytics and Applications**.![](images/Agnosticism.gif)
+Welcome to **ISSS608 Visual Analytics and Applications**.
+
+Take a look at this mathematical function.
+
+![](images/Ackermann function.jpg)
