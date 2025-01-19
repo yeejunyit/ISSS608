@@ -6,4 +6,4 @@ Welcome to **ISSS608 Visual Analytics and Applications**.
 
 Take a look at this mathematical function.
 
-![](images/Ackermann function.jpg)
+![](images/Ackermann%20function.jpg)

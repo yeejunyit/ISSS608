@@ -4,14 +4,14 @@
     "href": "index.html",
     "title": "ISSS608",
     "section": "",
-    "text": "Welcome to ISSS608 Visual Analytics and Applications."
+    "text": "Welcome to ISSS608 Visual Analytics and Applications.\nTake a look at this mathematical function."
   },
   {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "When you row your boat gently through the barn, you might encounter piranhas. Make sure to scream.\nJust kidding. This webpage contains the deliverables of my course in ISSS608 Visual Analytics at SMU."
+    "text": "This webpage contains the deliverables of my course in ISSS608 Visual Analytics and Applications at SMU."
   },
   {
     "objectID": "HandsOnE/HOE00/HOE00.html",
@@ -215,5 +215,47 @@
     "title": "Hands on Exercise 01: ggplot2 Graphics",
     "section": "First Glance: Comparing Graphics",
     "text": "First Glance: Comparing Graphics\n\nR Graphics\n\nhist(exam_data$MATHS)\n\n\n\n\n\n\n\n\nHere the code is simple\n\n\nggplot2\n\nggplot(data=exam_data, aes(x = MATHS)) +\n  geom_histogram(bins=10, \n                 boundary = 100,\n                 color=\"black\", \n                 fill=\"grey\") +\n  ggtitle(\"Distribution of Maths scores\")\n\n\n\n\n\n\n\n\nHere, there are more paramters to customise, but the mapping between variables and the properties of interest are more visible here"
+  },
+  {
+    "objectID": "HOE/HOE00/HOE00.html",
+    "href": "HOE/HOE00/HOE00.html",
+    "title": "Hands On Ex 00: Working with Tidyverse",
+    "section": "",
+    "text": "Load tidyverse into r env by using code chunk below freeze parameter prevents running of code chunks\n\npacman::p_load(tidyverse)\n\nImporting data (Old way - deprecated)\n\nrealis_csv &lt;- read.csv(\"data/REALIS2019.csv\")"
+  },
+  {
+    "objectID": "HOE/HOE00/HOE00.html#getting-started",
+    "href": "HOE/HOE00/HOE00.html#getting-started",
+    "title": "Hands On Ex 00: Working with Tidyverse",
+    "section": "",
+    "text": "Load tidyverse into r env by using code chunk below freeze parameter prevents running of code chunks\n\npacman::p_load(tidyverse)\n\nImporting data (Old way - deprecated)\n\nrealis_csv &lt;- read.csv(\"data/REALIS2019.csv\")"
+  },
+  {
+    "objectID": "HOE/HOE00/HOE00.html#importing-data-new-way",
+    "href": "HOE/HOE00/HOE00.html#importing-data-new-way",
+    "title": "Hands On Ex 00: Working with Tidyverse",
+    "section": "Importing data (New way)",
+    "text": "Importing data (New way)\nUses readr to import csv as a tibble data.frame\n\nrealis2019 &lt;- read_csv(\"data/REALIS2019.csv\")\n\n\npopdata_fat &lt;- read_csv(\"data/PopData2019_fat.csv\")"
+  },
+  {
+    "objectID": "HOE/HOE00/HOE00.html#pivoting-data",
+    "href": "HOE/HOE00/HOE00.html#pivoting-data",
+    "title": "Hands On Ex 00: Working with Tidyverse",
+    "section": "Pivoting data",
+    "text": "Pivoting data\n%&gt;% sequentially processes functions, called “pipe”\n\npopdata_long = popdata_fat %&gt;%\n  pivot_longer(c(3:21),\n               names_to = \"Age Group\",\n               values_to = \"Population\")"
+  },
+  {
+    "objectID": "HOE/HOE00/HOE00.html#writing-and-reading-the-file",
+    "href": "HOE/HOE00/HOE00.html#writing-and-reading-the-file",
+    "title": "Hands On Ex 00: Working with Tidyverse",
+    "section": "Writing and reading the file",
+    "text": "Writing and reading the file\nrds is a r data serialisation *Remember to add rds folder to .gitignore as it is a data folder\n\nwrite_rds(popdata_long, \"rds/popdata_long.rds\")\n\n\npopdata_long = read_rds(\"rds/popdata_long.rds\")"
+  },
+  {
+    "objectID": "HOE/HOE00/HOE00.html#working-with-dplyr-package",
+    "href": "HOE/HOE00/HOE00.html#working-with-dplyr-package",
+    "title": "Hands On Ex 00: Working with Tidyverse",
+    "section": "Working with dplyr package",
+    "text": "Working with dplyr package\n\nselect() function\n\nrealis2019_selected = realis2019 %&gt;%\n  select(`Project Name`,\n         `Type of Sale`,\n         `Unit Price ($ psm)`,\n         `Property Type`)\nrealis2019_selected\n\n# A tibble: 19,515 × 4\n   `Project Name`           `Type of Sale` `Unit Price ($ psm)` `Property Type` \n   &lt;chr&gt;                    &lt;chr&gt;                         &lt;dbl&gt; &lt;chr&gt;           \n 1 PEIRCE VIEW              Resale                         7434 Condominium     \n 2 FLORIDA PARK             Resale                         9737 Semi-Detached H…\n 3 BULLION PARK             Resale                        11467 Condominium     \n 4 CASTLE GREEN             Resale                         9346 Condominium     \n 5 HAPPY ESTATE             Resale                        10183 Semi-Detached H…\n 6 TEACHER'S HOUSING ESTATE Resale                        12659 Terrace House   \n 7 THE PANORAMA             Resale                        16064 Condominium     \n 8 THE PANORAMA             Resale                        16905 Condominium     \n 9 CHIP THYE GARDEN         Resale                        13500 Terrace House   \n10 TEACHER'S HOUSING ESTATE Resale                         9935 Terrace House   \n# ℹ 19,505 more rows\n\n\n\n\nfilter() function\n\nrealis2019_filtered = realis2019_selected %&gt;%\n  filter(`Property Type` ==\"Condominium\" |\n          `Property Type`== \"Apartment\") %&gt;%\n  filter(`Type of Sale` == \"New Sale\") %&gt;%\n  filter(`Unit Price ($ psm)` &lt;= 13000)\n\n\n\ncombining both functions\n\nrealis2019_combined = realis2019 %&gt;%\n  select(`Project Name`,\n         `Type of Sale`,\n         `Unit Price ($ psm)`,\n         `Property Type`) %&gt;%\n  filter(`Property Type` ==\"Condominium\" |\n          `Property Type`== \"Apartment\") %&gt;%\n  filter(`Type of Sale` == \"New Sale\") %&gt;%\n  filter(`Unit Price ($ psm)` &lt;= 13000)\nrealis2019_filtered\n\n# A tibble: 87 × 4\n   `Project Name`        `Type of Sale` `Unit Price ($ psm)` `Property Type`\n   &lt;chr&gt;                 &lt;chr&gt;                         &lt;dbl&gt; &lt;chr&gt;          \n 1 RIVERFRONT RESIDENCES New Sale                      12863 Apartment      \n 2 RIVERFRONT RESIDENCES New Sale                      12809 Apartment      \n 3 RIVERFRONT RESIDENCES New Sale                      12848 Apartment      \n 4 RIVERFRONT RESIDENCES New Sale                      12875 Apartment      \n 5 RIVERFRONT RESIDENCES New Sale                      12962 Apartment      \n 6 RIVERFRONT RESIDENCES New Sale                      12915 Apartment      \n 7 RIVERFRONT RESIDENCES New Sale                      12513 Apartment      \n 8 RIVERFRONT RESIDENCES New Sale                      12838 Apartment      \n 9 RIVERFRONT RESIDENCES New Sale                      12970 Apartment      \n10 RIVERFRONT RESIDENCES New Sale                      13000 Apartment      \n# ℹ 77 more rows"
   }
 ]
