@@ -27,7 +27,9 @@ Read data file
 exam_data = read_csv("data/Exam_data.csv")
 ```
 
-## First Glance: Comparing Graphics {.tabset}
+## First Glance: Comparing Graphics
+
+:::{.panel-tabset}
 
 ### R Graphics
 
@@ -49,7 +51,7 @@ ggplot(data=exam_data, aes(x = MATHS)) +
 ```
 
 Here, there are more paramters to customise, but the mapping between variables and the properties of interest are more visible here
-
+:::
 ## Grammar of Graphics
 
 Before we dive in, We need to understand that there is a scheme for data visualization which breaks up graphs into components such as scales and layers.

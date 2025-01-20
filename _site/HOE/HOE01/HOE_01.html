@@ -188,11 +188,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#loading-data" id="toc-loading-data" class="nav-link" data-scroll-target="#loading-data">Loading Data</a></li>
-  <li><a href="#first-glance-comparing-graphics" id="toc-first-glance-comparing-graphics" class="nav-link" data-scroll-target="#first-glance-comparing-graphics">First Glance: Comparing Graphics</a>
-  <ul class="collapse">
-  <li><a href="#r-graphics" id="toc-r-graphics" class="nav-link" data-scroll-target="#r-graphics">R Graphics</a></li>
-  <li><a href="#ggplot2" id="toc-ggplot2" class="nav-link" data-scroll-target="#ggplot2">ggplot2</a></li>
-  </ul></li>
+  <li><a href="#first-glance-comparing-graphics" id="toc-first-glance-comparing-graphics" class="nav-link" data-scroll-target="#first-glance-comparing-graphics">First Glance: Comparing Graphics</a></li>
   <li><a href="#grammar-of-graphics" id="toc-grammar-of-graphics" class="nav-link" data-scroll-target="#grammar-of-graphics">Grammar of Graphics</a></li>
   <li><a href="#essential-grammatical-element-1-data" id="toc-essential-grammatical-element-1-data" class="nav-link" data-scroll-target="#essential-grammatical-element-1-data">Essential Grammatical Element 1: Data</a></li>
   <li><a href="#essential-grammatical-element-2-aesthetics" id="toc-essential-grammatical-element-2-aesthetics" class="nav-link" data-scroll-target="#essential-grammatical-element-2-aesthetics">Essential Grammatical Element 2: Aesthetics</a></li>
@@ -252,7 +248,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">January 18, 2025</p>
+      <p class="date-modified">January 20, 2025</p>
     </div>
   </div>
     
@@ -278,10 +274,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>exam_data <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">"data/Exam_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="first-glance-comparing-graphics" class="level2 tabset">
-<h2 class="tabset anchored" data-anchor-id="first-glance-comparing-graphics">First Glance: Comparing Graphics</h2>
-<section id="r-graphics" class="level3">
-<h3 class="anchored" data-anchor-id="r-graphics">R Graphics</h3>
+<section id="first-glance-comparing-graphics" class="level2">
+<h2 class="anchored" data-anchor-id="first-glance-comparing-graphics">First Glance: Comparing Graphics</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">R Graphics</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">ggplot2</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(exam_data<span class="sc">$</span>MATHS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -293,9 +291,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Here the code is simple</p>
-</section>
-<section id="ggplot2" class="level3">
-<h3 class="anchored" data-anchor-id="ggplot2">ggplot2</h3>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>exam_data, <span class="fu">aes</span>(<span class="at">x =</span> MATHS)) <span class="sc">+</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>, </span>
@@ -312,7 +309,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Here, there are more paramters to customise, but the mapping between variables and the properties of interest are more visible here</p>
-</section>
+</div>
+</div>
+</div>
 </section>
 <section id="grammar-of-graphics" class="level2">
 <h2 class="anchored" data-anchor-id="grammar-of-graphics">Grammar of Graphics</h2>

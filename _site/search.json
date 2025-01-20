@@ -214,7 +214,7 @@
     "href": "HOE/HOE01/HOE_01.html#first-glance-comparing-graphics",
     "title": "Hands on Exercise 01: ggplot2 Graphics",
     "section": "First Glance: Comparing Graphics",
-    "text": "First Glance: Comparing Graphics\n\nR Graphics\n\nhist(exam_data$MATHS)\n\n\n\n\n\n\n\n\nHere the code is simple\n\n\nggplot2\n\nggplot(data=exam_data, aes(x = MATHS)) +\n  geom_histogram(bins=10, \n                 boundary = 100,\n                 color=\"black\", \n                 fill=\"grey\") +\n  ggtitle(\"Distribution of Maths scores\")\n\n\n\n\n\n\n\n\nHere, there are more paramters to customise, but the mapping between variables and the properties of interest are more visible here"
+    "text": "First Glance: Comparing Graphics\n\nR Graphicsggplot2\n\n\n\nhist(exam_data$MATHS)\n\n\n\n\n\n\n\n\nHere the code is simple\n\n\n\nggplot(data=exam_data, aes(x = MATHS)) +\n  geom_histogram(bins=10, \n                 boundary = 100,\n                 color=\"black\", \n                 fill=\"grey\") +\n  ggtitle(\"Distribution of Maths scores\")\n\n\n\n\n\n\n\n\nHere, there are more paramters to customise, but the mapping between variables and the properties of interest are more visible here"
   },
   {
     "objectID": "HOE/HOE00/HOE00.html",
