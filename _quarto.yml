@@ -7,10 +7,10 @@ website:
     left:
     - text: "Hands On Exercise"
       menu:
-      - text: "Hands On Exercise 0"
-        href: HandsOnE/HOE00/HOE00.html
       - text: "Hands On Exercise 1"
         href: HOE/HOE01/HOE_01.html
+      - text: "Hands On Exercise 2"
+        href: HOE/HOE01/HOE_02.html
     - text: "In-class Exercise"
       menu:
       - text: "In-class Exercise 1"
