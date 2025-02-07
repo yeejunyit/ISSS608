@@ -1,5 +1,5 @@
 ---
-title: "Hands on Exercise 04: Programming Animated Statistical Graphics  with R"
+title: "Hands on Exercise 03b: Programming Animated Statistical Graphics  with R"
 author: "Yee Jun Yit"
 date-modified: "last-modified"
 execute:
@@ -29,7 +29,7 @@ We first introduce some of the key concepts and terminology related to this type
 
 -   **Animation Attributes**: settings that control how the animation behaves. For example, you can specify the duration of each frame, the easing function used to transition between frames, and whether to start the animation from the current frame or from the beginning.
 
-::: {.callout-tip}
+::: callout-tip
 ## Tip
 
 Before making animated graphs, one should ask oneself: Does it make sense to go through the effort? If you are conducting an exploratory data analysis, an animated graphic may not be worth the time investment. However, if you are giving a presentation, a few well-placed animated graphics can help an audience connect with your topic remarkably better than static counterparts.
@@ -97,8 +97,10 @@ ggplot(globalPop, aes(x = Old, y = Young,
 ```
 
 ### Building the animated bubble plot
--  [transition_time()](https://gganimate.com/reference/transition_time.html) of **gganimate** is used to create transition through distinct states in time (i.e. Year).
--  `ease_aes()` is used to control easing of aesthetics. The default is `linear`. Other methods are: quadratic, cubic, quartic, quintic, sine, circular, exponential, elastic, back, and bounce.
+
+-   [transition_time()](https://gganimate.com/reference/transition_time.html) of **gganimate** is used to create transition through distinct states in time (i.e. Year).
+-   `ease_aes()` is used to control easing of aesthetics. The default is `linear`. Other methods are: quadratic, cubic, quartic, quintic, sine, circular, exponential, elastic, back, and bounce.
+
 ```{r}
 ggplot(globalPop, aes(x = Old, y = Young, 
                       size = Population, 
@@ -120,7 +122,7 @@ In **Plotly R** package, both `ggplotly()` and `plot_ly()` support key frame ani
 
 ### Building an animated bubble plot: `ggplotly()` method
 
-::: {.panel-tabset}
+::: panel-tabset
 #### The plot
 
 ```{r, echo=FALSE}
@@ -162,16 +164,16 @@ ggplotly(gg)
 ```
 :::
 
-::: {.callout-note}
+::: callout-note
 #### Things to learn from the code chunk above
 
--  Appropriate ggplot2 functions are used to create a static bubble plot. The output is then saved as an R object called gg.
--  `ggplotly()` is then used to convert the R graphic object into an animated svg object.
+-   Appropriate ggplot2 functions are used to create a static bubble plot. The output is then saved as an R object called gg.
+-   `ggplotly()` is then used to convert the R graphic object into an animated svg object.
 :::
 
 Notice that although `show.legend = FALSE` argument was used, the legend still appears on the plot. To overcome this problem, `theme(legend.position='none')` should be used as shown in the plot and code chunk below.
 
-::: {.panel-tabset}
+::: panel-tabset
 #### The plot
 
 ```{r, echo=FALSE}
@@ -212,9 +214,10 @@ gg <- ggplot(globalPop,
 ggplotly(gg)
 ```
 :::
+
 ### Building an animated bubble plot: `plot_ly()` method
 
-::: {.panel-tabset}
+::: panel-tabset
 #### The plot
 
 ```{r, echo=FALSE}
@@ -255,5 +258,6 @@ bp
 :::
 
 ## References
--  [Getting Started](https://gganimate.com/articles/gganimate.html)
--  [Building an animation step-by-step with gganimate](https://www.alexcookson.com/post/2020-10-18-building-an-animation-step-by-step-with-gganimate/)
+
+-   [Getting Started](https://gganimate.com/articles/gganimate.html)
+-   [Building an animation step-by-step with gganimate](https://www.alexcookson.com/post/2020-10-18-building-an-animation-step-by-step-with-gganimate/)

@@ -1,5 +1,5 @@
 ---
-title: "Hands on Exercise 03: Interactive Data Visualisations with R"
+title: "Hands on Exercise 03a: Interactive Data Visualisations with R"
 author: "Yee Jun Yit"
 date-modified: "last-modified"
 execute:
@@ -487,7 +487,7 @@ girafe(
 
 Coordinated multiple views methods has been implemented in the data visualisation below.
 
-::: {.panel-tabset}
+::: panel-tabset
 #### The plots
 
 ```{r, echo=FALSE}
@@ -581,7 +581,7 @@ There are two ways to create interactive graph by using plotly, they are by usin
 
 The tabset below shows an example a basic interactive plot created by using plot_ly().
 
-::: {.panel-tabset}
+::: panel-tabset
 #### The plot
 
 ```{r, echo=FALSE}
@@ -597,14 +597,11 @@ plot_ly(data = exam_data,
              x = ~MATHS, 
              y = ~ENGLISH)
 ```
-
 :::
 
 ### Working with visual variable: plot_ly() method
 
-In the code chunk below, *color* argument is mapped to a qualitative visual variable (i.e. RACE). 
-::: {.panel-tabset} 
-#### The plot
+In the code chunk below, *color* argument is mapped to a qualitative visual variable (i.e. RACE). ::: {.panel-tabset} \#### The plot
 
 ```{r, echo=FALSE}
 plot_ly(data = exam_data, 
@@ -630,7 +627,7 @@ Creating an interactive scatter plot: ggplotly() method
 
 The code chunk below plots a generic interactive scatter plot by using *ggplotly()*. It provides the coordinates of the plots as a default.
 
-::: {.panel-tabset}
+::: panel-tabset
 #### The plot
 
 ```{r, echo=FALSE}
@@ -668,7 +665,7 @@ The creation of a coordinated linked plot by using plotly involves three steps:
 
 3.  [subplot()](https://plotly.com/r/subplots/) of **plotly** package is used to place them next to each other side-by-side.
 
-::: {.panel-tabset}
+::: panel-tabset
 #### The plot
 
 ```{r, echo=FALSE}
