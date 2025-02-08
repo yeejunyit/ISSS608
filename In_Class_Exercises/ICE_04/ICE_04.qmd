@@ -1,0 +1,30 @@
+---
+title: "In Class Exercise 04: Box plot"
+author: "Yee Jun Yit"
+date-modified: "last-modified"
+execute:
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
+---
+
+## Loading data
+
+```{r}
+pacman::p_load(haven, SmartEDA, tidyverse, tidymodels)
+```
+
+```{r}
+exam_data <- read_csv("data/Exam_data.csv")
+```
+## Box plot as a contrast with more detailed visual representations from class
+
+```{r}
+ggplot(data = exam_data,
+       aes(x = ENGLISH,
+           y = CLASS)) +
+  geom_boxplot()
+```
+
+

@@ -1,0 +1,17 @@
+{
+  "hash": "65de9e60f75351d4d6b2ec5b6a5124c5",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"In Class Exercise 04: Box plot\"\nauthor: \"Yee Jun Yit\"\ndate-modified: \"last-modified\"\nexecute:\n  echo: true\n  eval: true\n  warning: false\n  freeze: true\n---\n\n\n\n## Loading data\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\npacman::p_load(haven, SmartEDA, tidyverse, tidymodels)\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\nexam_data <- read_csv(\"data/Exam_data.csv\")\n```\n:::\n\n\n## Box plot as a contrast with more detailed visual representations from class\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nggplot(data = exam_data,\n       aes(x = ENGLISH,\n           y = CLASS)) +\n  geom_boxplot()\n```\n\n::: {.cell-output-display}\n![](ICE_04_files/figure-html/unnamed-chunk-3-1.png){width=672}\n:::\n:::\n",
+    "supporting": [
+      "ICE_04_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

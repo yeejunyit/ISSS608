@@ -21,12 +21,12 @@ website:
         href: Hands_On_Exercises/HOE04/HOE_04b.html
     - text: "In-class Exercise"
       menu:
-      - text: "In-class Exercise 1"
-        href: InClassE/ICE01/ICE01.html
+      - text: "In-class Exercise 4"
+        href: In_Class_Exercises/ICE_04/ICE_04.html
     - text: "Take-home Exercise"
       menu:
       - text: "Take-home Exercise 1"
-        href: TakeHomeE/THE01/THE01.html
+        href: Take_Home_Exercises/THE_01/THE01.html
     right:
       - href: index.qmd
         text: Home
