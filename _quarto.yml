@@ -19,6 +19,12 @@ website:
         href: Hands_On_Exercises/HOE04/HOE_04a.html
       - text: "Hands On Exercise 4b"
         href: Hands_On_Exercises/HOE04/HOE_04b.html
+      - text: "Hands On Exercise 4c"
+        href: Hands_On_Exercises/HOE04/HOE_04c.html
+      - text: "Hands On Exercise 4d"
+        href: Hands_On_Exercises/HOE04/HOE_04d.html
+      - text: "Hands On Exercise 5b"
+        href: Hands_On_Exercises/HOE05/HOE_05b.html
     - text: "In-class Exercise"
       menu:
       - text: "In-class Exercise 4"
