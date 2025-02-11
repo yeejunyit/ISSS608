@@ -19,7 +19,13 @@ In this exercise, we will build funnel plots for, which is a specially designed 
 
 ## Loading Data
 
-We will be using the following R packages: - **FunnelPlotR** for creating funnel plots, - plotly for creating interactive funnel plots, - ggplot2 for creating funnel plots manually, - knitr, for building static html tables, - tidyverse, a family of R packages for data science processes.
+We will be using the following R packages:
+
+-   **FunnelPlotR** for creating funnel plots,
+-   plotly for creating interactive funnel plots,
+-   ggplot2 for creating funnel plots manually,
+-   knitr, for building static html tables,
+-   tidyverse, a family of R packages for data science processes.
 
 ```{r}
 pacman::p_load(FunnelPlotR, plotly, knitr, tidyverse)
@@ -34,7 +40,14 @@ covid19  <- read_csv("data/COVID-19_DKI_Jakarta.csv") %>%
 
 ## FunnelPlotR methods
 
-The [FunnelPlotR](https://nhs-r-community.github.io/FunnelPlotR/) package uses ggplot to generate funnel plots. It requires a `numerator` (events of interest), `denominator` (population to be considered) and `group`. The key arguments selected for customisation are: - `limit`: plot limits (95 or 99) - `label_outliers`: to label outliers (true or false) - `Poisson_limits`: to add Poisson limits to the plot - `OD_adjust`: to add overdispersed limits to the plot - `xrange` and `yrange`: to specify the range to display for axes, acting like a zoom function - Other aesthetic components such as graph title, axis labels etc
+The [FunnelPlotR](https://nhs-r-community.github.io/FunnelPlotR/) package uses ggplot to generate funnel plots. It requires a `numerator` (events of interest), `denominator` (population to be considered) and `group`. The key arguments selected for customisation are:
+
+-   `limit`: plot limits (95 or 99)
+-   `label_outliers`: to label outliers (true or false)
+-   `Poisson_limits`: to add Poisson limits to the plot
+-   `OD_adjust`: to add overdispersed limits to the plot
+-   `xrange` and `yrange`: to specify the range to display for axes, acting like a zoom function
+-   Other aesthetic components such as graph title, axis labels etc
 
 ### FunnelPlotR methods: The basic plot
 

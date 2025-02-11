@@ -10,11 +10,13 @@ execute:
 ---
 
 ## Overview
+
 Ternary plots are a way of displaying the distribution and variability of three-part compositional data. (For example, the proportion of aged, economy active and young population or sand, silt, and clay in soil.) It’s display is a triangle with sides scaled from 0 to 1. Each side represents one of the three components. A point is plotted so that a line drawn perpendicular from the point to each leg of the triangle intersect at the component values of the point.
 
 In this exercise, we will build ternary plots programmatically using R for visualising and analysing the population structure of Singapore.
 
 We will follow 4 steps for this exercise:
+
 (1) Install and launch **tidyverse** and **ggtern** packages
 (2) Derive three new measures using `mutate()` function of **dplyr** package
 (3) Build a static ternary plot using `ggtern()` function of **ggtern** package
@@ -23,8 +25,9 @@ We will follow 4 steps for this exercise:
 ## Loading Data
 
 We will use two main R packages for this hands-on exercise. They are:
+
 -  [ggtern](https://cran.r-project.org/web/packages/ggtern/ggtern.pdf), a ggplot extension specially designed to plot ternary diagrams. The package will be used to plot static ternary plots.
--  [Plotly R](https://plotly.com/r/), an R package for creating interactive web-based graphs via plotly’s JavaScript graphing library, plotly.js . The **plotly R** libary contains the *ggplotly* function, which will convert **ggplot2** figures into a Plotly object.
+-  [Plotly R](https://plotly.com/r/), an R package for creating interactive web-based graphs via plotly’s JavaScript graphing library, plotly.js. The **plotly R** libary contains the *ggplotly* function, which will convert **ggplot2** figures into a Plotly object.
 -  tidyverse, a family of R packages for data science processes.
 
 ```{r}
@@ -36,6 +39,7 @@ We will be using the [Singapore Residents by Planning AreaSubzone, Age Group, Se
 ```{r}
 pop_data <- read_csv("data/respopagsex2000to2018_tidy.csv") 
 ```
+
 We will use the ***mutate()*** function of **dplyr** package to derive three new measures, namely: young, active, and old by unpacking the columns based on year, grouped by their ages using `pivot_wider()`.
 
 ```{r}
@@ -55,10 +59,12 @@ agpop_mutated <- pop_data %>%
 ### Plotting a static ternary diagram
 
 We use **ggtern()** function of **ggtern** package to create a simple ternary plot.
+
 ```{r}
 ggtern(data=agpop_mutated,aes(x=YOUNG,y=ACTIVE, z=OLD)) +
   geom_point()
 ```
+
 We add a theme for better clarity of visualisation.
 
 ```{r}
@@ -67,6 +73,7 @@ ggtern(data=agpop_mutated, aes(x=YOUNG,y=ACTIVE, z=OLD)) +
   labs(title="Population structure, 2018") +
   theme_rgbw()
 ```
+
 ### Plotting an interative ternary diagram
 
 ```{r}
@@ -111,4 +118,3 @@ plot_ly(
     ternary = ternaryAxes
   )
 ```
-

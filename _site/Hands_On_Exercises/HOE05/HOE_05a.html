@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Yee Jun Yit">
+
+<title>Hands on Exercise 05a: Visual Correlation Analysis – ISSS608</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-ddd961a2510921635943dfbbd19534c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">ISSS608</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-hands-on-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Hands On Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-hands-on-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../Hands_On_Exercises/HOE01/HOE_01.html">
+ <span class="dropdown-text">Hands On Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands_On_Exercises/HOE02/HOE_02.html">
+ <span class="dropdown-text">Hands On Exercise 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands_On_Exercises/HOE03/HOE_03a.html">
+ <span class="dropdown-text">Hands On Exercise 3a</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands_On_Exercises/HOE03/HOE_03b.html">
+ <span class="dropdown-text">Hands On Exercise 3b</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands_On_Exercises/HOE04/HOE_04a.html">
+ <span class="dropdown-text">Hands On Exercise 4a</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands_On_Exercises/HOE04/HOE_04b.html">
+ <span class="dropdown-text">Hands On Exercise 4b</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands_On_Exercises/HOE04/HOE_04c.html">
+ <span class="dropdown-text">Hands On Exercise 4c</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands_On_Exercises/HOE04/HOE_04d.html">
+ <span class="dropdown-text">Hands On Exercise 4d</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands_On_Exercises/HOE05/HOE_05b.html">
+ <span class="dropdown-text">Hands On Exercise 5b</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-in-class-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">In-class Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-in-class-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../In_Class_Exercises/ICE_04/ICE_04.html">
+ <span class="dropdown-text">In-class Exercise 4</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Take-home Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../Take_Home_Exercises/THE_01/THE01.html">
+ <span class="dropdown-text">Take-home Exercise 1</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#loading-data" id="toc-loading-data" class="nav-link" data-scroll-target="#loading-data">Loading Data</a></li>
+  <li><a href="#building-correlation-matrix-pairs-method" id="toc-building-correlation-matrix-pairs-method" class="nav-link" data-scroll-target="#building-correlation-matrix-pairs-method">Building Correlation Matrix: <em>pairs()</em> method</a>
+  <ul class="collapse">
+  <li><a href="#building-a-basic-correlation-matrix" id="toc-building-a-basic-correlation-matrix" class="nav-link" data-scroll-target="#building-a-basic-correlation-matrix">Building a basic correlation matrix</a></li>
+  <li><a href="#drawing-only-the-lower-triangle" id="toc-drawing-only-the-lower-triangle" class="nav-link" data-scroll-target="#drawing-only-the-lower-triangle">Drawing only the lower triangle</a></li>
+  <li><a href="#including-correlation-coefficients" id="toc-including-correlation-coefficients" class="nav-link" data-scroll-target="#including-correlation-coefficients">Including correlation coefficients</a></li>
+  </ul></li>
+  <li><a href="#visualising-correlation-matrix-ggcormat" id="toc-visualising-correlation-matrix-ggcormat" class="nav-link" data-scroll-target="#visualising-correlation-matrix-ggcormat">Visualising Correlation Matrix: ggcormat()</a>
+  <ul class="collapse">
+  <li><a href="#the-basic-plot" id="toc-the-basic-plot" class="nav-link" data-scroll-target="#the-basic-plot">The basic plot</a></li>
+  <li><a href="#things-to-learn-from-the-code-chunk-above" id="toc-things-to-learn-from-the-code-chunk-above" class="nav-link" data-scroll-target="#things-to-learn-from-the-code-chunk-above">Things to learn from the code chunk above</a></li>
+  </ul></li>
+  <li><a href="#building-multiple-plots" id="toc-building-multiple-plots" class="nav-link" data-scroll-target="#building-multiple-plots">Building multiple plots</a>
+  <ul class="collapse">
+  <li><a href="#things-to-learn-from-the-code-chunk-above-1" id="toc-things-to-learn-from-the-code-chunk-above-1" class="nav-link" data-scroll-target="#things-to-learn-from-the-code-chunk-above-1">Things to learn from the code chunk above</a></li>
+  </ul></li>
+  <li><a href="#visualising-correlation-matrix-using-corrplot-package" id="toc-visualising-correlation-matrix-using-corrplot-package" class="nav-link" data-scroll-target="#visualising-correlation-matrix-using-corrplot-package">Visualising Correlation Matrix using corrplot Package</a>
+  <ul class="collapse">
+  <li><a href="#getting-started-with-corrplot" id="toc-getting-started-with-corrplot" class="nav-link" data-scroll-target="#getting-started-with-corrplot">Getting started with corrplot</a></li>
+  <li><a href="#working-with-visual-geometrics" id="toc-working-with-visual-geometrics" class="nav-link" data-scroll-target="#working-with-visual-geometrics">Working with visual geometrics</a></li>
+  <li><a href="#working-with-layouts" id="toc-working-with-layouts" class="nav-link" data-scroll-target="#working-with-layouts">Working with layouts</a></li>
+  </ul></li>
+  <li><a href="#working-with-mixed-layouts" id="toc-working-with-mixed-layouts" class="nav-link" data-scroll-target="#working-with-mixed-layouts">Working with mixed layouts</a>
+  <ul class="collapse">
+  <li><a href="#combining-corrgrams-with-the-significant-test" id="toc-combining-corrgrams-with-the-significant-test" class="nav-link" data-scroll-target="#combining-corrgrams-with-the-significant-test">Combining corrgrams with the significant test</a></li>
+  <li><a href="#reordering-a-corrgram" id="toc-reordering-a-corrgram" class="nav-link" data-scroll-target="#reordering-a-corrgram">Reordering a corrgram</a></li>
+  <li><a href="#reordering-a-correlation-matrix-using-hclust" id="toc-reordering-a-correlation-matrix-using-hclust" class="nav-link" data-scroll-target="#reordering-a-correlation-matrix-using-hclust">Reordering a correlation matrix using hclust</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a>
+  <ul class="collapse">
+  <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages">R Packages</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Hands on Exercise 05a: Visual Correlation Analysis</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Yee Jun Yit </p>
+          </div>
+  </div>
+    
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">February 11, 2025</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>The correlation coefficient is a popular statistic that use to measure the type and strength of the relationship between two variables. The values of a correlation coefficient ranges between -1.0 and 1.0. A correlation coefficient of 1 shows a perfect linear relationship between the two variables, while a -1.0 shows a perfect inverse relationship between the two variables. A correlation coefficient of 0.0 shows no linear relationship between the two variables.</p>
+<p>When multivariate data are used, the correlation coefficeints of the pair comparisons are displayed in a table form known as correlation matrix or scatterplot matrix.</p>
+<p>There are three broad reasons for computing the correlation matrix for a dataset:</p>
+<ul>
+<li>To reveal the relationship between high-dimensional variables in a pair-wise manner;</li>
+<li>To input into other analyses. For example, people commonly use correlation matrices as inputs for exploratory factor analysis, confirmatory factor analysis, structural equation models, and linear regression when excluding missing values pairwise.</li>
+<li>As a diagnostic when checking other analyses. For example, with linear regression a high amount of correlations suggests that the linear regression’s estimates will be unreliable.</li>
+</ul>
+<p>When the data is large, both in terms of the number of observations and the number of variables, <a href="https://www.datavis.ca/papers/corrgram.pdf">Corrgram</a> tends to be used to visually explore and analyse the structure and the patterns of relations among variables. It is designed based on two main schemes:</p>
+<ol type="1">
+<li>Rendering the value of a correlation to depict its sign and magnitude, and</li>
+<li>Reordering the variables in a correlation matrix so that “similar” variables are positioned adjacently, facilitating perception.</li>
+</ol>
+<p>In this exercise, we will learn how to perform data visualisations for correlation matrices. We will proceed in 3 sections:</p>
+<ol type="1">
+<li>Create correlation matrices using <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.0/topics/pairs">pairs()</a> of R Graphics</li>
+<li>Plot corrgrams using the <strong>corrplot</strong> package in R</li>
+<li>Create an interactive correlation matrix using plotly R</li>
+</ol>
+</section>
+<section id="loading-data" class="level2">
+<h2 class="anchored" data-anchor-id="loading-data">Loading Data</h2>
+<p>We will be using the following R packages:</p>
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html"><strong>corrplot</strong></a> package that provides a visual exploratory tool on correlation matrix that supports automatic variable reordering to help detect hidden patterns among variables;</li>
+<li><strong>ggstatsplot</strong> package to create visual graphics with rich statistical information;</li>
+<li>tidyverse, a family of R packages for data science processes.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(corrplot, ggstatsplot, tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We will use the <a href="https://archive.ics.uci.edu/dataset/186/wine+quality">Wine Quality Dataset</a> of UCI Machine Learning Repository, which consists of 13 variables and 6497 observations. The dataset already combines red wine and white wine data into one csv file.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>wine <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/wine_quality.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We note that besides quality, type, free sulfur dioxide, and total sulfur dioxide columns, the rest of the features are continuous numerical data.</p>
+</section>
+<section id="building-correlation-matrix-pairs-method" class="level2">
+<h2 class="anchored" data-anchor-id="building-correlation-matrix-pairs-method">Building Correlation Matrix: <em>pairs()</em> method</h2>
+<p>There is more than one way to build scatterplot matrices with R. In this section, we will create a scatterplot matrix by using the <a href="https://stat.ethz.ch/R-manual/R-devel/library/graphics/html/pairs.html"><em>pairs</em></a> function of R Graphics.</p>
+<section id="building-a-basic-correlation-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="building-a-basic-correlation-matrix">Building a basic correlation matrix</h3>
+<p>The figure below shows the scatter plot matrix of Wine Quality Data as an 12 by 12 matrix.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(wine[,<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="HOE_05a_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The input of <em>pairs()</em> can be a matrix or data frame. The code chunk used to create the scatterplot matrix is relatively simple and uses the default <em>pairs</em> function. Columns 1 to 12 of wine dataframe are used to build the scatterplot matrix. The variables are: fixed acidity, volatile acidity, citric acid, residual sugar, chlorides, free sulfur dioxide, total sulfur dioxide, density, pH, sulphates, alcohol, and quality.</p>
+<p>We notice that quality column is the label, so we will use the features in columns 1 to 11 only.</p>
+</section>
+<section id="drawing-only-the-lower-triangle" class="level3">
+<h3 class="anchored" data-anchor-id="drawing-only-the-lower-triangle">Drawing only the lower triangle</h3>
+<p><em>pairs</em> function of R Graphics provids many customisation arguments. For example, it is a common practice to show either the upper half or lower half of the correlation matrix instead of both because a correlation matrix is symmetric. To show the lower half of the correlation matrix, the upper.panel argument will be used as shown in the code chunk below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(wine[,<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>], <span class="at">upper.panel =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="HOE_05a_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Similarly, you can display the upper half of the correlation matrix by using the lower.panel argument.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(wine[,<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>], <span class="at">lower.panel =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="HOE_05a_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="including-correlation-coefficients" class="level3">
+<h3 class="anchored" data-anchor-id="including-correlation-coefficients">Including correlation coefficients</h3>
+<p>To show the correlation coefficient of each pair of variables instead of a scatter plot, we can use the <a href="https://www.rdocumentation.org/packages/xcms/versions/1.48.0/topics/panel.cor"><em>panel.cor</em></a> function. This will also show higher correlations in a larger font in the upper triangle of the matrix.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>panel.cor <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, <span class="at">digits=</span><span class="dv">2</span>, <span class="at">prefix=</span><span class="st">""</span>, cex.cor, ...) {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>usr <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="st">"usr"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">on.exit</span>(<span class="fu">par</span>(usr))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">usr =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">abs</span>(<span class="fu">cor</span>(x, y, <span class="at">use=</span><span class="st">"complete.obs"</span>))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>txt <span class="ot">&lt;-</span> <span class="fu">format</span>(<span class="fu">c</span>(r, <span class="fl">0.123456789</span>), <span class="at">digits=</span>digits)[<span class="dv">1</span>]</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>txt <span class="ot">&lt;-</span> <span class="fu">paste</span>(prefix, txt, <span class="at">sep=</span><span class="st">""</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">missing</span>(cex.cor)) cex.cor <span class="ot">&lt;-</span> <span class="fl">0.8</span><span class="sc">/</span><span class="fu">strwidth</span>(txt)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, txt, <span class="at">cex =</span> cex.cor <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> r) <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(wine[,<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>], </span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">upper.panel =</span> panel.cor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="HOE_05a_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="visualising-correlation-matrix-ggcormat" class="level2">
+<h2 class="anchored" data-anchor-id="visualising-correlation-matrix-ggcormat">Visualising Correlation Matrix: ggcormat()</h2>
+<p>One of the major limitations of the correlation matrix is that the scatter plots appear very cluttered when the number of observations is relatively large (i.e.&nbsp;more than 500 observations). To overcome this problem, the <strong>Corrgram</strong> data visualisation technique suggested by D. J. Murdoch and E. D. Chow (1996) and Friendly, M (2002) and will be used.</p>
+<p>At least three R packages provide functions to plot corrgrams, and they are:</p>
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/corrgram/index.html">corrgram</a></li>
+<li><a href="https://cran.r-project.org/web/packages/ellipse/index.html">ellipse</a></li>
+<li><a href="https://cran.r-project.org/web/packages/corrplot/index.html">corrplot</a></li>
+</ul>
+<p>On top that, some R packages like ggstatsplot also provide functions for building corrgrams.</p>
+<p>In this section, we will visualise a correlation matrix using <a href="https://indrajeetpatil.github.io/ggstatsplot/reference/ggcorrmat.html"><em>ggcorrmat() </em></a> of <a href="https://indrajeetpatil.github.io/ggstatsplot/index.html"><strong>ggstatplot</strong></a> package</p>
+<section id="the-basic-plot" class="level3">
+<h3 class="anchored" data-anchor-id="the-basic-plot">The basic plot</h3>
+<p>One of the advantages of using <em>ggcorrmat()</em> over other methods to visualise a correlation matrix is it’s ability to provide a comprehensive and yet professional statistical report as shown in the figure below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ggstatsplot<span class="sc">::</span><span class="fu">ggcorrmat</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> wine, </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">cor.vars =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="HOE_05a_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Theses consist of values which are not sorted, so we improve the plot by implementing hierarchical clustering to group similar features tugether, making patterns more visible.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ggstatsplot<span class="sc">::</span><span class="fu">ggcorrmat</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> wine, </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">cor.vars =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggcorrplot.args =</span> <span class="fu">list</span>(<span class="at">outline.color =</span> <span class="st">"black"</span>, </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">hc.order =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">tl.cex =</span> <span class="dv">10</span>),</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">title    =</span> <span class="st">"Correlogram for wine dataset"</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">subtitle =</span> <span class="st">"Four pairs are no significant at p &lt; 0.05"</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="HOE_05a_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="things-to-learn-from-the-code-chunk-above" class="level3 {callout-note}">
+<h3 class="anchored" data-anchor-id="things-to-learn-from-the-code-chunk-above">Things to learn from the code chunk above</h3>
+<ul>
+<li><code>cor.vars</code> argument is used to compute the correlation matrix needed to build the corrgram.</li>
+<li><code>hc.order</code> argument implements hierarchical clustering to the data</li>
+<li><code>ggcorrplot.args</code> argument provides additional (mostly aesthetic) arguments that will be passed to the <a href="https://www.sthda.com/english/wiki/ggcorrplot-visualization-of-a-correlation-matrix-using-ggplot2?title=ggcorrplot-visualization-of-a-correlation-matrix-using-ggplot2"><code>ggcorrplot::ggcorrplot</code></a> function. The list should avoid any of the following arguments since they are already internally being used: <code>corr</code>, <code>method</code>, <code>p.mat</code>, <code>sig.level</code>, <code>ggtheme</code>, <code>colors</code>, <code>lab</code>, <code>pch</code>, <code>legend.title</code>, <code>digits</code>.</li>
+</ul>
+</section>
+<p>The following sample sub-code chunk can be used to control specific component of the plot such as the font size of the x-axis, y-axis, and the statistical report.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ggplot.component <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">text=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">5</span>),</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="building-multiple-plots" class="level2">
+<h2 class="anchored" data-anchor-id="building-multiple-plots">Building multiple plots</h2>
+<p>Since ggstatsplot is an extension of ggplot2, it also supports faceting. However the feature is not available in <em>ggcorrmat()</em> but in the <a href="https://indrajeetpatil.github.io/ggstatsplot/reference/grouped_ggcorrmat.html"><em>grouped_ggcorrmat()</em></a> of <strong>ggstatsplot</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grouped_ggcorrmat</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> wine,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">cor.vars =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">grouping.var =</span> type,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"robust"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">p.adjust.method =</span> <span class="st">"holm"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">plotgrid.args =</span> <span class="fu">list</span>(<span class="at">ncol =</span> <span class="dv">2</span>),</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggcorrplot.args =</span> <span class="fu">list</span>(<span class="at">outline.color =</span> <span class="st">"black"</span>, </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">hc.order =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>                         <span class="at">tl.cex =</span> <span class="dv">10</span>),</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">annotation.args =</span> <span class="fu">list</span>(</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">tag_levels =</span> <span class="st">"a"</span>,</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Correlogram for wine dataset"</span>,</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"The measures are: alcohol, sulphates, fixed acidity, citric acid, chlorides, residual sugar, density, free sulfur dioxide and volatile acidity"</span>,</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Dataset: UCI Machine Learning Repository"</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="HOE_05a_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="things-to-learn-from-the-code-chunk-above-1" class="level3 {callout-note}">
+<h3 class="anchored" data-anchor-id="things-to-learn-from-the-code-chunk-above-1">Things to learn from the code chunk above</h3>
+<ul>
+<li>to build a facet plot, the only argument needed is <code>grouping.var</code>. Here, a robust correlation method which is percentage bend correlation is used, and the p-value us adjusted for multiple comparisons using Holm’s method</li>
+<li>Behind <em>group_ggcorrmat()</em>, <strong>patchwork</strong> package is used to create the multiplot. <code>plotgrid.args</code> argument provides a list of additional arguments passed to <a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html"><em>patchwork::wrap_plots</em></a>, except for guides argument which is already separately specified earlier.</li>
+<li>Similarly, <code>annotation.args</code> argument calls the <a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot annotation arguments</a> of patchwork package.</li>
+</ul>
+</section>
+</section>
+<section id="visualising-correlation-matrix-using-corrplot-package" class="level2">
+<h2 class="anchored" data-anchor-id="visualising-correlation-matrix-using-corrplot-package">Visualising Correlation Matrix using corrplot Package</h2>
+<p>We now move to the main package to be explored in this exercise, which is the <a href="https://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html"><strong>corrplot</strong></a> package.</p>
+<section id="getting-started-with-corrplot" class="level3">
+<h3 class="anchored" data-anchor-id="getting-started-with-corrplot">Getting started with corrplot</h3>
+<p>We recompute the correlation matrix of the wine data frame using this packaage and plot the corrgram using <a href="https://www.rdocumentation.org/packages/corrplot/versions/0.2-0/topics/corrplot"><em>corrplot()</em></a>, with setting all at default.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>wine.cor <span class="ot">&lt;-</span> <span class="fu">cor</span>(wine[, <span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>])</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(wine.cor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="HOE_05a_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Notice that the default visual object used to plot the corrgram is circle. The default layout of the corrgram is a symmetric matrix. The default colour scheme is diverging blue-red. Blue colours are used to represent pair variables with positive correlation coefficients and red colours are used to represent pair variables with negative correlation coefficients. The intensity of the colours or <strong>saturation</strong> is used to represent the strength of the correlation coefficient. Darker colours and larger circles indicate relatively stronger linear relationship between the paired variables. On the other hand, lighter colours and smaller circles indicates relatively weaker linear relationship.</p>
+</section>
+<section id="working-with-visual-geometrics" class="level3">
+<h3 class="anchored" data-anchor-id="working-with-visual-geometrics">Working with visual geometrics</h3>
+<p>In the <strong>corrplot</strong> package, there are seven visual geometrics (a parameter method) that can be used to encode the attribute values. They are: circle, square, ellipse, number, shade, color and pie. The default is circle, but this default setting can be changed by using the method argument as shown below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(wine.cor, </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">method =</span> <span class="st">"pie"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="HOE_05a_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="working-with-layouts" class="level3">
+<h3 class="anchored" data-anchor-id="working-with-layouts">Working with layouts</h3>
+<p><em>corrplot()</em> supports three layout types, namely: “full”, “upper” or “lower”. The default is “full” which displays the full matrix. The default setting can be changed by using the <em>type</em> argument of <em>corrplot()</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(wine.cor, </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">method =</span> <span class="st">"ellipse"</span>, </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">type=</span><span class="st">"lower"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="HOE_05a_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can further customise the layout by using the <code>diag</code> argument to turn off the diagonal cells, and the <code>tl.col</code> argument to change the axis text label colour to black as shown below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(wine.cor, </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">method =</span> <span class="st">"ellipse"</span>, </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">type=</span><span class="st">"lower"</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">diag =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">tl.col =</span> <span class="st">"black"</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">cl.cex =</span> <span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="HOE_05a_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Other arguments would include <code>tl.pos</code>, <code>tl.cex</code>, <code>tl.offset</code> for the text labels, and <code>cl.pos</code>, <code>cl.cex</code>, <code>cl.offset</code> for the colour legend</p>
+</section>
+</section>
+<section id="working-with-mixed-layouts" class="level2">
+<h2 class="anchored" data-anchor-id="working-with-mixed-layouts">Working with mixed layouts</h2>
+<p>With the <strong>corrplot</strong> package, it is possible to design corrgrams which are mixed: a visual matrix in one triangle and a numerical matrix in the other triangle. In order to create a coorgram with such mixed layout, <a href="https://www.rdocumentation.org/packages/corrplot/versions/0.84/topics/corrplot.mixed"><em>corrplot.mixed()</em></a>, a wrapped function for mixed visualisation styles will be used.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot.mixed</span>(wine.cor, </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">lower =</span> <span class="st">"ellipse"</span>, </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">upper =</span> <span class="st">"number"</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">tl.pos =</span> <span class="st">"lt"</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">diag =</span> <span class="st">"n"</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">tl.col =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="HOE_05a_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Notice that arguments <em>lower</em> and <em>upper</em> are used to define the visualisation method used. In this case ellipses are used to map the lower half of the corrgram and numbers are used to map the upper half of the corrgram. The argument <code>tl.pos</code> is used to specify the placement of the axis label. Lastly, the <code>diag</code> argument is used to specify the glyph on the principal diagonal of the corrgram, in this case none.</p>
+<section id="combining-corrgrams-with-the-significant-test" class="level3">
+<h3 class="anchored" data-anchor-id="combining-corrgrams-with-the-significant-test">Combining corrgrams with the significant test</h3>
+<p>In statistical analysis, we are also interested to know which pair of variables have correlation coefficients which are statistically significant.</p>
+<p>With the <strong>corrplot</strong> package, we can use the <em>cor.mtest()</em> function to compute the p-values and confidence interval for each pair of variables.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>wine.sig <span class="ot">=</span> <span class="fu">cor.mtest</span>(wine.cor, <span class="at">conf.level=</span> .<span class="dv">95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can then use the <code>p.mat</code> argument of <code>corrplot</code> function to feed the calculated p-values into the visual.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(wine.cor,</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">method =</span> <span class="st">"number"</span>,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">type =</span> <span class="st">"lower"</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">diag =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">tl.col =</span> <span class="st">"black"</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">tl.srt =</span> <span class="dv">45</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">p.mat =</span> wine.sig<span class="sc">$</span>p,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">sig.level =</span> .<span class="dv">05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="HOE_05a_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The figure above shows the corrgram combined with the significant test. The corrgram reveals that not all correlation pairs are statistically significant. For example the correlation between total sulfur dioxide and free surfur dioxide is statistically significant at a significance level of 0.05, but not the pair between total sulfur dioxide and citric acid.</p>
+</section>
+<section id="reordering-a-corrgram" class="level3">
+<h3 class="anchored" data-anchor-id="reordering-a-corrgram">Reordering a corrgram</h3>
+<p>Matrix reordering is very important to mine the hiden structures and patterns in a corrgram. By default, the order of attributes of a corrgram is sorted according to the correlation matrix (i.e.&nbsp;“original”). The default setting can be over-written by using the <code>order</code> argument of corrplot(). Currently, <strong>corrplot</strong> package supports four sorting methods:</p>
+<ul>
+<li>“AOE” is for the angular order of the eigenvectors. See <a href="www.datavis.ca/papers/corrgram.pdf">Michael Friendly (2002)</a> for details.</li>
+<li>“FPC” for the first principal component order.</li>
+<li>“hclust” for hierarchical clustering order, and “hclust.method” for the agglomeration method to be used. “hclust.method” should be one of “ward”, “ward.D”, “ward.D2”, “single”, “complete”, “average”, “mcquitty”, “median” or “centroid”.</li>
+<li>“alphabet” for alphabetical order.</li>
+</ul>
+<p>More algorithms can be found in the <a href="https://cran.r-project.org/web/packages/seriation/seriation.pdf"><strong>seriation</strong></a> package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot.mixed</span>(wine.cor, </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">lower =</span> <span class="st">"ellipse"</span>, </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">upper =</span> <span class="st">"number"</span>,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">tl.pos =</span> <span class="st">"lt"</span>,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">diag =</span> <span class="st">"l"</span>,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">order=</span><span class="st">"AOE"</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">tl.col =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="HOE_05a_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="reordering-a-correlation-matrix-using-hclust" class="level3">
+<h3 class="anchored" data-anchor-id="reordering-a-correlation-matrix-using-hclust">Reordering a correlation matrix using hclust</h3>
+<p>If using <strong>hclust</strong>, <strong><em>corrplot()</em></strong> can draw rectangles around the corrgram based on the results of hierarchical clustering.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(wine.cor, </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">method =</span> <span class="st">"ellipse"</span>, </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">tl.pos =</span> <span class="st">"lt"</span>,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">tl.col =</span> <span class="st">"black"</span>,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">order=</span><span class="st">"hclust"</span>,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">hclust.method =</span> <span class="st">"ward.D"</span>,</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">addrect =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="HOE_05a_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>Michael Friendly (2002). “Corrgrams: Exploratory displays for correlation matrices”. The American Statistician, 56, 316–324.</p>
+<section id="r-packages" class="level3">
+<h3 class="anchored" data-anchor-id="r-packages">R Packages</h3>
+<ul>
+<li><a href="https://indrajeetpatil.github.io/ggstatsplot/articles/web_only/ggcorrmat.html">ggcormat()</a> of <a href="https://indrajeetpatil.github.io/ggstatsplot/index.html"><strong>ggstatsplot</strong></a> package</li>
+<li><a href="https://cran.r-project.org/web/packages/corrplot/index.html"><strong>corrplot</strong></a>, a graphical display of a correlation matrices or general matrices. It also contains some algorithms to do matrix reordering. In addition, corrplot is good at details, including choosing color, text labels, color labels, layout, etc.</li>
+<li><a href="https://cran.r-project.org/web/packages/corrgram/index.html"><strong>corrgram</strong></a>, which calculates correlation of variables and displays the results graphically. Includes panel functions that can display points, shading, ellipses, and correlation values with confidence intervals.</li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
