@@ -35,12 +35,22 @@ website:
         href: Hands_On_Exercises/HOE05/HOE_05e.html
     - text: "In-class Exercise"
       menu:
+      - text: "In-class Exercise 1 (Tableau)"
+        href: "https://public.tableau.com/app/profile/junyit.yee/viz/InClassExercise_01/Dashboard1"
+      - text: "In-class Exercise 2 (Tableau)"
+        href: "https://public.tableau.com/app/profile/junyit.yee/viz/InClassExercise_02/Dashboard1"
+      - text: "In-class Exercise 3 (Tableau)"
+        href: "https://public.tableau.com/app/profile/junyit.yee/viz/InClassExercise_03/Dashboard1"
       - text: "In-class Exercise 4"
         href: In_Class_Exercises/ICE_04/ICE_04.html
+      - text: "In-class Exercise 5 (Tableau)"
+        href: "https://public.tableau.com/app/profile/junyit.yee/viz/InClassExercise_05/Dashboard1"
+      - text: "In-class Exercise 5"
+        href: In_Class_Exercises/ICE_05/ICE_05.html
     - text: "Take-home Exercise"
       menu:
       - text: "Take-home Exercise 1"
-        href: Take_Home_Exercises/THE_01/THE01.html
+        href: Take_Home_Exercises/THE_01/THE_01.html
     right:
       - href: index.qmd
         text: Home

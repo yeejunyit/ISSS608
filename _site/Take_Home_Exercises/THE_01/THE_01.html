@@ -8,7 +8,7 @@
 
 <meta name="author" content="Yee Jun Yit">
 
-<title>Take Home Exercise 01: Insights in Shippinh Data – ISSS608</title>
+<title>Take Home Exercise 01: Insights in Shipping Data – ISSS608</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -188,8 +188,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-in-class-exercise">    
         <li>
+    <a class="dropdown-item" href="https://public.tableau.com/app/profile/junyit.yee/viz/InClassExercise_01/Dashboard1">
+ <span class="dropdown-text">In-class Exercise 1 (Tableau)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://public.tableau.com/app/profile/junyit.yee/viz/InClassExercise_02/Dashboard1">
+ <span class="dropdown-text">In-class Exercise 2 (Tableau)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://public.tableau.com/app/profile/junyit.yee/viz/InClassExercise_03/Dashboard1">
+ <span class="dropdown-text">In-class Exercise 3 (Tableau)</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../In_Class_Exercises/ICE_04/ICE_04.html">
  <span class="dropdown-text">In-class Exercise 4</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://public.tableau.com/app/profile/junyit.yee/viz/InClassExercise_05/Dashboard1">
+ <span class="dropdown-text">In-class Exercise 5 (Tableau)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In_Class_Exercises/ICE_05/ICE_05.html">
+ <span class="dropdown-text">In-class Exercise 5</span></a>
   </li>  
     </ul>
   </li>
@@ -199,7 +219,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
         <li>
-    <a class="dropdown-item" href="../../Take_Home_Exercises/THE_01/THE01.html">
+    <a class="dropdown-item" href="../../Take_Home_Exercises/THE_01/THE_01.html">
  <span class="dropdown-text">Take-home Exercise 1</span></a>
   </li>  
     </ul>
@@ -235,10 +255,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#eda-and-visualisations" id="toc-eda-and-visualisations" class="nav-link" data-scroll-target="#eda-and-visualisations">EDA and Visualisations</a>
   <ul class="collapse">
   <li><a href="#view-the-first-few-rows" id="toc-view-the-first-few-rows" class="nav-link" data-scroll-target="#view-the-first-few-rows">View the first few rows</a></li>
-  <li><a href="#check-for-missing-values" id="toc-check-for-missing-values" class="nav-link" data-scroll-target="#check-for-missing-values">Check for missing values</a></li>
+  <li><a href="#check-for-duplicated-and-missing-values" id="toc-check-for-duplicated-and-missing-values" class="nav-link" data-scroll-target="#check-for-duplicated-and-missing-values">Check for duplicated and missing values</a></li>
   <li><a href="#analyse-the-structure-of-the-dataset" id="toc-analyse-the-structure-of-the-dataset" class="nav-link" data-scroll-target="#analyse-the-structure-of-the-dataset">Analyse the structure of the dataset</a></li>
   <li><a href="#extract-summary-statistics" id="toc-extract-summary-statistics" class="nav-link" data-scroll-target="#extract-summary-statistics">Extract summary statistics</a></li>
   </ul></li>
+  <li><a href="#data-exploration" id="toc-data-exploration" class="nav-link" data-scroll-target="#data-exploration">Data Exploration</a>
+  <ul class="collapse">
+  <li><a href="#correlation-of-numerical-variables" id="toc-correlation-of-numerical-variables" class="nav-link" data-scroll-target="#correlation-of-numerical-variables">Correlation of Numerical Variables</a></li>
+  <li><a href="#categorical-data" id="toc-categorical-data" class="nav-link" data-scroll-target="#categorical-data">Categorical Data</a></li>
+  <li><a href="#treemaps" id="toc-treemaps" class="nav-link" data-scroll-target="#treemaps">Treemaps</a></li>
+  <li><a href="#time-series" id="toc-time-series" class="nav-link" data-scroll-target="#time-series">Time Series</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -247,7 +275,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Take Home Exercise 01: Insights in Shippinh Data</h1>
+<h1 class="title">Take Home Exercise 01: Insights in Shipping Data</h1>
 </div>
 
 
@@ -265,7 +293,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">February 14, 2025</p>
+      <p class="date-modified">February 16, 2025</p>
     </div>
   </div>
     
@@ -283,30 +311,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="loading-data" class="level2">
 <h2 class="anchored" data-anchor-id="loading-data">Loading Data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(SmartEDA, plotly, ggstatsplot, treemap, tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We will be using the Ship Performance Dataset, which is synthetic data generated to realistically represent key operational metrics and attributes of different ship types in the Gulf of Guinea in Africa. This will enable us to perform maritime data analytics for clustering, prediction, and optimization of the industry.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ship_performance <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Ship_Performance_Dataset.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The dataset consists of 2736 rows and 18 columns, with features split into numerical and categorical types.</p>
-<p>The numerical features consist of the following:</p>
-<ul>
-<li><em>Speed_Over_Ground_knots</em>: Average speed of the ship over water (in knots).</li>
-<li><em>Engine_Power_kW</em>: Engine power output (in kilowatts).</li>
-<li><em>Distance_Traveled_nm</em>: Total distance traveled by the ship (in nautical miles).</li>
-<li><em>Operational_Cost_USD</em>: Total operational cost per voyage (in USD).</li>
-<li><em>Revenue_per_Voyage_USD</em>: Revenue generated per voyage (in USD).</li>
-<li><em>Efficiency_nm_per_kWh</em>: Energy efficiency calculated in nautical miles per kilowatt-hour.</li>
-</ul>
-<p>The categorical features are the following:</p>
-<ul>
-<li><em>Ship_Type</em>: Type of ship (e.g., Tanker, Container Ship, Fish Carrier, Bulk Carrier).</li>
-<li><em>Route_Type</em>: Shipping route type (e.g., Short-haul, Long-haul, Transoceanic).</li>
-<li><em>Engine_Type</em>: Type of engine (e.g., Diesel, Heavy Fuel Oil).</li>
-<li><em>Maintenance_Status</em>: Maintenance condition of the ship (e.g., Fair, Critical, Good).</li>
-<li><em>Weather_Condition</em>: Prevailing weather conditions during voyages (e.g., Calm, Moderate, Rough).</li>
-</ul>
 </section>
 <section id="eda-and-visualisations" class="level2">
 <h2 class="anchored" data-anchor-id="eda-and-visualisations">EDA and Visualisations</h2>
@@ -334,10 +345,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="check-for-missing-values" class="level3">
-<h3 class="anchored" data-anchor-id="check-for-missing-values">Check for missing values</h3>
+<section id="check-for-duplicated-and-missing-values" class="level3">
+<h3 class="anchored" data-anchor-id="check-for-duplicated-and-missing-values">Check for duplicated and missing values</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(ship_performance))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">duplicated</span>(ship_performance))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<p>There are no duplicated rows</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(ship_performance))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                   Date               Ship_Type              Route_Type 
                       0                       0                       0 
@@ -354,12 +372,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>According to the above code chunk, all the columns have 0 missing values, but visual inspection of the first 5 rows reveal the existence of missing-like values such as “None”. This suggests that those missing values are not being recognized as NA.</p>
-<p>We will change the missing values in categorical columns to NA and drop any rows with missing values.</p>
+<p>We will change the missing values in categorical columns to NA and recheck for missing values.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ship_performance <span class="ot">&lt;-</span> ship_performance <span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), <span class="sc">~</span><span class="fu">na_if</span>(.x, <span class="st">"None"</span>)))</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(ship_performance))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ship_performance <span class="ot">&lt;-</span> ship_performance <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), <span class="sc">~</span><span class="fu">na_if</span>(.x, <span class="st">"None"</span>)))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(ship_performance))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                   Date               Ship_Type              Route_Type 
                       0                     136                     136 
@@ -375,56 +393,182 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
                       0                       0                       0 </code></pre>
 </div>
 </div>
-<p>We can see now that quite a number of columns have missing values, and that each column has exactly 136 missing data</p>
+<p>We can see now that four columns “Ship_Type”, “Route_Type”, “Engine_Type”, “Maintenance_Status” have missing values, and that each column has exactly 136 missing data. We check how many unique rows contain missing values:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>rows_missing <span class="ot">&lt;-</span> ship_performance <span class="sc">%&gt;%</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">rowSums</span>(<span class="fu">is.na</span>(.)) <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>()</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Percentage of rows with missing values:"</span>, (rows_missing <span class="sc">/</span> <span class="fu">nrow</span>(ship_performance)) <span class="sc">*</span> <span class="dv">100</span>, <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>rows_missing <span class="ot">&lt;-</span> ship_performance <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">rowSums</span>(<span class="fu">is.na</span>(.)) <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>()</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Percentage of rows with missing values:"</span>, (rows_missing <span class="sc">/</span> <span class="fu">nrow</span>(ship_performance)) <span class="sc">*</span> <span class="dv">100</span>, <span class="st">"%"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Percentage of rows with missing values: 22.25877 %</code></pre>
 </div>
 </div>
-<p>Since the percentage of rows with missing values is high, istead of dropping rows and missing critical data, we will</p>
+<p>Since the percentage of rows with missing values is high, instead of dropping rows and missing critical data, we will inpute data based on the distribution</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)  <span class="co"># Ensure reproducibility</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to impute categorical columns based on their frequency distribution</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>impute_categorical <span class="ot">&lt;-</span> <span class="cf">function</span>(column) {</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  missing_indices <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">is.na</span>(column))</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(missing_indices) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    column[missing_indices] <span class="ot">&lt;-</span> <span class="fu">sample</span>(column[<span class="sc">!</span><span class="fu">is.na</span>(column)], </span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>                                      <span class="fu">length</span>(missing_indices), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(column)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply to all categorical columns (where data type is character)</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>ship_performance_imputed <span class="ot">&lt;-</span> ship_performance <span class="sc">%&gt;%</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), impute_categorical))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can check whether the distribution of data before and after imputation is the same visually, first by extracting the relevant data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get categorical column names</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>categorical_columns <span class="ot">&lt;-</span> <span class="fu">names</span>(ship_performance)[<span class="fu">sapply</span>(ship_performance, is.character)]</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to get the distribution of data </span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>get_percent_distribution <span class="ot">&lt;-</span> <span class="cf">function</span>(data, column) {</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  freq_table <span class="ot">&lt;-</span> <span class="fu">table</span>(data[[column]], <span class="at">useNA =</span> <span class="st">"no"</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  freq_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(freq_table, <span class="at">responseName =</span> <span class="st">"Count"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">Percent =</span> Count <span class="sc">/</span> <span class="fu">sum</span>(Count) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">Variable =</span> column</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Rename the classes and reorder the data.frame</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(freq_df)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">"Classes"</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(freq_df)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>distributions_before <span class="ot">&lt;-</span> <span class="fu">lapply</span>(categorical_columns, <span class="cf">function</span>(col) {</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  freq_df <span class="ot">&lt;-</span> <span class="fu">get_percent_distribution</span>(ship_performance, col)</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  freq_df<span class="sc">$</span>Status <span class="ot">&lt;-</span> <span class="st">"Before Imputation"</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>  freq_df</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>}) <span class="sc">%&gt;%</span> <span class="fu">bind_rows</span>()</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Get distributions after imputation</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>distributions_after <span class="ot">&lt;-</span> <span class="fu">lapply</span>(categorical_columns, <span class="cf">function</span>(col) {</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>  freq_df <span class="ot">&lt;-</span> <span class="fu">get_percent_distribution</span>(ship_performance_imputed, col)</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>  freq_df<span class="sc">$</span>Status <span class="ot">&lt;-</span> <span class="st">"After Imputation"</span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>  freq_df</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>}) <span class="sc">%&gt;%</span> <span class="fu">bind_rows</span>()</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>distributions_combined <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(distributions_before, distributions_after)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We then plot the distribution of the missing categorical data after and before it has been imputed.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(distributions_combined, <span class="fu">aes</span>(<span class="at">x =</span> Classes, <span class="at">y =</span> Percent, <span class="at">fill =</span> Status)) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Variable, <span class="at">scales =</span> <span class="st">"free_x"</span>) <span class="sc">+</span>  <span class="co"># separate plot for each categorical column</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Comparison of Categorical Distributions Before and After Imputation"</span>,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Variable"</span>,</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Percentage"</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)  <span class="co"># tilt x-axis labels if needed</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Before Imputation"</span> <span class="ot">=</span> <span class="st">"Red"</span>, </span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"After Imputation"</span>  <span class="ot">=</span> <span class="st">"Blue"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="THE_01_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explanation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The bar graph illustrates how several categorical variables “Engine_Type”, “Maintenance_Status”, “Route_Type”, “Ship_Type”, and “Weather_Condition” are distributed before and after the imputation of missing data. We can see that the proportions of each category remain largely consistent, indicating that the chosen imputation method did not introduce noticeable bias or distort the original distribution, and is stable. This stability suggests that the imputation process preserved the core structure of the dataset. Consequently, subsequent analyses that rely on these categorical variables can be expected to yield reliable results as the approach to handling missing values maintained the representativeness of the underlying categorical features.</p>
+</div>
+</div>
 </section>
 <section id="analyse-the-structure-of-the-dataset" class="level3">
 <h3 class="anchored" data-anchor-id="analyse-the-structure-of-the-dataset">Analyse the structure of the dataset</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ship_performance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>ship_performance_imputed <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ExpData</span>(<span class="at">type =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>tibble [2,736 × 18] (S3: tbl_df/tbl/data.frame)
- $ Date                   : Date[1:2736], format: "2023-06-04" "2023-06-11" ...
- $ Ship_Type              : chr [1:2736] "Container Ship" "Fish Carrier" "Container Ship" "Bulk Carrier" ...
- $ Route_Type             : chr [1:2736] NA "Short-haul" "Long-haul" "Transoceanic" ...
- $ Engine_Type            : chr [1:2736] "Heavy Fuel Oil (HFO)" "Steam Turbine" "Diesel" "Steam Turbine" ...
- $ Maintenance_Status     : chr [1:2736] "Critical" "Good" "Fair" "Fair" ...
- $ Speed_Over_Ground_knots: num [1:2736] 12.6 10.4 20.7 21.1 13.7 ...
- $ Engine_Power_kW        : num [1:2736] 2063 1796 1649 915 1090 ...
- $ Distance_Traveled_nm   : num [1:2736] 1031 1060 659 1127 1445 ...
- $ Draft_meters           : num [1:2736] 14.13 14.65 7.2 11.79 9.73 ...
- $ Weather_Condition      : chr [1:2736] "Moderate" "Rough" "Moderate" "Moderate" ...
- $ Cargo_Weight_tons      : num [1:2736] 1959 162 178 1737 261 ...
- $ Operational_Cost_USD   : num [1:2736] 483832 483388 448543 261350 287718 ...
- $ Revenue_per_Voyage_USD : num [1:2736] 292183 883766 394019 87551 676121 ...
- $ Turnaround_Time_hours  : num [1:2736] 25.9 63.2 49.4 22.4 64.2 ...
- $ Efficiency_nm_per_kWh  : num [1:2736] 1.455 0.29 0.5 0.703 1.331 ...
- $ Seasonal_Impact_Score  : num [1:2736] 1.416 0.886 1.406 1.371 0.583 ...
- $ Weekly_Voyage_Count    : num [1:2736] 1 6 9 1 8 7 3 6 8 2 ...
- $ Average_Load_Percentage: num [1:2736] 93.8 93.9 96.2 66.2 80 ...</code></pre>
+<pre><code>   Index           Variable_Name Variable_Type Sample_n Missing_Count
+1      1                    Date          Date     2736             0
+2      2               Ship_Type     character     2736             0
+3      3              Route_Type     character     2736             0
+4      4             Engine_Type     character     2736             0
+5      5      Maintenance_Status     character     2736             0
+6      6 Speed_Over_Ground_knots       numeric     2736             0
+7      7         Engine_Power_kW       numeric     2736             0
+8      8    Distance_Traveled_nm       numeric     2736             0
+9      9            Draft_meters       numeric     2736             0
+10    10       Weather_Condition     character     2736             0
+11    11       Cargo_Weight_tons       numeric     2736             0
+12    12    Operational_Cost_USD       numeric     2736             0
+13    13  Revenue_per_Voyage_USD       numeric     2736             0
+14    14   Turnaround_Time_hours       numeric     2736             0
+15    15   Efficiency_nm_per_kWh       numeric     2736             0
+16    16   Seasonal_Impact_Score       numeric     2736             0
+17    17     Weekly_Voyage_Count       numeric     2736             0
+18    18 Average_Load_Percentage       numeric     2736             0
+   Per_of_Missing No_of_distinct_values
+1               0                    57
+2               0                     4
+3               0                     4
+4               0                     3
+5               0                     3
+6               0                  2736
+7               0                  2736
+8               0                  2736
+9               0                  2736
+10              0                     3
+11              0                  2736
+12              0                  2736
+13              0                  2736
+14              0                  2736
+15              0                  2736
+16              0                  2736
+17              0                     9
+18              0                  2736</code></pre>
 </div>
 </div>
-<p>There are now XXXXXX rows and still 18 columns.</p>
-<p>We will convert the Date column to Date data type for better extraction of time and seasonlity related features</p>
+<p>The categorical features consist of the following:</p>
+<ul>
+<li><em>Ship_Type</em>: Type of ship (e.g., Tanker, Container Ship, Fish Carrier, Bulk Carrier).</li>
+<li><em>Route_Type</em>: Shipping route type (e.g., Short-haul, Long-haul, Transoceanic).</li>
+<li><em>Engine_Type</em>: Type of engine (e.g., Diesel, Heavy Fuel Oil).</li>
+<li><em>Maintenance_Status</em>: Maintenance condition of the ship (e.g., Fair, Critical, Good).</li>
+<li><em>Weather_Condition</em>: Prevailing weather conditions during voyages (e.g., Calm, Moderate, Rough).</li>
+</ul>
+<p>The numerical features are highlighted by the following:</p>
+<ul>
+<li><em>Speed_Over_Ground_knots</em>: Average speed of the ship over water (in knots).</li>
+<li><em>Engine_Power_kW</em>: Engine power output (in kilowatts).</li>
+<li><em>Distance_Traveled_nm</em>: Total distance traveled by the ship (in nautical miles).</li>
+<li><em>Operational_Cost_USD</em>: Total operational cost per voyage (in USD).</li>
+<li><em>Revenue_per_Voyage_USD</em>: Revenue generated per voyage (in USD).</li>
+<li><em>Efficiency_nm_per_kWh</em>: Energy efficiency calculated in nautical miles per kilowatt-hour.</li>
+</ul>
+<p>We will drop the column “Seasonal_Impact_Score” as it has no context and we can’t understand what the numbers represent.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ship_performance<span class="sc">$</span>Date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(ship_performance<span class="sc">$</span>Date, <span class="at">format=</span><span class="st">"%Y-%m-%d"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ship_performance_imputed <span class="ot">&lt;-</span> ship_performance_imputed <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>Seasonal_Impact_Score)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="extract-summary-statistics" class="level3">
 <h3 class="anchored" data-anchor-id="extract-summary-statistics">Extract summary statistics</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ship_performance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ship_performance_imputed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      Date             Ship_Type          Route_Type        Engine_Type       
  Min.   :2023-06-04   Length:2736        Length:2736        Length:2736       
@@ -454,25 +598,265 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  Mean   :255143       Mean   :521362         Mean   :41.75        
  3rd Qu.:381797       3rd Qu.:750073         3rd Qu.:57.36        
  Max.   :499735       Max.   :999917         Max.   :71.97        
- Efficiency_nm_per_kWh Seasonal_Impact_Score Weekly_Voyage_Count
- Min.   :0.1002        Min.   :0.500         Min.   :1.000      
- 1st Qu.:0.4636        1st Qu.:0.758         1st Qu.:3.000      
- Median :0.7899        Median :1.009         Median :5.000      
- Mean   :0.7987        Mean   :1.004         Mean   :4.915      
- 3rd Qu.:1.1474        3rd Qu.:1.253         3rd Qu.:7.000      
- Max.   :1.4993        Max.   :1.499         Max.   :9.000      
- Average_Load_Percentage
- Min.   : 50.01         
- 1st Qu.: 62.70         
- Median : 75.50         
- Mean   : 75.22         
- 3rd Qu.: 87.72         
- Max.   :100.00         </code></pre>
+ Efficiency_nm_per_kWh Weekly_Voyage_Count Average_Load_Percentage
+ Min.   :0.1002        Min.   :1.000       Min.   : 50.01         
+ 1st Qu.:0.4636        1st Qu.:3.000       1st Qu.: 62.70         
+ Median :0.7899        Median :5.000       Median : 75.50         
+ Mean   :0.7987        Mean   :4.915       Mean   : 75.22         
+ 3rd Qu.:1.1474        3rd Qu.:7.000       3rd Qu.: 87.72         
+ Max.   :1.4993        Max.   :9.000       Max.   :100.00         </code></pre>
 </div>
 </div>
-
-
 </section>
+</section>
+<section id="data-exploration" class="level2">
+<h2 class="anchored" data-anchor-id="data-exploration">Data Exploration</h2>
+<section id="correlation-of-numerical-variables" class="level3">
+<h3 class="anchored" data-anchor-id="correlation-of-numerical-variables">Correlation of Numerical Variables</h3>
+<p>We start with using <code>ggcorrmat()</code> of <strong>ggstatsplot</strong> package to visualise a correlation matrix for our data exploration. This function computes pairwise correlation coefficients and their corresponding p-values, displaying them in a heatmap-style plot. The graphical output makes it easy to spot which pairs of variables have strong positive or negative relationships, as well as which variables are largely uncorrelated. This initial overview helps us identify potential multi-collinearity problems and guides us toward which variables may be most influential in downstream analyses or predictive models.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcorrmat</span>(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> ship_performance_imputed, </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">cor.vars =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">17</span>,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggcorrplot.args =</span> <span class="fu">list</span>(<span class="at">outline.color =</span> <span class="st">"black"</span>, </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">hc.order =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">tl.cex =</span> <span class="dv">7</span>),</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">title    =</span> <span class="st">"Correlogram for ship performance dataset"</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="THE_01_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explanation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>All correlations appear statistically nonsignificant (marked with “X”), indicating that these variables may not share strong linear associations. The color scale is from gold to green, but the matrix is all coloured in white. Overall, the distribution of modest correlations suggests that the chosen metrics operate independently. Given the presence of these nonsignificant results, deeper analysis might consider nonlinear patterns or variables not reflected here. In particular, identifying the operational drivers of efficiency and profitability could benefit from more detailed modeling or domain-specific insights. Nonetheless, this initial overview highlights areas where further study may prove most valuable.</p>
+</div>
+</div>
+<p>We confirm this by creating scatterplots for a few key pairs of variables. For instance, plotting “Cargo_Weight_tons” against “Revenue_per_Voyage_USD” visually examines whether heavier shipments indeed correlate with higher earnings, as one might expect. The resulting plot can reveal outliers or nonlinear patterns that are missed by simple correlation coefficients. By repeating this approach with other relevant variables, such as Operational_Cost_USD or Turnaround_Time_hours, we gain a clearer picture to guide us toward more targeted modeling.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(ship_performance_imputed, <span class="fu">aes</span>(<span class="at">x =</span> Cargo_Weight_tons, <span class="at">y =</span> Revenue_per_Voyage_USD)) <span class="sc">+</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Cargo Weight vs Revenue"</span>, <span class="at">x =</span> <span class="st">"Cargo Weight (tons)"</span>, <span class="at">y =</span> <span class="st">"Revenue per Voyage (USD)"</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(ship_performance_imputed, <span class="fu">aes</span>(<span class="at">x =</span> Draft_meters, <span class="at">y =</span> Efficiency_nm_per_kWh)) <span class="sc">+</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"brown"</span>) <span class="sc">+</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Draft vs Efficiency"</span>, <span class="at">x =</span> <span class="st">"Draft (meters)"</span>, <span class="at">y =</span> <span class="st">"Efficiency (nm/kWh)"</span>)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(ship_performance_imputed, <span class="fu">aes</span>(<span class="at">x =</span> Engine_Power_kW, <span class="at">y =</span> Speed_Over_Ground_knots)) <span class="sc">+</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"grey40"</span>) <span class="sc">+</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"purple"</span>) <span class="sc">+</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Engine Power vs Speed"</span>, <span class="at">x =</span> <span class="st">"Engine Power (kW)"</span>, <span class="at">y =</span> <span class="st">"Speed Over Ground (knots)"</span>)</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(ship_performance_imputed, <span class="fu">aes</span>(<span class="at">x =</span> Turnaround_Time_hours, <span class="at">y =</span> Weekly_Voyage_Count)) <span class="sc">+</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"green"</span>) <span class="sc">+</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Turnaround Time vs No. of Voyages"</span>, <span class="at">x =</span> <span class="st">"Turnaround Time (hours)"</span>, <span class="at">y =</span> <span class="st">"Weekly Voyage Count"</span>)</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>(p1 <span class="sc">+</span> p2) <span class="sc">/</span> (p3 <span class="sc">+</span> p4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="THE_01_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explanation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The color points in the plots above each highlight a data observation, while the straight line depicts a linear regression fit to giving a quick read on trend direction and any outliers that may exist. The near‐horizontal lines in these examples confirm that the variables are not correlated, or at least that any relationship is not linear. Future steps would involve drilling down into each individual relationship to confirm whether certain ranges of values display different patterns, or if additional variables might moderate the relationship.</p>
+</div>
+</div>
+</section>
+<section id="categorical-data" class="level3">
+<h3 class="anchored" data-anchor-id="categorical-data">Categorical Data</h3>
+<p>We try to visualise the effect of “Weather” and Maintenance Status”, which are categorical varaibles, on “Revenue” and “Turnaround Time” respectively.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>p5 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(ship_performance_imputed, <span class="fu">aes</span>(<span class="at">x =</span> Weather_Condition, </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">y =</span> Revenue_per_Voyage_USD, </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> Maintenance_Status)) <span class="sc">+</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Revenue by Weather and Maintenance Status"</span>,</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Weather Condition"</span>,</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Revenue per Voyage (USD)"</span>,</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Maintenance Status"</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>p6 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(ship_performance_imputed, <span class="fu">aes</span>(<span class="at">x =</span> Weather_Condition, </span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>               <span class="at">y =</span> Turnaround_Time_hours, </span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> Maintenance_Status)) <span class="sc">+</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Turnaround Time by Weather and Maintenance Status"</span>,</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Weather Condition"</span>,</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Turnaround Time (hours)"</span>,</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Maintenance Status"</span></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>p5 <span class="sc">/</span> p6</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="THE_01_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explanation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In these boxplots, we can see that revenue and turnaround time vary slightly across different weather conditions (calm, moderate, and rough) and maintenance statuses (critical, fair, and good). However, the overall differences appear relatively minor, suggesting that neither weather nor maintenance category dramatically influences performance. Although there are some small shifts in median revenue when comparing, for instance, “critical” vessels under rough conditions or “good” vessels under moderate conditions, these changes are not especially pronounced. Similarly, turnaround times show only modest variations across categories, with some slight increases under rough weather and critical maintenance status, yet these do not seem substantial. We can see no major outliers or clear patterns of drastically higher or lower values for specific categories. Overall, the patterns suggest that any differences in revenue or turnaround time are not particularly significant. No notable impact on operations is detected.</p>
+</div>
+</div>
+</section>
+<section id="treemaps" class="level3">
+<h3 class="anchored" data-anchor-id="treemaps">Treemaps</h3>
+<p>We use a treemap to visualize hierarchical data—making it easier to spot patterns and relationships across multiple categorical dimensions at a glance</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">treemap</span>(ship_performance_imputed,</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">index =</span> <span class="fu">c</span>(<span class="st">"Ship_Type"</span>, <span class="st">"Route_Type"</span>, <span class="st">"Weather_Condition"</span>),  <span class="co"># Hierarchy</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">vSize =</span> <span class="st">"Revenue_per_Voyage_USD"</span>,                           <span class="co"># Rectangle size</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">vColor =</span> <span class="st">"Turnaround_Time_hours"</span>,                           <span class="co"># Rectangle color</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">type =</span> <span class="st">"value"</span>,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Treemap of Ship Data by Ship Type, Route Type, and Weather Condition"</span>,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">title.legend =</span> <span class="st">"Turnaround Time (hours)"</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="THE_01_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explanation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This treemap is divided by “Ship_Type”, then “Route_Type”, and finally by “Weather_Condition.” Each category is represented as a rectangle whose area is proportional to total revenue (Revenue_per_Voyage_USD). The color of each rectangle corresponds to Turnaround_Time_hours.</p>
+<p>The results indicate that Container Ships on coastal routes under calm weather generate high revenue, while Bulk Carriers operating long-haul in rough conditions exhibit extended turnaround times surpassing 3,000 hours. Meanwhile, shorter routes in moderate weather generally show moderate earnings but efficient turnaround below 2,000 hours. These findings highlight potential operational optimizations, such as focusing on schedules for ships frequently exposed to adverse conditions, improving efficiency in the port.</p>
+</div>
+</div>
+</section>
+<section id="time-series" class="level3">
+<h3 class="anchored" data-anchor-id="time-series">Time Series</h3>
+<p>We plot a time series to view any possible seasonality.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> ship_performance_imputed <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Date, Weather_Condition) <span class="sc">%&gt;%</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">'drop'</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Line plot of weather counts over time</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(weather, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Count, <span class="at">color =</span> Weather_Condition)) <span class="sc">+</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Frequency of Weather Conditions Over Months"</span>,</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Date"</span>,</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count of Observations"</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="THE_01_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explanation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There’s no obvious, repeating cycle that clearly indicates classic seasonality in the weather.</p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>TAT_weather <span class="ot">&lt;-</span> ship_performance_imputed <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Date, Weather_Condition) <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Mean_TAT =</span> <span class="fu">mean</span>(Turnaround_Time_hours), <span class="at">.groups =</span> <span class="st">'drop'</span>)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Plot the time series</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(TAT_weather, <span class="fu">aes</span>(<span class="at">x =</span> Date, </span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> Mean_TAT, </span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">color =</span> Weather_Condition)) <span class="sc">+</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Mean Turnaround Time Over Date, by Weather Condition"</span>,</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Date"</span>,</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Turnaround Time (hours)"</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="THE_01_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explanation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The lines appear irregular and interwoven, showing no clear or repeating patterns (e.g., no predictable peaks and troughs at regular intervals). We therefore can’t conclude any strong seasonality or distinct trend in turnaround times by weather condition solely from this time-series plot</p>
+</div>
+</div>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>Overall, our exploratory data analysis suggests that the dataset does not exhibit many clear, strong patterns or obvious cycles. Variables like turnaround time, speed, and efficiency show substantial variability without forming distinct trends. Even time-series plots by weather condition indicate no persistent cyclical behavior.</p>
+<p>The treemap provides preliminary insights—like the high revenue of Container Ships on calm-weather coastal routes and the lengthy turnaround times of Bulk Carriers in rough conditions—yet these observations warrant deeper investigation. Additional data, such as detailed cost structures or refined weather metrics, would help validate and expand upon these findings, enabling more targeted strategies to optimize scheduling and improve operational efficiency.</p>
+
+
 </section>
 
 </main> <!-- /main -->
