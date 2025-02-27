@@ -34,18 +34,21 @@ summary(car_resale)
 list(car_resale)
 str(car_resale)
 ```
+
 But we will use the ExpData() function from the **SmartEDA** package. There are two types of exploration, `type = 1` provides an overall data summary.
 
 ```{r}
 car_resale %>%
   ExpData(type = 1)
 ```
+
 While `type = 2` provides a variable level summary.
 
 ```{r}
 car_resale %>%
   ExpData(type = 2)
 ```
+
 ## Data Wrangling
 
 It would be better to work with factors instead of strings for categorical data, so we convert the categorical data into factors.
@@ -68,18 +71,22 @@ car_resale %>%
             nlim=10,
             Page=c(2,2))
 ```
+
 ::: callout-note
 ### Note
+
 The `nlim` argument excludes numeric variables which have less than the specified number of unique values.
 :::
 
 We now set the target label as the "Price" of the car.
+
 ```{r}
 car_resale %>%
   ExpNumViz(target="Price",
             nlim=10,
             Page=c(2,2))
 ```
+
 ### Categorical Variables
 
 We then visualise the categorical columns.
@@ -96,13 +103,15 @@ car_resale %>%
             Page=c(4,4),
             sample=16)
 ```
+
 ::: callout-note
 ### Note
+
 From the [documentation](https://www.rdocumentation.org/packages/SmartEDA/versions/0.3.10/topics/ExpCatViz), we can see the following:
 
--  `clim` argument is the maximum number of categories to be considered to be included in each bar graph
--  `margin` argument is an indexing argument. `1` is for row based proportions and `2` for column based proportions.
--  `sample` is the number of categorical variables selected randomly
+-   `clim` argument is the maximum number of categories to be considered to be included in each bar graph
+-   `margin` argument is an indexing argument. `1` is for row based proportions and `2` for column based proportions.
+-   `sample` is the number of categorical variables selected randomly
 :::
 
 ### Multicollinearity Check
@@ -114,16 +123,20 @@ model <- lm(Price ~ Age_08_04 + Mfg_Year + KM + Weight + Guarantee_Period,
             data = car_resale)
 model
 ```
+
 Then doing the multicollinearity check.
 
 ```{r}
 check_collinearity(model)
 ```
+
 We plot the VIF to visualise the values better.
+
 ```{r}
 check_c <- check_collinearity(model)
 plot(check_c)
 ```
+
 We remove "MFG_Year" as it's VIF value is the highest, removing it's collinearity with "Age_08_04" and proceed with the rest of the variables.
 
 ## Model Building and Verification
@@ -140,12 +153,15 @@ model1 <- lm(Price ~ Age_08_04 + KM + Weight + Guarantee_Period,
             data = car_resale)
 check_normality(model1)
 ```
+
 Normal is a good fit as p-value is less than 0.1%.
 
 We then check for Heteroscedasticity (non-constant error variance).
+
 ```{r}
 check_heteroscedasticity(model1)
 ```
+
 Error variance is fine as p-value is also less than 0.1%.
 
 We do a full check on the linear model without "MFG_Year"
@@ -154,26 +170,33 @@ We do a full check on the linear model without "MFG_Year"
 #| fig-width: 12
 check_model(model1)
 ```
-(1)  From Homogeneity of Variance, we can see two clusters: one for the left cluster, and one for the right sparser cluster. This suggests that we should build two models for the data.
-(2)  The Influential Observations contain an outlier (coloured red). We can consider removing this value and remodelling the data.
+
+(1) From Homogeneity of Variance, we can see two clusters: one for the left cluster, and one for the right sparser cluster. This suggests that we should build two models for the data.
+(2) The Influential Observations contain an outlier (coloured red). We can consider removing this value and remodelling the data.
 
 ## Model Summary
 
 We could use the built in R function `summary()`.
+
 ```{r}
 summary(model1)
 ```
+
 The data is presented very inelegantly. We do a basic visualisation.
+
 ```{r}
 plot(parameters(model1))
 ```
+
 This is better as statistics are presented together.
+
 ```{r}
 library(ggstatsplot)
 
 ggcoefstats(model1,
             output = "plot")
 ```
+
 We use the `tbl_regression()` of **gtsummary** package for a elegant summary.
 
 ```{r}

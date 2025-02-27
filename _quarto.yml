@@ -33,6 +33,8 @@ website:
         href: Hands_On_Exercises/HOE05/HOE_05d.html
       - text: "Hands On Exercise 5e"
         href: Hands_On_Exercises/HOE05/HOE_05e.html
+      - text: "Hands On Exercise 7"
+        href: Hands_On_Exercises/HOE07/HOE_07.html
     - text: "In-class Exercise"
       menu:
       - text: "In-class Exercise 1 (Tableau)"
