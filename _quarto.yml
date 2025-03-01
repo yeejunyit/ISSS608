@@ -49,6 +49,10 @@ website:
         href: "https://public.tableau.com/app/profile/junyit.yee/viz/InClassExercise_05/Dashboard1"
       - text: "In-class Exercise 5"
         href: In_Class_Exercises/ICE_05/ICE_05.html
+      - text: "In-class Exercise 6"
+        href: "https://yisbetterthanx.shinyapps.io/In_Class_Exercise_06_Introduction_to_Shiny/"
+      - text: "In-class Exercise 7"
+        href: In_Class_Exercises/ICE_07/ICE_07.html
     - text: "Take-home Exercise"
       menu:
       - text: "Take-home Exercise 1"
