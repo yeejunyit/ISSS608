@@ -57,6 +57,8 @@ website:
       menu:
       - text: "Take-home Exercise 1"
         href: Take_Home_Exercises/THE_01/THE_01.html
+      - text: "Take-home Exercise 2"
+        href: Take_Home_Exercises/THE_02/THE_02.html
     right:
       - href: index.qmd
         text: Home

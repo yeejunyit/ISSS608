@@ -200,7 +200,7 @@ tsibble_longer %>%
 ::: {callout-note}
 #### What we can learn from the code chunk above
 
--   `gg_subseries" provides a simple function to plot a cycle plot, as opposed to having to manually do the plot combining`geom_line()`,`geom_hline()`in a`facet_grid()\`.
+-   `gg_subseries()` provides a simple function to plot a cycle plot, as opposed to having to manually do the plot combining`geom_line()`,`geom_hline()`in a `facet_grid()`.
 :::
 
 We can see the data paints a more detailed picture of seasonality: Italians will suddenly surge in numbers of arrivals in the month of August, while the Vietnamese have more obvious shoulder season with a gradual progression towards their peak in July before coming back down.
