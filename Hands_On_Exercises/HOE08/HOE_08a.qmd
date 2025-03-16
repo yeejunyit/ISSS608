@@ -19,7 +19,7 @@ In this chapter, we will plot functional and truthful choropleth maps by using a
 
 We will be using the following main packages:
 
--   [**tmap**](https://scales.r-lib.org/) provides thematic maps, which are geographical maps in which spatial data distributions are visualized;
+-   [**tmap**](https://r-tmap.github.io/tmap/) provides thematic maps, which are geographical maps in which spatial data distributions are visualized;
 -   [**sf**](https://cran.r-project.org/web/packages/sf/sf.pdf) provides support for simple features, a standardized way to encode spatial vector data;
 
 And as usual:
@@ -48,7 +48,7 @@ Only the first few records are displayed by default as a preview limit for reada
 Next, we will import *respopagesexfa2011to2020.csv* file and save the file into an R data.frame called popagsex.
 
 ```{r}
-popdata <- read_csv("data/respopagesexfa2011to2020.csv")
+popdata <- read_csv("data/respopagesextod2011to2020.csv")
 ```
 
 ## Data Preparation
@@ -151,19 +151,17 @@ Despite its usefulness of drawing a choropleth map quickly and easily, the disad
 
 ```{r}
 tm_shape(mpsz_pop2020)+
-  tm_fill("DEPENDENCY", 
-          style = "quantile", 
-          palette = "matplotlib.blues",
-          title = "Dependency ratio") +
-  tm_layout(main.title = "Distribution of Dependency Ratio by planning subzone",
-            main.title.position = "center",
-            main.title.size = 1.2,
-            legend.height = 0.45, 
-            legend.width = 0.35,
-            frame = TRUE) +
-  tm_borders(alpha = 0.5) +
+  tm_polygons(fill = "DEPENDENCY", 
+              fill.scale = tm_scale_intervals(
+                style = "quantile",
+                n = 5,
+                values = "matplotlib.blues"),
+              fill.legend = tm_legend(
+                title = "Dependency ratio")) +
+  tm_title("Distribution of Dependency Ratio by planning subzone") +
+  tm_layout(frame = TRUE) +
+  tm_borders(fill_alpha = 0.5) +
   tm_compass(type="8star", size = 2) +
-  tm_scale_bar() +
   tm_grid(alpha =0.2) +
   tm_credits("Source: Planning Sub-zone boundary from Urban Redevelopment Authorithy (URA)\n and Population data from Department of Statistics DOS", 
              position = c("left", "bottom"))
@@ -212,12 +210,12 @@ tm_shape(mpsz_pop2020)+
 
 Notice that the planning subzones are shaded according to the respective dependecy values.
 
-To add the boundary of the planning subzones, tm_borders will be used as shown in the code chunk below.
+To add the boundary of the planning subzones, *tm_borders()* will be used as shown in the code chunk below.
 
 ```{r}
 tm_shape(mpsz_pop2020)+
   tm_fill("DEPENDENCY") +
-  tm_borders(lwd = 0.1,  alpha = 1)
+  tm_borders(col = "black", lwd = 1)
 ```
 
 Notice that light-gray border lines have been added on the choropleth map.
@@ -227,7 +225,7 @@ The alpha argument is used to define transparency number between 0 (totally tran
 Beside `alpha` argument, there are three other arguments for *tm_borders()*, they are:
 
 -   *col* = border colour,
--   *lwd* = border line width. The default is 1, and
+-   *lwd* = border line width. The default is 1, and cannot be thinner than that
 -   *lty* = border line type. The default is “solid”.
 
 ### Data classification methods of tmap
@@ -244,42 +242,46 @@ We try a quantile data classification that uses 5 classes.
 
 ```{r}
 tm_shape(mpsz_pop2020)+
-  tm_fill("DEPENDENCY",
-          n = 5,
-          style = "jenks") +
-  tm_borders(alpha = 0.5)
+  tm_polygons(fill = "DEPENDENCY", 
+              fill.scale = tm_scale_intervals(
+                style = "quantile",
+                n = 5)) +
+  tm_borders(fill_alpha = 0.5)
 ```
 
 Here's one that uses the *equal* method
 
 ```{r}
 tm_shape(mpsz_pop2020)+
-  tm_fill("DEPENDENCY",
-          n = 5,
-          style = "equal") +
-  tm_borders(alpha = 0.5)
+  tm_polygons(fill = "DEPENDENCY", 
+              fill.scale = tm_scale_intervals(
+                style = "equal",
+                n = 5)) +
+  tm_borders(fill_alpha = 0.5)
 ```
 
-Notice that the distribution of the *quantile* data classification method is more even compared to the *equal* data classification method.
+Notice that the distribution of the *quantile* data classification method is more detailed compared to the *equal* data classification method.
 
 We try now the *kmeans* method
 
 ```{r}
 tm_shape(mpsz_pop2020)+
-  tm_fill("DEPENDENCY",
-          n = 5,
-          style = "kmeans") +
-  tm_borders(alpha = 0.5)
+  tm_polygons(fill = "DEPENDENCY", 
+              fill.scale = tm_scale_intervals(
+                style = "kmeans",
+                n = 5)) +
+  tm_borders(fill_alpha = 0.5)
 ```
 
 And for more granularity we change the number of means
 
 ```{r}
 tm_shape(mpsz_pop2020)+
-  tm_fill("DEPENDENCY",
-          n = 10,
-          style = "kmeans") +
-  tm_borders(alpha = 0.5)
+  tm_polygons(fill = "DEPENDENCY", 
+              fill.scale = tm_scale_intervals(
+                style = "kmeans",
+                n = 10)) +
+  tm_borders(fill_alpha = 0.5)
 ```
 
 The bigger the number of means, the more we see the relatively higher concentration of dependents in the central region, reflecting the demand for schools in those subzones. This is in comparison to the relatively uniform colour of the previous choropleth map with only 5 means.
@@ -300,9 +302,9 @@ Our breaks vector is thus c(0, 0.60, 0.70, 0.80, 0.90, 1.00), which we plot as b
 
 ```{r}
 tm_shape(mpsz_pop2020)+
-  tm_fill("DEPENDENCY",
-          breaks = c(0, 0.60, 0.70, 0.80, 0.90, 1.00)) +
-  tm_borders(alpha = 0.5)
+  tm_polygons(fill = "DEPENDENCY",
+              breaks = c(0, 0.60, 0.70, 0.80, 0.90, 1.00)) +
+  tm_borders(fill_alpha = 0.5)
 ```
 
 ### Colour Scheme
@@ -315,21 +317,24 @@ To change the colour, we assign the preferred colour to the *palette* argument o
 
 ```{r}
 tm_shape(mpsz_pop2020)+
-  tm_fill("DEPENDENCY",
-          n = 6,
-          style = "quantile",
-          palette = "Greens") +
-  tm_borders(alpha = 0.5)
+  tm_polygons(fill = "DEPENDENCY",
+              fill.scale = tm_scale_intervals(
+                style = "quantile",
+                n = 6,
+                values = "Greens")) +
+  tm_borders(fill_alpha = 0.5)
 ```
 
 Notice that the choropleth map is shaded in green, from light to dark. To reverse the colour shading from dark to light, we add a “-” prefix.
 
 ```{r}
 tm_shape(mpsz_pop2020)+
-  tm_fill("DEPENDENCY",
-          style = "quantile",
-          palette = "-Greens") +
-  tm_borders(alpha = 0.5)
+  tm_polygons(fill = "DEPENDENCY",
+              fill.scale = tm_scale_intervals(
+                style = "quantile",
+                n = 6,
+                values = "-Greens")) +
+  tm_borders(fill_alpha = 0.5)
 ```
 
 ### Map Layouts
@@ -340,24 +345,19 @@ Map layout refers to the combination of all map elements into a cohensive map. M
 
 In **tmap**, several *legend* options are provided to change the placement, format and appearance of the legend.
 
-```{r}
-#| fig-width: 12
-
+```{r, message=FALSE}
 tm_shape(mpsz_pop2020)+
-  tm_fill("DEPENDENCY", 
-          style = "jenks", 
-          palette = "Blues", 
-          legend.hist = TRUE, 
-          #legend.is.portrait = TRUE,
-          legend.hist.z = 1) +
-  tm_layout(main.title = "Distribution of Dependency Ratio by planning subzone \n(Jenks classification)",
-            main.title.position = "center",
-            main.title.size = 1.5,
-            #legend.height = 0.45, 
-            #legend.width = 0.35,
-            legend.outside.position = "right",
-            frame = FALSE) +
-  tm_borders(alpha = 0.5)
+  tm_polygons(fill = "DEPENDENCY",
+              fill.scale = tm_scale_intervals(
+                style = "quantile",
+                values = "matplotlib.blues"), 
+              fill.legend = tm_legend(title = "Dependency Ratio"),
+              fill.chart = tm_chart_histogram()) +
+  tm_layout(main.title = "Distribution of Dependency Ratio by planning subzone \n (Quantile classification)",
+            main.title.size = 1,
+            main.title.position = c("center", "top"),
+            main.title.frame = FALSE) +
+  tm_borders(fill_alpha = 0.5)
 ```
 
 ::: {callout-warning}
@@ -372,12 +372,10 @@ This will affect all legend arguments from here.
 
 ```{r}
 tm_shape(mpsz_pop2020)+
-  tm_fill("DEPENDENCY", 
-          style = "quantile", 
-          palette = "-Greens",
-          legend.outside = FALSE,
-          legend = c("right", "bottom")) +
-  tm_borders(alpha = 0.5) +
+  tm_polygons(fill = "DEPENDENCY",
+              fill.scale = tm_scale_intervals(
+                values = "-Greens")) +
+  tm_borders(fill_alpha = 0.5) +
   tmap_style("classic")
 ```
 
@@ -389,19 +387,18 @@ In the code chunk below, *tm_compass()* and *tm_grid()* are used to add a compas
 
 ```{r}
 tm_shape(mpsz_pop2020)+
-  tm_fill("DEPENDENCY", 
-          style = "quantile", 
-          palette = "Blues",
-          title = "No. of persons") +
-  tm_layout(main.title = "Distribution of Dependency Ratio \nby planning subzone",
-            main.title.position = "center",
-            main.title.size = 1.2,
-            #legend.height = 0.45, 
-            #legend.width = 0.35,
-            frame = TRUE) +
-  tm_borders(alpha = 0.5) +
+  tm_polygons(fill = "DEPENDENCY", 
+              fill.scale = tm_scale_intervals(
+                style = "quantile",
+                n = 5,
+                values = "matplotlib.blues"),
+              fill.legend = tm_legend(
+                title = "Dependency ratio")) +
+  tm_title("Distribution of Dependency Ratio by planning subzone") +
+  tm_layout(frame = TRUE) +
+  tm_borders(fill_alpha = 0.5) +
   tm_compass(type="8star", size = 2) +
-  tm_grid(lwd = 0.1, alpha = 0.2) +
+  tm_grid(alpha =0.2) +
   tm_credits("Source: Planning Sub-zone boundary from Urban Redevelopment Authorithy (URA)\n and Population data from Department of Statistics DOS", 
              position = c("left", "bottom"))
 ```
@@ -430,11 +427,12 @@ In this example, small multiple choropleth maps are created by defining **ncols*
 #| fig-width: 12
 
 tm_shape(mpsz_pop2020)+
-  tm_fill(c("YOUNG", "AGED"),
-          style = "equal", 
-          palette = "Blues") +
+  tm_polygons(fill= c("YOUNG", "AGED"),
+              fill.scale = tm_scale_intervals(
+                style = "equal",
+                values = "matplotlib.blues")) +
   tm_layout(legend.position = c("right", "bottom")) +
-  tm_borders(alpha = 0.5) +
+  tm_borders(fill_alpha = 0.5) +
   tmap_style("white")
 ```
 
@@ -444,10 +442,29 @@ In this example, small multiple choropleth maps are created by assigning multipl
 #| fig-width: 12
 
 tm_shape(mpsz_pop2020)+ 
-  tm_polygons(c("DEPENDENCY","AGED"),
-          style = c("equal", "quantile"), 
-          palette = "Greens") +
+  tm_polygons(fill = c("DEPENDENCY","AGED"),
+              fill.scale = list(
+                tm_scale_intervals(style = "equal", values = "matplotlib.blues"),
+                tm_scale_intervals(style = "quantile", values = "Greens"))) +
   tm_layout(legend.position = c("right", "bottom"))
+```
+
+#### By defining a group-by variable in *tm_facets()*
+
+Here, we create multiple small choropleth maps using *tm_facets()*.
+
+```{r}
+tm_shape(mpsz_pop2020) +
+  tm_polygons(fill = "DEPENDENCY",
+              fill.scale = tm_scale_intervals(
+                style = "quantile",
+                values = "matplotlib.blues")) +
+  tm_facets(by="REGION_N", 
+            free.coords=TRUE) +
+  tm_layout(legend.show = FALSE,
+            title.position = c("center", "center"), 
+            title.size = 20) +
+  tm_borders(fill_alpha = 0.5)
 ```
 
 #### By creating multiple stand-alone maps with tmap_arrange()
@@ -458,14 +475,16 @@ In this example, multiple small choropleth maps are created by creating multiple
 #| fig-width: 12
 
 youngmap <- tm_shape(mpsz_pop2020)+ 
-  tm_polygons("YOUNG", 
-              style = "quantile", 
-              palette = "matplotlib.blues")
+  tm_polygons(fill = "YOUNG", 
+              fill.scale = tm_scale_intervals(
+                style = "quantile",
+                values = "matplotlib.blues"))
 
 agedmap <- tm_shape(mpsz_pop2020)+ 
-  tm_polygons("AGED", 
-              style = "quantile", 
-              palette = "matplotlib.blues")
+  tm_polygons(fill = "AGED", 
+              fill.scale = tm_scale_intervals(
+                style = "quantile",
+                values = "matplotlib.blues"))
 
 tmap_arrange(youngmap, agedmap, asp=1, ncol=2)
 ```
@@ -479,20 +498,17 @@ Instead of creating small multiple choropleth map, you can also use selection fu
 #| fig-height: 6
 
 tm_shape(mpsz_pop2020[mpsz_pop2020$REGION_N=="CENTRAL REGION", ])+
-  tm_fill("DEPENDENCY", 
-          style = "quantile", 
-          palette = "Blues", 
-          legend.hist = TRUE, 
-          legend.is.portrait = TRUE,
-          legend.hist.z = 0.1) +
-  tm_layout(legend.outside = TRUE,
-            #legend.height = 0.45, 
-            #legend.width = 5.0,
-            legend.outside.position = "right",
-            frame = FALSE) +
-  tm_borders(alpha = 0.5)
+  tm_polygons(fill = "DEPENDENCY", 
+              fill.scale = tm_scale_intervals(
+                style = "quantile",
+                values = "matplotlib.blues"),
+              fill.legend = tm_legend(title = "Dependency Ratio"),
+              fill.chart = tm_chart_histogram()) +
+  tm_layout(frame = FALSE) +
+  tm_borders(fill_alpha = 0.5)
 ```
 
 ## References
 
 -   [tmap: thematic maps in R](https://r-tmap.github.io/tmap/)
+-   [tmap](https://cran.r-project.org/web/packages/tmap/tmap.pdf) package documentation

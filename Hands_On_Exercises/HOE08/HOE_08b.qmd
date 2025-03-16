@@ -1,0 +1,138 @@
+---
+title: "Hands on Exercise 08b: Visualising Geospatial Point Data"
+author: "Yee Jun Yit"
+date-modified: "last-modified"
+execute:
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
+---
+
+## Overview
+
+Proportional symbol maps (also known as graduate symbol maps) are a class of maps that use the visual variable of size to represent differences in the magnitude of a discrete, abruptly changing phenomenon, e.g. counts of people. Like choropleth maps, we can create classed or unclassed versions of these maps. The classed ones are known as range-graded or graduated symbols, and the unclassed are called proportional symbols, where the area of the symbols are proportional to the values of the attribute being mapped. In this exercise, we will learn how to create a proportional symbol map showing the number of wins by Singapore Pools’ outlets using an R package called **tmap**.
+
+We will learn how to:
+
+-   Import an aspatial data file into R,
+-   Convert it into simple point feature data frame and at the same time, to assign an appropriate projection reference to the newly create simple point feature data frame,
+-   Plot interactive proportional symbol maps.
+
+## Loading Data
+
+We will be using the following main packages:
+
+-   [**tmap**](https://r-tmap.github.io/tmap/) provides thematic maps, which are geographical maps in which spatial data distributions are visualized;
+-   [**sf**](https://cran.r-project.org/web/packages/sf/sf.pdf) provides support for simple features, a standardized way to encode spatial vector data;
+
+And as usual:
+
+-   tidyverse, a family of R packages for data science processes.
+
+```{r}
+pacman::p_load(tmap, sf, tidyverse)
+```
+
+In this exercise, we will be using SGPools_svy21.csv, which is in csv format.
+
+```{r}
+sgpools <- read_csv("data/SGPools_svy21.csv")
+str(sgpools)
+```
+
+The data consists of 306 records in seven columns, with XCOORD and YCOORD columns the x-coordinates and y-coordinates of the particular SingPools outlet or branche. They are in [Singapore SVY21 Projected Coordinates System](https://app.sla.gov.sg/sirent/About/PlaneCoordinateSystem).
+
+It is in tibble form, as can be seen from `spc_tbl_` above, not the base R data.frame.
+
+## Creating a sf data frame from an aspatial data frame
+
+We convert the sgpools tibble into a simple feature data frame by using *st_as_sf()* of **sf** package.
+
+```{r}
+sgpools_sf <- st_as_sf(sgpools, 
+                       coords = c("XCOORD", "YCOORD"),
+                       crs= 3414)
+```
+
+::: {callout-note}
+### Things to learn from the code above
+
+-   The *coords* argument requires us to provide the column name of the x-coordinates first then followed by the column name of the y-coordinates.
+-   The *crs* argument requires us to provide the coordinates system in epsg format. [EPSG: 3414](https://epsg.io/3414) is the same as Singapore SVY21 Projected Coordinate System. We can search for other countries' epsg code by refering to [epsg.io](https://epsg.io/).
+:::
+
+```{r}
+list(sgpools_sf)
+```
+
+Notice that a new column called *geometry* has been added into the data frame. It is now an instance of the point feature class, with a bounding box providing provides information about the extent of the geospatial data.
+
+## Drawing Proportional Symbol Map
+
+To create an interactive proportional symbol map in R, the view mode of tmap will be used.
+
+```{r}
+tmap_mode("view")
+```
+
+### Starting with an interactive point symbol map
+
+```{r}
+tm_shape(sgpools_sf)+
+tm_bubbles(fill = "red",
+           size = 0.5,
+           col = "black",
+           lwd = 1)
+```
+
+### Making it proportional
+
+To draw a proportional symbol map, we need to assign a numerical variable to the size visual attribute. In this case we use *Gp1Gp2Winnings* for the size visual attribute.
+
+```{r}
+tm_shape(sgpools_sf)+
+tm_bubbles(fill = "red",
+           size = "Gp1Gp2 Winnings",
+           col = "black",
+           lwd = 1)
+```
+
+### Giving it a Different Colour
+
+The proportional symbol map can be further improved by using the *fill* visual attribute. Here we use the *OUTLET_TYPE* variable as the *fill* attribute variable.
+
+```{r}
+tm_shape(sgpools_sf)+
+tm_bubbles(fill = "OUTLET TYPE", 
+          size = "Gp1Gp2 Winnings",
+          col = "black",
+          lwd = 1)
+```
+
+### Faceted Outlet Types
+
+**tmap** also works with faceted plots. The argument `sync` in tm_facets() can be used in this case to produce multiple maps with synchronised zoom and pan settings.
+
+```{r}
+tm_shape(sgpools_sf) +
+  tm_bubbles(fill = "OUTLET TYPE", 
+          size = "Gp1Gp2 Winnings",
+          col = "black",
+          lwd = 1) +
+  tm_facets(by= "OUTLET TYPE",
+            nrow = 1,
+            sync = TRUE)
+```
+
+## Conclusion: Switching Mode
+
+Before ending a session, it is wise to switch **tmap**’s Viewer back to plot mode.
+
+```{r}
+tmap_mode("plot")
+```
+
+## References
+
+-   [tmap: thematic maps in R](https://r-tmap.github.io/tmap/)

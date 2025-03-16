@@ -37,6 +37,10 @@ website:
         href: Hands_On_Exercises/HOE07/HOE_07.html
       - text: "Hands On Exercise 8a"
         href: Hands_On_Exercises/HOE08/HOE_08a.html
+      - text: "Hands On Exercise 8b"
+        href: Hands_On_Exercises/HOE08/HOE_08b.html
+      - text: "Hands On Exercise 8c"
+        href: Hands_On_Exercises/HOE08/HOE_08c.html
     - text: "In-class Exercise"
       menu:
       - text: "In-class Exercise 1 (Tableau)"
@@ -55,6 +59,10 @@ website:
         href: "https://yisbetterthanx.shinyapps.io/In_Class_Exercise_06_Introduction_to_Shiny/"
       - text: "In-class Exercise 7"
         href: In_Class_Exercises/ICE_07/ICE_07.html
+      - text: "In-class Exercise 8-1 (Tableau)"
+        href: "https://public.tableau.com/app/profile/junyit.yee/viz/InClassExercise_08/SingaporePoolsNumberofWinningsbyShopType"
+      - text: "In-class Exercise 8-2 (Tableau)"
+        href: "https://public.tableau.com/app/profile/junyit.yee/viz/InClassExercise_08_2/AnimatedandInteractiveGeospatialPropertyTransactions"
     - text: "Take-home Exercise"
       menu:
       - text: "Take-home Exercise 1"
