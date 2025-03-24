@@ -36,7 +36,7 @@ And as usual:
 -   tidyverse, a family of R packages for data science processes.
 
 ```{r}
-pacman::p_load(igraph, tidygraph, ggraph, visNetwork, graphlayouts,
+pacman::p_load(igraph, tidygraph, ggraph, visNetwork, graphlayouts, ggforce, concaveman,
                lubridate, clock,
                tidyverse)
 ```
@@ -273,6 +273,7 @@ g <- ggraph(GAStech_graph,
 
 g + theme_graph()
 ```
+
 ::: {callout-note}
 #### Things to learn from the code chunk above
 
@@ -292,6 +293,7 @@ g <- ggraph(GAStech_graph,
 
 g + theme_graph()
 ```
+
 ::: {callout-note}
 #### Things to learn from the code chunk above
 
@@ -313,6 +315,7 @@ g <- ggraph(GAStech_graph,
 
 g + theme_graph()
 ```
+
 ::: {callout-note}
 #### Things to learn from the code chunk above
 
@@ -325,9 +328,9 @@ Another very useful feature of **ggraph** is faceting. In visualising network da
 
 There are three functions in ggraph to implement faceting:
 
--  [`facet_nodes()`](https://ggraph.data-imaginist.com/reference/facet_nodes.html) whereby edges are only drawn in a panel if both terminal nodes are present here,
--  [`facet_edges()`](https://ggraph.data-imaginist.com/reference/facet_edges.html) whereby nodes are always drawn in al panels even if the node data contains an attribute named the same as the one used for the edge facetting, and
--  [`facet_graph()`](https://ggraph.data-imaginist.com/reference/facet_graph.html) which does faceting on the above two variables simultaneously.
+-   [`facet_nodes()`](https://ggraph.data-imaginist.com/reference/facet_nodes.html) whereby edges are only drawn in a panel if both terminal nodes are present here,
+-   [`facet_edges()`](https://ggraph.data-imaginist.com/reference/facet_edges.html) whereby nodes are always drawn in al panels even if the node data contains an attribute named the same as the one used for the edge facetting, and
+-   [`facet_graph()`](https://ggraph.data-imaginist.com/reference/facet_graph.html) which does faceting on the above two variables simultaneously.
 
 ### Working with `facet_edges()`
 
@@ -346,6 +349,7 @@ g <- ggraph(GAStech_graph,
 
 g + facet_edges(~Weekday)
 ```
+
 #### Working with theme()
 
 Here, we change the position of the legend
@@ -364,6 +368,7 @@ g <- ggraph(GAStech_graph,
   
 g + facet_edges(~Weekday)
 ```
+
 #### Adding a frame
 
 We add a frame to each individual graph
@@ -384,6 +389,7 @@ g + facet_edges(~Weekday) +
                 border = TRUE) +
   theme(legend.position = 'bottom')
 ```
+
 ### Working with `facet_nodes()`
 
 Here, we use `facet_nodes()`, but with all the above positioning and frame at one go.
@@ -404,7 +410,9 @@ g + facet_nodes(~Department)+
                 border = TRUE) +
   theme(legend.position = 'bottom')
 ```
+
 ## Network Metrics Analysis
+
 ### Computing centrality indices
 
 Centrality measures are a collection of statistical indices use to describe the relative important of the actors are to a network.
@@ -422,12 +430,11 @@ g <- GAStech_graph %>%
             size=betweenness_centrality))
 g + theme_graph()
 ```
+
 ::: {callout-note}
 #### Things to learn from the code chunk above
 
--   `mutate()` of **dplyr** is used to perform the computation.
-    the algorithm used is the `centrality_betweenness()` of **tidygraph**.
-
+-   `mutate()` of **dplyr** is used to perform the computation. the algorithm used is the `centrality_betweenness()` of **tidygraph**.
 :::
 
 ### Visualising network metrics
@@ -444,6 +451,7 @@ g <- GAStech_graph %>%
                       size = centrality_betweenness()))
 g + theme_graph()
 ```
+
 ### Visualising Community
 
 **tidygraph** package inherits many of the community detection algorithms embedded into igraph and makes them available to us, including *Edge-betweenness* (`group_edge_betweenness`), *Leading eigenvector* (`group_leading_eigen`), *Fast-greedy* (`group_fast_greedy`), *Louvain* (`group_louvain`), *Walktrap* (`group_walktrap`), *Label propagation* (`group_label_prop`), *InfoMAP* (`group_infomap`), *Spinglass* (`group_spinglass`), and *Optimal* (`group_optimal`). Some [community algorithms](https://tidygraph.data-imaginist.com/reference/group_graph.html) are designed to take into account direction or weight, while others ignore it.
@@ -461,14 +469,44 @@ g <- GAStech_graph %>%
 
 g + theme_graph()
 ```
+
+For better visualisation, we make use of [**ggforce**](https://ggforce.data-imaginist.com/) package, which provides missing functionality to **ggplot2**, specifically its `geom_mark_hull()`, which draws a convex hull around groups of points to emphasize the cluster.
+
+```{r}
+g <- GAStech_graph %>%
+  activate(nodes) %>%
+  mutate(community = as.factor(
+    group_optimal(weights = Weight)),
+         betweenness_measure = centrality_betweenness()) %>%
+  ggraph(layout = "fr") +
+  geom_mark_hull(
+    aes(x, y, 
+        group = community, 
+        fill = community),  
+    alpha = 0.2,  
+    expand = unit(0.3, "cm"),  # Expand
+    radius = unit(0.3, "cm")  # Smoothness
+  ) + 
+  geom_edge_link(aes(width=Weight), 
+                 alpha=0.2) +
+  scale_edge_width(range = c(0.1, 5)) +
+  geom_node_point(aes(fill = Department,
+                      size = betweenness_measure),
+                      color = "black",
+                      shape = 21)
+  
+g + theme_graph()
+```
+
+
 ## Building Interactive Network Graph with **visNetwork**
 
 [**visNetwork**](https://datastorm-open.github.io/visNetwork/) is a R package for network visualization, using the [vis.js](https://visjs.org/) javascript library.
 
 The `visNetwork()` function uses a nodes list and edges list to create an interactive graph.
 
--  The nodes list must include an “id” column, and the edge list must have “from” and “to” columns.
--  The function also plots the labels for the nodes, using the names of the actors from the “label” column in the node list.
+-   The nodes list must include an “id” column, and the edge list must have “from” and “to” columns.
+-   The function also plots the labels for the nodes, using the names of the actors from the “label” column in the node list.
 
 With the resulting graph, we can move the nodes and the graph will use an algorithm to keep the nodes properly spaced. At the same time, we can also zoom in and out on the plot, and move it around to re-center it.
 
@@ -489,6 +527,7 @@ GAStech_edges_aggregated <- GAStech_edges %>%
   filter(weight > 1) %>%
   ungroup()
 ```
+
 ### Plotting the first interactive network graph
 
 USing the data prepared, we now plot the interactive network graph.
@@ -497,6 +536,7 @@ USing the data prepared, we now plot the interactive network graph.
 visNetwork(GAStech_nodes, 
            GAStech_edges_aggregated)
 ```
+
 This graph uses force-based physics to adjust the nodes' positions. However, there are too many edges in the graph, leading to the nodes not stabilizing properly, as the graph keeps recalculating positions instead of settling.
 
 ### Working with Layouts
@@ -508,6 +548,7 @@ visNetwork(GAStech_nodes,
            GAStech_edges_aggregated) %>%
   visIgraphLayout(layout = "layout_with_fr") 
 ```
+
 ### Working with visual attributes - Nodes
 
 `visNetwork()` looks for a field called “group” in the nodes object to colour the nodes according to the values of the "group" field.
@@ -520,6 +561,7 @@ GAStech_nodes <- GAStech_nodes %>%
 ```
 
 And run the code below to shades the nodes by assigning unique colour to each category in the "group" field.
+
 ```{r}
 visNetwork(GAStech_nodes,
            GAStech_edges_aggregated) %>%
@@ -527,12 +569,13 @@ visNetwork(GAStech_nodes,
   visLegend() %>%
   visLayout(randomSeed = 123)
 ```
+
 ### Working with visual attributes - Edges
 
 We symbolise the edges using [`visEdges()`](https://datastorm-open.github.io/visNetwork/edges.html). Here,
 
--  `arrows` is used to define where to place the arrow.
--  `smooth` is used to plot the edges using a smooth curve.
+-   `arrows` is used to define where to place the arrow.
+-   `smooth` is used to plot the edges using a smooth curve.
 
 ```{r}
 visNetwork(GAStech_nodes,
@@ -544,12 +587,13 @@ visNetwork(GAStech_nodes,
   visLegend() %>%
   visLayout(randomSeed = 123)
 ```
+
 ### Interactivity
 
 `visOptions()` is used to incorporate interactivity features in the data visualisation. Here,
 
--  `highlightNearest` highlights nearest neighbours when clicking a node.
--  `nodesIdSelection` creates an HTML select element by adding a dropdown menu.
+-   `highlightNearest` highlights nearest neighbours when clicking a node.
+-   `nodesIdSelection` creates an HTML select element by adding a dropdown menu.
 
 ```{r}
 visNetwork(GAStech_nodes,
@@ -560,7 +604,6 @@ visNetwork(GAStech_nodes,
   visLegend() %>%
   visLayout(randomSeed = 123)
 ```
-
 
 ## References
 

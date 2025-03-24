@@ -1,7 +1,7 @@
 ---
 title: "Hands on Exercise 08a: Choropleth Mapping with R"
 author: "Yee Jun Yit"
-date-modified: "last-modified"
+date-modified: "March 16, 2025"
 execute:
   echo: true
   eval: true
@@ -33,7 +33,7 @@ pacman::p_load(tmap, sf, tidyverse)
 In this exercise, we will be using two datasets to create the choropleth map:
 
 (1) Master Plan 2014 Subzone Boundary (Web) (i.e. `MP14_SUBZONE_WEB_PL`) in ESRI shapefile format. Downloaded at [data.gov.sg](https://data.gov.sg/datasets/d_d14da225fccf921049ab64238ff473d9/view), this is a geospatial data file. It consists of the geographical boundary of Singapore at the planning subzone level, and is based on URA Master Plan 2014.
-(2) Singapore Residents by Planning Area / Subzone, Age Group, Sex and Type of Dwelling, June 2011-2020 (`respopagesexfa2011to2020.csv`). This is an aspatial data fie downloaded at [Department of Statistics, Singapore](https://www.singstat.gov.sg/find-data/search-by-theme/population/geographic-distribution/latest-data) Although it does not contain any coordinates values, but it’s PA and SZ fields can be used as unique identifiers to geocode to MP14_SUBZONE_WEB_PL shapefile.
+(2) Singapore Residents by Planning Area / Subzone, Age Group, Sex and Type of Dwelling, June 2011-2020 (`respopagesextod2011to2020.csv`). This is an aspatial data fie downloaded at [Department of Statistics, Singapore](https://www.singstat.gov.sg/find-data/search-by-theme/population/geographic-distribution/latest-data) Although it does not contain any coordinates values, but it’s PA and SZ fields can be used as unique identifiers to geocode to MP14_SUBZONE_WEB_PL shapefile.
 
 WE use the *st_read()* function of **sf** package to import `MP14_SUBZONE_WEB_PL` shapefile into R as a simple feature data frame called `mpsz`.
 
@@ -45,7 +45,7 @@ mpsz
 
 Only the first few records are displayed by default as a preview limit for readability.
 
-Next, we will import *respopagesexfa2011to2020.csv* file and save the file into an R data.frame called popagsex.
+Next, we will import *respopagesextod2011to2020.csv* file and save the file into an R data.frame called popagsex.
 
 ```{r}
 popdata <- read_csv("data/respopagesextod2011to2020.csv")

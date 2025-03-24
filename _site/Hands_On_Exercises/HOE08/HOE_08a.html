@@ -247,6 +247,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="https://public.tableau.com/app/profile/junyit.yee/viz/InClassExercise_08_2/AnimatedandInteractiveGeospatialPropertyTransactions">
  <span class="dropdown-text">In-class Exercise 8-2 (Tableau)</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../In_Class_Exercises/ICE_09/ICE_09.html">
+ <span class="dropdown-text">In-class Exercise 9</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -372,7 +376,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In this exercise, we will be using two datasets to create the choropleth map:</p>
 <ol type="1">
 <li>Master Plan 2014 Subzone Boundary (Web) (i.e.&nbsp;<code>MP14_SUBZONE_WEB_PL</code>) in ESRI shapefile format. Downloaded at <a href="https://data.gov.sg/datasets/d_d14da225fccf921049ab64238ff473d9/view">data.gov.sg</a>, this is a geospatial data file. It consists of the geographical boundary of Singapore at the planning subzone level, and is based on URA Master Plan 2014.</li>
-<li>Singapore Residents by Planning Area / Subzone, Age Group, Sex and Type of Dwelling, June 2011-2020 (<code>respopagesexfa2011to2020.csv</code>). This is an aspatial data fie downloaded at <a href="https://www.singstat.gov.sg/find-data/search-by-theme/population/geographic-distribution/latest-data">Department of Statistics, Singapore</a> Although it does not contain any coordinates values, but it’s PA and SZ fields can be used as unique identifiers to geocode to MP14_SUBZONE_WEB_PL shapefile.</li>
+<li>Singapore Residents by Planning Area / Subzone, Age Group, Sex and Type of Dwelling, June 2011-2020 (<code>respopagesextod2011to2020.csv</code>). This is an aspatial data fie downloaded at <a href="https://www.singstat.gov.sg/find-data/search-by-theme/population/geographic-distribution/latest-data">Department of Statistics, Singapore</a> Although it does not contain any coordinates values, but it’s PA and SZ fields can be used as unique identifiers to geocode to MP14_SUBZONE_WEB_PL shapefile.</li>
 </ol>
 <p>WE use the <em>st_read()</em> function of <strong>sf</strong> package to import <code>MP14_SUBZONE_WEB_PL</code> shapefile into R as a simple feature data frame called <code>mpsz</code>.</p>
 <div class="cell">
@@ -432,7 +436,7 @@ First 10 features:
 </div>
 </div>
 <p>Only the first few records are displayed by default as a preview limit for readability.</p>
-<p>Next, we will import <em>respopagesexfa2011to2020.csv</em> file and save the file into an R data.frame called popagsex.</p>
+<p>Next, we will import <em>respopagesextod2011to2020.csv</em> file and save the file into an R data.frame called popagsex.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>popdata <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/respopagesextod2011to2020.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -988,6 +992,7 @@ First 10 features:
 <h2 class="anchored" data-anchor-id="references">References</h2>
 <ul>
 <li><a href="https://r-tmap.github.io/tmap/">tmap: thematic maps in R</a></li>
+<li><a href="https://cran.r-project.org/web/packages/tmap/tmap.pdf">tmap</a> package documentation</li>
 </ul>
 
 
