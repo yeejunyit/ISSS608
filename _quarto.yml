@@ -67,12 +67,16 @@ website:
         href: "https://public.tableau.com/app/profile/junyit.yee/viz/InClassExercise_08/SingaporePoolsNumberofWinningsbyShopType"
       - text: "In-class Exercise 8-2 (Tableau)"
         href: "https://public.tableau.com/app/profile/junyit.yee/viz/InClassExercise_08_2/AnimatedandInteractiveGeospatialPropertyTransactions"
+      - text: "In-class Exercise 10 (Tableau)"
+        href: "https://public.tableau.com/app/profile/junyit.yee/viz/InClassExercise_10/CoffeeChainSalesReportbyProductandProductType"
     - text: "Take-home Exercise"
       menu:
       - text: "Take-home Exercise 1"
         href: Take_Home_Exercises/THE_01/THE_01.html
       - text: "Take-home Exercise 2"
         href: Take_Home_Exercises/THE_02/THE_02.html
+      - text: "Take-home Exercise 3"
+        href: Take_Home_Exercises/THE_03/THE_03.html
     right:
       - href: index.qmd
         text: Home

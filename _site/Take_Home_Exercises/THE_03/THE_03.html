@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Yee Jun Yit">
+
+<title>Prototyping: GeBIZ High Level Data – ISSS608</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-ddd961a2510921635943dfbbd19534c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="../../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+
+<script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+<script src="../../site_libs/plotly-binding-4.10.4/plotly.js"></script>
+
+<script src="../../site_libs/typedarray-0.1/typedarray.min.js"></script>
+
+<script src="../../site_libs/jquery-3.5.1/jquery.min.js"></script>
+
+<link href="../../site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+
+<script src="../../site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+
+<link href="../../site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+
+<script src="../../site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+<script src="../../site_libs/d3-3.5.5/d3.min.js"></script>
+
+<link href="../../site_libs/d3tree-0.1/d3tree.css" rel="stylesheet">
+
+<script src="../../site_libs/d3tree-binding-0.1/d3tree.js"></script>
+
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">ISSS608</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-hands-on-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Hands On Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-hands-on-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../Hands_On_Exercises/HOE01/HOE_01.html">
+ <span class="dropdown-text">Hands On Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands_On_Exercises/HOE02/HOE_02.html">
+ <span class="dropdown-text">Hands On Exercise 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands_On_Exercises/HOE03/HOE_03a.html">
+ <span class="dropdown-text">Hands On Exercise 3a</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands_On_Exercises/HOE03/HOE_03b.html">
+ <span class="dropdown-text">Hands On Exercise 3b</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands_On_Exercises/HOE04/HOE_04a.html">
+ <span class="dropdown-text">Hands On Exercise 4a</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands_On_Exercises/HOE04/HOE_04b.html">
+ <span class="dropdown-text">Hands On Exercise 4b</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands_On_Exercises/HOE04/HOE_04c.html">
+ <span class="dropdown-text">Hands On Exercise 4c</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands_On_Exercises/HOE04/HOE_04d.html">
+ <span class="dropdown-text">Hands On Exercise 4d</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands_On_Exercises/HOE05/HOE_05a.html">
+ <span class="dropdown-text">Hands On Exercise 5a</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands_On_Exercises/HOE05/HOE_05b.html">
+ <span class="dropdown-text">Hands On Exercise 5b</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands_On_Exercises/HOE05/HOE_05c.html">
+ <span class="dropdown-text">Hands On Exercise 5c</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands_On_Exercises/HOE05/HOE_05d.html">
+ <span class="dropdown-text">Hands On Exercise 5d</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands_On_Exercises/HOE05/HOE_05e.html">
+ <span class="dropdown-text">Hands On Exercise 5e</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands_On_Exercises/HOE07/HOE_07.html">
+ <span class="dropdown-text">Hands On Exercise 7</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands_On_Exercises/HOE08/HOE_08a.html">
+ <span class="dropdown-text">Hands On Exercise 8a</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands_On_Exercises/HOE08/HOE_08b.html">
+ <span class="dropdown-text">Hands On Exercise 8b</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands_On_Exercises/HOE08/HOE_08c.html">
+ <span class="dropdown-text">Hands On Exercise 8c</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands_On_Exercises/HOE09/HOE_09.html">
+ <span class="dropdown-text">Hands On Exercise 9</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands_On_Exercises/HOE10/HOE_10.html">
+ <span class="dropdown-text">Hands On Exercise 10</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-in-class-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">In-class Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-in-class-exercise">    
+        <li>
+    <a class="dropdown-item" href="https://public.tableau.com/app/profile/junyit.yee/viz/InClassExercise_01/Dashboard1">
+ <span class="dropdown-text">In-class Exercise 1 (Tableau)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://public.tableau.com/app/profile/junyit.yee/viz/InClassExercise_02/Dashboard1">
+ <span class="dropdown-text">In-class Exercise 2 (Tableau)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://public.tableau.com/app/profile/junyit.yee/viz/InClassExercise_03/Dashboard1">
+ <span class="dropdown-text">In-class Exercise 3 (Tableau)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In_Class_Exercises/ICE_04/ICE_04.html">
+ <span class="dropdown-text">In-class Exercise 4</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://public.tableau.com/app/profile/junyit.yee/viz/InClassExercise_05/Dashboard1">
+ <span class="dropdown-text">In-class Exercise 5 (Tableau)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In_Class_Exercises/ICE_05/ICE_05.html">
+ <span class="dropdown-text">In-class Exercise 5</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://yisbetterthanx.shinyapps.io/In_Class_Exercise_06_Introduction_to_Shiny/">
+ <span class="dropdown-text">In-class Exercise 6 (Shiny)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In_Class_Exercises/ICE_07/ICE_07.html">
+ <span class="dropdown-text">In-class Exercise 7</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://public.tableau.com/app/profile/junyit.yee/viz/InClassExercise_08/SingaporePoolsNumberofWinningsbyShopType">
+ <span class="dropdown-text">In-class Exercise 8-1 (Tableau)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://public.tableau.com/app/profile/junyit.yee/viz/InClassExercise_08_2/AnimatedandInteractiveGeospatialPropertyTransactions">
+ <span class="dropdown-text">In-class Exercise 8-2 (Tableau)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://public.tableau.com/app/profile/junyit.yee/viz/InClassExercise_10/CoffeeChainSalesReportbyProductandProductType">
+ <span class="dropdown-text">In-class Exercise 10 (Tableau)</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Take-home Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../Take_Home_Exercises/THE_01/THE_01.html">
+ <span class="dropdown-text">Take-home Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Take_Home_Exercises/THE_02/THE_02.html">
+ <span class="dropdown-text">Take-home Exercise 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Take_Home_Exercises/THE_03/THE_03.html">
+ <span class="dropdown-text">Take-home Exercise 3</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#loading-data-and-packages" id="toc-loading-data-and-packages" class="nav-link" data-scroll-target="#loading-data-and-packages">Loading Data and Packages</a></li>
+  <li><a href="#point-measures" id="toc-point-measures" class="nav-link" data-scroll-target="#point-measures">Point Measures</a></li>
+  <li><a href="#bar-graphs" id="toc-bar-graphs" class="nav-link" data-scroll-target="#bar-graphs">Bar graphs</a></li>
+  <li><a href="#ridegeline-plot" id="toc-ridegeline-plot" class="nav-link" data-scroll-target="#ridegeline-plot">Ridegeline Plot</a>
+  <ul class="collapse">
+  <li><a href="#kruskal-wallis-test-anova" id="toc-kruskal-wallis-test-anova" class="nav-link" data-scroll-target="#kruskal-wallis-test-anova">Kruskal-Wallis Test (ANOVA)</a></li>
+  </ul></li>
+  <li><a href="#treemaps" id="toc-treemaps" class="nav-link" data-scroll-target="#treemaps">Treemaps</a></li>
+  <li><a href="#time-series" id="toc-time-series" class="nav-link" data-scroll-target="#time-series">Time Series</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Prototyping: GeBIZ High Level Data</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Yee Jun Yit </p>
+          </div>
+  </div>
+    
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">March 31, 2025</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This page of prototypes will be for exploring the codes for the plots in the General Economic Visualisation module of our Shiny Application.</p>
+<p>Specifically, I will be looking at time series analysis, and building treemaps, besides taking a look at ridgeplots.</p>
+</section>
+<section id="loading-data-and-packages" class="level2">
+<h2 class="anchored" data-anchor-id="loading-data-and-packages">Loading Data and Packages</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(ggthemes, plotly, ggstatsplot, treemap, htmltools, d3treeR, ggridges, tidyverse, lubridate, fpp3, patchwork)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/procurement_with_ministry.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ministry_mapping <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/agency_mapping (1).csv"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>ministry_mapping <span class="ot">&lt;-</span> ministry_mapping <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ministry, ministry_abbr) <span class="sc">%&gt;%</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(ministry, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>procurement <span class="ot">&lt;-</span> dataset <span class="sc">%&gt;%</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(ministry_mapping, <span class="at">by =</span> <span class="st">"ministry"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(procurement)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 18,638
+Columns: 9
+$ tender_no            &lt;chr&gt; "ACR000ETT18300010", "ACR000ETT18300011", "ACR000…
+$ tender_description   &lt;chr&gt; "SUPPLY, DESIGN, DEVELOPMENT, CUSTOMIZATION, DELI…
+$ agency               &lt;chr&gt; "Accounting And Corporate Regulatory Authority", …
+$ award_date           &lt;chr&gt; "11/06/2019", "10/05/2019", "30/04/2019", "29/08/…
+$ tender_detail_status &lt;chr&gt; "Awarded to Suppliers", "Awarded to No Suppliers"…
+$ supplier_name        &lt;chr&gt; "AZAAS PTE. LTD.", "Unknown", "ACCENTURE SG SERVI…
+$ awarded_amt          &lt;dbl&gt; 2305880.0, 0.0, 2035000.0, 30700373.9, 178800.0, …
+$ ministry             &lt;chr&gt; "MINISTRY OF FINANCE", "MINISTRY OF FINANCE", "MI…
+$ ministry_abbr        &lt;chr&gt; "MOF", "MOF", "MOF", "MOF", "MOF", "MOF", "MOF", …</code></pre>
+</div>
+</div>
+<p>The “character” data type for the award date needs to be changed to “date” type, which we do using <strong>lubridate</strong>’s <code>dmy</code> function</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>procurement <span class="ot">&lt;-</span> procurement <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">award_date =</span> <span class="fu">dmy</span>(award_date)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Group the ministry data by ministry and then by agency names.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ministries <span class="ot">&lt;-</span> procurement <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(ministry)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>agencies <span class="ot">&lt;-</span> procurement <span class="sc">%&gt;%</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(agency, ministry)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="point-measures" class="level2">
+<h2 class="anchored" data-anchor-id="point-measures">Point Measures</h2>
+<p>Get percentage of tenders awarded</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>number_awarded <span class="ot">&lt;-</span> procurement <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tender_detail_status <span class="sc">!=</span> <span class="st">"Awarded to No Suppliers"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Percentage of tenders awarded: "</span>, <span class="fu">nrow</span>(number_awarded) <span class="sc">/</span> <span class="fu">nrow</span>(procurement) <span class="sc">*</span> <span class="dv">100</span>, <span class="st">"%"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Percentage of tenders awarded:  95.79891 %</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">Average tender value: S$ "</span>, <span class="fu">sum</span>(number_awarded<span class="sc">$</span>awarded_amt, <span class="at">na.rm =</span> <span class="cn">FALSE</span>)<span class="sc">/</span><span class="fu">nrow</span>(procurement))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Average tender value: S$  5539801</code></pre>
+</div>
+</div>
+<p>Compute Yearly Averages</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>procurement<span class="sc">$</span>award_year <span class="ot">&lt;-</span> <span class="fu">year</span>(procurement<span class="sc">$</span>award_date)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>procurement_fullyears <span class="ot">&lt;-</span> procurement <span class="sc">%&gt;%</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(award_year <span class="sc">&gt;=</span> <span class="dv">2020</span> <span class="sc">&amp;</span> award_year <span class="sc">&lt;=</span> <span class="dv">2023</span>,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>         tender_detail_status <span class="sc">!=</span> <span class="st">"Awarded to No Suppliers"</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>total_award <span class="ot">&lt;-</span> <span class="fu">sum</span>(procurement_fullyears<span class="sc">$</span>awarded_amt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>total_tenders <span class="ot">&lt;-</span> <span class="fu">nrow</span>(procurement_fullyears)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>years_count <span class="ot">&lt;-</span> <span class="fu">n_distinct</span>(procurement_fullyears<span class="sc">$</span>award_year)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>ministries_count <span class="ot">&lt;-</span> <span class="fu">n_distinct</span>(procurement_fullyears<span class="sc">$</span>ministry)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>annual_gov_award <span class="ot">&lt;-</span> total_award <span class="sc">/</span> years_count</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>annual_ministry_award <span class="ot">&lt;-</span> annual_gov_award <span class="sc">/</span> ministries_count</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>annual_gov_tenders <span class="ot">&lt;-</span> <span class="fu">round</span>(total_tenders <span class="sc">/</span> years_count)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>annual_ministry_tenders <span class="ot">&lt;-</span> <span class="fu">round</span>(annual_gov_tenders <span class="sc">/</span> ministries_count)</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Amount Awarded Yearly: S$ "</span>, annual_gov_award<span class="sc">/</span><span class="dv">1000000</span>, <span class="st">" mil"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Amount Awarded Yearly: S$  20137.48  mil</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">Average Awarded Yearly per Ministry/Organ of State: S$ "</span>, <span class="fu">round</span>(annual_ministry_award<span class="sc">/</span><span class="dv">1000000</span>, <span class="dv">2</span>), <span class="st">" mil"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Average Awarded Yearly per Ministry/Organ of State: S$  839.06  mil</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">Tenders Awarded Yearly: "</span>, annual_gov_tenders)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Tenders Awarded Yearly:  3499</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">Tenders Awarded Yearly per Ministry/Organ of State: "</span>, annual_ministry_tenders)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Tenders Awarded Yearly per Ministry/Organ of State:  146</code></pre>
+</div>
+</div>
+</section>
+<section id="bar-graphs" class="level2">
+<h2 class="anchored" data-anchor-id="bar-graphs">Bar graphs</h2>
+<p>Get the top 5 ministries which spent the most across the dataset</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>all_award <span class="ot">&lt;-</span> <span class="fu">sum</span>(procurement<span class="sc">$</span>awarded_amt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>top_ministries_award <span class="ot">&lt;-</span> procurement <span class="sc">%&gt;%</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ministry) <span class="sc">%&gt;%</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_award =</span> <span class="fu">sum</span>(awarded_amt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(total_award)) <span class="sc">%&gt;%</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">ministry =</span> <span class="fu">factor</span>(ministry, <span class="at">levels =</span> ministry),</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">cum_pct =</span> <span class="fu">cumsum</span>(total_award) <span class="sc">/</span> all_award <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Plot the bar graphs showing the top 5 ministries which spent the most</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(top_ministries_award, <span class="fu">aes</span>(<span class="at">x =</span> ministry)) <span class="sc">+</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> total_award), <span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"darkblue"</span>) <span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> cum_pct <span class="sc">*</span> <span class="fu">max</span>(total_award) <span class="sc">/</span> <span class="dv">100</span>, <span class="at">group =</span> <span class="dv">1</span>), <span class="at">color =</span> <span class="st">"orange"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> cum_pct <span class="sc">*</span> <span class="fu">max</span>(total_award) <span class="sc">/</span> <span class="dv">100</span>), <span class="at">color =</span> <span class="st">"orange"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Total Award Amount (SGD)"</span>,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="sc">~</span> . <span class="sc">*</span> <span class="dv">100</span> <span class="sc">/</span> <span class="fu">max</span>(top_ministries_award<span class="sc">$</span>total_award), <span class="at">name =</span> <span class="st">"Cumulative %"</span>)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Top 5 Ministries by Total Award (2020–2023)"</span>,</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Ministry"</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">6</span>, <span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="THE_03_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Attempt to have the x labels as the ministry_abbr, and have the plot as an interactive one.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>top_ministries_award <span class="ot">&lt;-</span> top_ministries_award <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(ministry_mapping, <span class="at">by =</span> <span class="st">"ministry"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ministry_abbr =</span> <span class="fu">factor</span>(ministry_abbr, <span class="at">levels =</span> ministry_abbr[<span class="fu">order</span>(<span class="sc">-</span>total_award)]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>top_ministries_award<span class="sc">$</span>bar_tooltip <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  top_ministries_award<span class="sc">$</span>ministry, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Total Award: $"</span>, <span class="fu">round</span>(top_ministries_award<span class="sc">$</span>total_award <span class="sc">/</span> <span class="fl">1e9</span>, <span class="dv">2</span>), <span class="st">" bil"</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>top_ministries_award<span class="sc">$</span>point_tooltip <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  top_ministries_award<span class="sc">$</span>ministry, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Cumulative Share: "</span>, <span class="fu">round</span>(top_ministries_award<span class="sc">$</span>cum_pct, <span class="dv">1</span>), <span class="st">"%"</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(top_ministries_award, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(ministry_abbr))) <span class="sc">+</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> total_award, <span class="at">text =</span> bar_tooltip), <span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"darkblue"</span>) <span class="sc">+</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> cum_pct <span class="sc">*</span> <span class="fu">max</span>(total_award) <span class="sc">/</span> <span class="dv">100</span>, <span class="at">group =</span> <span class="dv">1</span>), <span class="at">color =</span> <span class="st">"orange"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> cum_pct <span class="sc">*</span> <span class="fu">max</span>(total_award) <span class="sc">/</span> <span class="dv">100</span>, <span class="at">text =</span> point_tooltip), <span class="at">color =</span> <span class="st">"orange"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Total Award Amount (SGD)"</span>,</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="cf">function</span>(x) <span class="fu">paste0</span>(x <span class="sc">/</span> <span class="fl">1e9</span>, <span class="st">"bil"</span>)</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Top 5 Ministries by Total Award Amount"</span>,</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">""</span> </span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>))</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(p1, <span class="at">tooltip =</span> <span class="st">"text"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-5521a66352d27795ef49" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-5521a66352d27795ef49">{"x":{"data":[{"orientation":"v","width":[0.89999999999999991,0.90000000000000013,0.90000000000000036,0.90000000000000036,0.90000000000000036],"base":[0,0,0,0,0],"x":[1,2,3,4,5],"y":[35664601010.360001,25698029270.580002,12576675306.389999,6357920701,5411058602.5200005],"text":["MINISTRY OF TRANSPORT<br />Total Award: $35.66 bil","MINISTRY OF NATIONAL DEVELOPMENT<br />Total Award: $25.7 bil","MINISTRY OF SUSTAINABILITY AND THE ENVIRONMENT<br />Total Award: $12.58 bil","MINISTRY OF TRADE AND INDUSTRY<br />Total Award: $6.36 bil","MINISTRY OF EDUCATION<br />Total Award: $5.41 bil"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,0,139,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5],"y":[12319164237.832769,21195703837.447186,25539902967.007286,27736037708.679672,29605110058.756386],"text":"","type":"scatter","mode":"lines","line":{"width":4.5354330708661417,"color":"rgba(255,165,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5],"y":[12319164237.832769,21195703837.447186,25539902967.007286,27736037708.679672,29605110058.756386],"text":["MINISTRY OF TRANSPORT<br />Cumulative Share: 34.5%","MINISTRY OF NATIONAL DEVELOPMENT<br />Cumulative Share: 59.4%","MINISTRY OF SUSTAINABILITY AND THE ENVIRONMENT<br />Cumulative Share: 71.6%","MINISTRY OF TRADE AND INDUSTRY<br />Cumulative Share: 77.8%","MINISTRY OF EDUCATION<br />Cumulative Share: 83%"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(255,165,0,1)","opacity":1,"size":7.559055118110237,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(255,165,0,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.762557077625573,"r":7.3059360730593621,"b":27.164798671647986,"l":54.794520547945211},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"Top 5 Ministries by Total Award Amount","font":{"color":"rgba(0,0,0,1)","family":"","size":17.534246575342465},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.40000000000000002,5.5999999999999996],"tickmode":"array","ticktext":["MOT","MND","MSE","MTI","MOE"],"tickvals":[1,2,3,4,5],"categoryorder":"array","categoryarray":["MOT","MND","MSE","MTI","MOE"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":13.283520132835198},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-1783230050.5180001,37447831060.877998],"tickmode":"array","ticktext":["0bil","10bil","20bil","30bil"],"tickvals":[0,10000000000,20000000000,30000000000],"categoryorder":"array","categoryarray":["0bil","10bil","20bil","30bil"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"Total Award Amount (SGD)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"407c1c4271d1":{"x":{},"y":{},"text":{},"type":"bar"},"407c3dc27e7f":{"x":{},"y":{}},"407c6f4761e3":{"x":{},"y":{},"text":{}}},"cur_data":"407c1c4271d1","visdat":{"407c1c4271d1":["function (y) ","x"],"407c3dc27e7f":["function (y) ","x"],"407c6f4761e3":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>We do the same for number of tenders awarded, but now increase to the top-10 ministries to account for roughly the same proportion of ~83%.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>all_tenders <span class="ot">&lt;-</span> <span class="fu">nrow</span>(procurement)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>top_ministries_tenders <span class="ot">&lt;-</span> procurement <span class="sc">%&gt;%</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ministry) <span class="sc">%&gt;%</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">tender_count =</span> <span class="fu">n</span>()</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(tender_count)) <span class="sc">%&gt;%</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">ministry =</span> <span class="fu">factor</span>(ministry, <span class="at">levels =</span> ministry),</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">cum_pct =</span> <span class="fu">cumsum</span>(tender_count) <span class="sc">/</span> all_tenders <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>top_ministries_tenders <span class="ot">&lt;-</span> top_ministries_tenders <span class="sc">%&gt;%</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(ministry_mapping, <span class="at">by =</span> <span class="st">"ministry"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ministry_abbr =</span> <span class="fu">factor</span>(ministry_abbr, <span class="at">levels =</span> ministry_abbr[<span class="fu">order</span>(<span class="sc">-</span>tender_count)]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>top_ministries_tenders<span class="sc">$</span>bar_tooltip <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  top_ministries_tenders<span class="sc">$</span>ministry, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Number of Tenders: "</span>, top_ministries_tenders<span class="sc">$</span>tender_count</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>top_ministries_tenders<span class="sc">$</span>point_tooltip <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  top_ministries_tenders<span class="sc">$</span>ministry, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Cumulative Proportion: "</span>, <span class="fu">round</span>(top_ministries_tenders<span class="sc">$</span>cum_pct, <span class="dv">1</span>), <span class="st">"%"</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(top_ministries_tenders, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(ministry_abbr))) <span class="sc">+</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> tender_count, <span class="at">text =</span> bar_tooltip), <span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"darkblue"</span>) <span class="sc">+</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> cum_pct <span class="sc">*</span> <span class="fu">max</span>(tender_count) <span class="sc">/</span> <span class="dv">100</span>, <span class="at">group =</span> <span class="dv">1</span>), <span class="at">color =</span> <span class="st">"orange"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> cum_pct <span class="sc">*</span> <span class="fu">max</span>(tender_count) <span class="sc">/</span> <span class="dv">100</span>, <span class="at">text =</span> point_tooltip), <span class="at">color =</span> <span class="st">"orange"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Number of Tenders"</span></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Top 10 Ministries by Number of Tenders"</span>,</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">""</span></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>))</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(p2, <span class="at">tooltip =</span> <span class="st">"text"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-fe6f90e25e5476313b7e" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-fe6f90e25e5476313b7e">{"x":{"data":[{"orientation":"v","width":[0.89999999999999991,0.90000000000000013,0.90000000000000036,0.90000000000000036,0.90000000000000036,0.90000000000000036,0.90000000000000036,0.89999999999999947,0.89999999999999858,0.89999999999999858],"base":[0,0,0,0,0,0,0,0,0,0],"x":[1,2,3,4,5,6,7,8,9,10],"y":[3011,2628,2033,1712,1587,1163,1142,865,846,824],"text":["MINISTRY OF EDUCATION<br />Number of Tenders: 3011","MINISTRY OF TRADE AND INDUSTRY<br />Number of Tenders: 2628","MINISTRY OF NATIONAL DEVELOPMENT<br />Number of Tenders: 2033","MINISTRY OF SUSTAINABILITY AND THE ENVIRONMENT<br />Number of Tenders: 1712","MINISTRY OF CULTURE, COMMUNITY AND YOUTH<br />Number of Tenders: 1587","MINISTRY OF TRANSPORT<br />Number of Tenders: 1163","MINISTRY OF HEALTH<br />Number of Tenders: 1142","MINISTRY OF DIGITAL DEVELOPMENT AND INFORMATION<br />Number of Tenders: 865","MINISTRY OF FINANCE<br />Number of Tenders: 846","MINISTRY OF HOME AFFAIRS<br />Number of Tenders: 824"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,0,139,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10],"y":[486.43207425689457,910.98985942697709,1239.4244017598453,1516.0008584612085,1772.3833565833245,1960.2679472046359,2144.7599527846337,2284.5021461530205,2421.1748578173629,2554.2934327717562],"text":"","type":"scatter","mode":"lines","line":{"width":4.5354330708661417,"color":"rgba(255,165,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10],"y":[486.43207425689457,910.98985942697709,1239.4244017598453,1516.0008584612085,1772.3833565833245,1960.2679472046359,2144.7599527846337,2284.5021461530205,2421.1748578173629,2554.2934327717562],"text":["MINISTRY OF EDUCATION<br />Cumulative Proportion: 16.2%","MINISTRY OF TRADE AND INDUSTRY<br />Cumulative Proportion: 30.3%","MINISTRY OF NATIONAL DEVELOPMENT<br />Cumulative Proportion: 41.2%","MINISTRY OF SUSTAINABILITY AND THE ENVIRONMENT<br />Cumulative Proportion: 50.3%","MINISTRY OF CULTURE, COMMUNITY AND YOUTH<br />Cumulative Proportion: 58.9%","MINISTRY OF TRANSPORT<br />Cumulative Proportion: 65.1%","MINISTRY OF HEALTH<br />Cumulative Proportion: 71.2%","MINISTRY OF DIGITAL DEVELOPMENT AND INFORMATION<br />Cumulative Proportion: 75.9%","MINISTRY OF FINANCE<br />Cumulative Proportion: 80.4%","MINISTRY OF HOME AFFAIRS<br />Cumulative Proportion: 84.8%"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(255,165,0,1)","opacity":1,"size":7.559055118110237,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(255,165,0,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.762557077625573,"r":7.3059360730593621,"b":27.164798671647986,"l":48.949771689497723},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"Top 10 Ministries by Number of Tenders","font":{"color":"rgba(0,0,0,1)","family":"","size":17.534246575342465},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.40000000000000002,10.6],"tickmode":"array","ticktext":["MOE","MTI","MND","MSE","MCCY","MOT","MOH","MDDI","MOF","MHA"],"tickvals":[1,2,3,4,5,6.0000000000000009,7,8,9,10],"categoryorder":"array","categoryarray":["MOE","MTI","MND","MSE","MCCY","MOT","MOH","MDDI","MOF","MHA"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":13.283520132835198},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-150.55000000000001,3161.5500000000002],"tickmode":"array","ticktext":["0","1000","2000","3000"],"tickvals":[0,1000,2000.0000000000002,3000],"categoryorder":"array","categoryarray":["0","1000","2000","3000"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"Number of Tenders","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"407c6b7c312b":{"x":{},"y":{},"text":{},"type":"bar"},"407c59f976ea":{"x":{},"y":{}},"407cb393959":{"x":{},"y":{},"text":{}}},"cur_data":"407c6b7c312b","visdat":{"407c6b7c312b":["function (y) ","x"],"407c59f976ea":["function (y) ","x"],"407cb393959":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="ridegeline-plot" class="level2">
+<h2 class="anchored" data-anchor-id="ridegeline-plot">Ridegeline Plot</h2>
+<p>We visualise ridgeline plots to reveal the distribution of tender awards within each ministry’s agencies</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># choice &lt;- menu(ministries$ministry, title = "Select a ministry:")</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># selected_ministry &lt;- ministries$ministry[choice]</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>selected_ministry <span class="ot">&lt;-</span> <span class="st">"MINISTRY OF TRANSPORT"</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>ministry_subset <span class="ot">&lt;-</span> procurement <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ministry <span class="sc">==</span> selected_ministry)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot ridgeplot</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ministry_subset, <span class="fu">aes</span>(<span class="at">x =</span> awarded_amt, <span class="at">y =</span> agency, <span class="at">fill =</span> agency)) <span class="sc">+</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density_ridges</span>(</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">quantile_lines =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">quantiles =</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>),</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">scale =</span> <span class="fl">1.2</span>,</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.7</span>,</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">bandwidth =</span> <span class="fl">1e4</span>,  <span class="co"># try adjusting: 1e5, 5e5, etc.</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">paste</span>(<span class="st">"Award Amount Distribution by Agency for"</span>, selected_ministry),</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Award Amount"</span>,</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Agency"</span></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_ridges</span>() <span class="sc">+</span></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>), <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), <span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="THE_03_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The large range of the awarded amounts results in a highly skewed distribution where most data is concentrated near zero. This skews the density estimation, compressing the ridgelines toward the left and making it difficult to visually distinguish the differences between agencies without appropriate scaling or transformation.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>selected_ministry <span class="ot">&lt;-</span> <span class="st">"MINISTRY OF TRANSPORT"</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>ministry_subset <span class="ot">&lt;-</span> procurement <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ministry <span class="sc">==</span> selected_ministry)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ministry_subset, <span class="fu">aes</span>(<span class="at">x =</span> awarded_amt, <span class="at">y =</span> agency)) <span class="sc">+</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_density_ridges</span>(</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">"density_ridges"</span>,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"blue"</span>,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">quantile_lines =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">quantiles =</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>),</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">scale =</span> <span class="fl">1.2</span>,</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.7</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">quantile</span>(ministry_subset<span class="sc">$</span>awarded_amt, <span class="fl">0.83</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))) <span class="sc">+</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">paste</span>(<span class="st">"Award Amount Distribution by Agency for"</span>, selected_ministry),</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Award Amount"</span>,</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Agency"</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_ridges</span>() <span class="sc">+</span></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>), <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), <span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="THE_03_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ministry_subset, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">"Agencies"</span>, <span class="at">y =</span> awarded_amt, <span class="at">fill =</span> agency)) <span class="sc">+</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="at">trim =</span> <span class="cn">FALSE</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>, </span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>)) <span class="sc">+</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> median, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">fill =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">quantile</span>(ministry_subset<span class="sc">$</span>awarded_amt, <span class="fl">0.83</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))) <span class="sc">+</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">9</span>),</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>)</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">paste</span>(<span class="st">"Award Amount Distribution by Agency for"</span>, selected_ministry),</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Agency"</span>,</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Award Amount"</span></span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="THE_03_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>ministry_subset_log <span class="ot">&lt;-</span> ministry_subset <span class="sc">%&gt;%</span> </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">log_award =</span> <span class="fu">log10</span>(awarded_amt))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggbetweenstats</span>(</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> ministry_subset_log,</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> agency,</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> awarded_amt,</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"nonparametric"</span>,  <span class="co"># Uses Kruskal-Wallis (good for skewed data)</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">messages =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">pairwise.comparisons =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">pairwise.display =</span> <span class="st">"significant"</span>,  <span class="co"># Show only sig pairwise tests</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">outlier.tagging =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">outlier.label =</span> tender_no,  <span class="co"># Optional: label outlier points</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Agency"</span>,</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Award Amount"</span>,</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="fu">paste</span>(<span class="st">"Comparison of Award Amounts by Agency for"</span>, selected_ministry),</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">results.subtitle =</span> <span class="cn">TRUE</span></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="THE_03_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="kruskal-wallis-test-anova" class="level3">
+<h3 class="anchored" data-anchor-id="kruskal-wallis-test-anova">Kruskal-Wallis Test (ANOVA)</h3>
+<p>Test whether the distributions across agencies (or any group) are statistically different</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>ANOVA <span class="ot">&lt;-</span> <span class="fu">kruskal.test</span>(awarded_amt <span class="sc">~</span> agency, <span class="at">data =</span> ministry_subset)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>ANOVA</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Kruskal-Wallis rank sum test
+
+data:  awarded_amt by agency
+Kruskal-Wallis chi-squared = 154.72, df = 4, p-value &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>ANOVA<span class="sc">$</span>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.977267e-32</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="treemaps" class="level2">
+<h2 class="anchored" data-anchor-id="treemaps">Treemaps</h2>
+<p>Plot a treemap to provide a visual summary of procurement activity across government ministries and their respective agencies. The size of each agency’s rectangle reflects the total value of awards granted to that agency, while the color intensity of each block corresponds to the number of tenders issued by the agency.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>summary_data <span class="ot">&lt;-</span> procurement <span class="sc">%&gt;%</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ministry, agency) <span class="sc">%&gt;%</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_award =</span> <span class="fu">sum</span>(awarded_amt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">tender_count =</span> <span class="fu">n</span>()</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>summary_data <span class="ot">&lt;-</span> summary_data <span class="sc">%&gt;%</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(ministry_mapping, <span class="at">by =</span> <span class="st">"ministry"</span>)</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot treemap</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="fu">treemap</span>(</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>  summary_data,</span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">index =</span> <span class="fu">c</span>(<span class="st">"ministry_abbr"</span>, <span class="st">"agency"</span>),</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">vSize =</span> <span class="st">"total_award"</span>,</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">vColor =</span> <span class="st">"tender_count"</span>,</span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"value"</span>,</span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"Blues"</span>,</span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Procurement Treemap by Ministry and Agency"</span>,</span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">title.legend =</span> <span class="st">"Number of Tenders"</span>,</span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">fontsize.labels =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">10</span>),</span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">fontcolor.labels =</span> <span class="fu">c</span>(<span class="st">"white"</span>, <span class="st">"black"</span>),</span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">border.col =</span> <span class="st">"white"</span></span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="THE_03_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The level of detail is not present, so make the treemap interactive. We have one extra step of making the names XML-safe, or an error <code>xmlParseEntityRef: no name</code> will appear for special characters e.g.&nbsp;ampersands “&amp;”</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>summary_data<span class="sc">$</span>agency <span class="ot">&lt;-</span> <span class="fu">htmlEscape</span>(summary_data<span class="sc">$</span>agency)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>tm <span class="ot">&lt;-</span> <span class="fu">treemap</span>(</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  summary_data,</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">index =</span> <span class="fu">c</span>(<span class="st">"ministry_abbr"</span>, <span class="st">"agency"</span>),</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">vSize =</span> <span class="st">"total_award"</span>,</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">vColor =</span> <span class="st">"tender_count"</span>,</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"value"</span>,</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="st">"Blues"</span>,</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Procurement Treemap by Ministry and Agency"</span>,</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">title.legend =</span> <span class="st">"Number of Tenders"</span>,</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">fontsize.labels =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">10</span>),</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">fontcolor.labels =</span> <span class="fu">c</span>(<span class="st">"white"</span>, <span class="st">"black"</span>),</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">border.col =</span> <span class="st">"white"</span></span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a><span class="fu">d3tree</span>(tm, <span class="at">rootname =</span> <span class="st">"Government of Singapore"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="THE_03_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="THE_03_files/figure-html/unnamed-chunk-22-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="d3tree html-widget html-fill-item" id="htmlwidget-671a60706963e85b8fbe" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-671a60706963e85b8fbe">{"x":{"data":{"name":"Government of Singapore","id":1,"size":null,"children":[{"name":"MCCY","color":"#08306B","h":0.1870844215885994,"id":2,"size":2410346022.61,"stdErr":2410346022.61,"vColor":1587,"vColorValue":1587,"vSize":2410346022.61,"w":0.1256058761560297,"x0":0.720847766492558,"y0":0.1012213847044651,"children":[{"name":"Majlis Ugama Islam Singapura","color":"#67ABD4","h":0.0126904930460018,"id":3,"size":35629205.02,"stdErr":35629205.02,"vColor":32,"vColorValue":32,"vSize":35629205.02,"w":0.02737132531644522,"x0":0.8190823173321423,"y0":0.1012213847044651},{"name":"Ministry of Culture, Community and Youth - Ministry Headquarter","color":"#64A9D3","h":0.04194951693838019,"id":4,"size":69177134.59,"stdErr":69177134.59,"vColor":62,"vColorValue":62,"vSize":69177134.59,"w":0.0160769549377099,"x0":0.8190823173321423,"y0":0.1139118777504669},{"name":"Ministry of Culture, Community and Youth - National Youth Council","color":"#61A7D2","h":0.06288488763135219,"id":5,"size":310189725.86,"stdErr":310189725.86,"vColor":95,"vColorValue":95,"vSize":310189725.86,"w":0.04808939456042391,"x0":0.7983642480881638,"y0":0.1558613946888472},{"name":"National Arts Council","color":"#61A7D2","h":0.0419495169383803,"id":6,"size":48598268.94,"stdErr":48598268.94,"vColor":77,"vColorValue":77,"vSize":48598268.94,"w":0.01129437037873538,"x0":0.8351592722698522,"y0":0.1139118777504668},{"name":"National Heritage Board","color":"#57A0CE","h":0.06955952397286519,"id":7,"size":343113432.89,"stdErr":343113432.89,"vColor":162,"vColorValue":162,"vSize":343113432.89,"w":0.04808939456042391,"x0":0.7983642480881638,"y0":0.2187462823201992},{"name":"People's Association","color":"#0B549F","h":0.1264881610787306,"id":8,"size":1005716884.44,"stdErr":1005716884.44,"vColor":884,"vColorValue":884,"vSize":1005716884.44,"w":0.07751648159560576,"x0":0.720847766492558,"y0":0.1618176452143338},{"name":"Singapore Sports Council (Sport Singapore) - SPC","color":"#57A0CE","h":0.06059626050986874,"id":9,"size":481805425.97,"stdErr":481805425.97,"vColor":147,"vColorValue":147,"vSize":481805425.97,"w":0.07751648159560573,"x0":0.720847766492558,"y0":0.1012213847044651},{"name":"Singapore Sports Council (Sport Singapore)","color":"#5AA2CF","h":0.05464000998438199,"id":10,"size":116115944.9,"stdErr":116115944.9,"vColor":128,"vColorValue":128,"vSize":116115944.9,"w":0.02071806924397864,"x0":0.7983642480881638,"y0":0.1012213847044651}]},{"name":"MDDI","color":"#0D57A1","h":0.1204028846519761,"id":11,"size":985804442.17,"stdErr":985804442.17,"vColor":865,"vColorValue":865,"vSize":985804442.17,"w":0.07982190135336595,"x0":0.8464536426485877,"y0":0.1679029216410882,"children":[{"name":"Government Technology Agency  (GovTech)","color":"#4090C5","h":0.05929505215398207,"id":12,"size":401547618.44,"stdErr":401547618.44,"vColor":338,"vColorValue":338,"vSize":401547618.44,"w":0.06602171305719569,"x0":0.8464536426485877,"y0":0.1679029216410882},{"name":"Info-communications Media Development Authority - MDA","color":"#549ECD","h":0.06364556906613945,"id":13,"size":90091744.48999999,"stdErr":90091744.48999999,"vColor":193,"vColorValue":193,"vSize":90091744.48999999,"w":0.01380018829617019,"x0":0.9124753557057834,"y0":0.2246602372269249},{"name":"Info-communications Media Development Authority","color":"#61A7D2","h":0.05675731558583659,"id":14,"size":80341265.68000001,"stdErr":80341265.68000001,"vColor":86,"vColorValue":86,"vSize":80341265.68000001,"w":0.01380018829617019,"x0":0.9124753557057834,"y0":0.1679029216410884},{"name":"National Library Board","color":"#4A97C9","h":0.06110783249799406,"id":15,"size":413823813.56,"stdErr":413823813.56,"vColor":248,"vColorValue":248,"vSize":413823813.56,"w":0.06602171305719576,"x0":0.8464536426485877,"y0":0.2271979737950703}]},{"name":"MFA","color":"#3888C1","h":0.09302198690148704,"id":16,"size":249160413.64,"stdErr":249160413.64,"vColor":414,"vColorValue":414,"vSize":249160413.64,"w":0.02611329177058494,"x0":0.9738867082294149,"y0":0,"children":[{"name":"Ministry of Foreign Affairs","color":"#3888C1","h":0.09302198690148704,"id":17,"size":249160413.64,"stdErr":249160413.64,"vColor":414,"vColorValue":414,"vSize":249160413.64,"w":0.02611329177058494,"x0":0.9738867082294149,"y0":0}]},{"name":"MHA","color":"#105CA5","h":0.3006714237099299,"id":18,"size":5016127066.360001,"stdErr":5016127066.360001,"vColor":824,"vColorValue":824,"vSize":5016127066.360001,"w":0.162646441140346,"x0":0.720847766492558,"y0":0.2883058062930644,"children":[{"name":"Gambling Regulatory Authority of Singapore (GRA)","color":"#67ABD4","h":0.01270502128734926,"id":19,"size":21313375.59,"stdErr":21313375.59,"vColor":28,"vColorValue":28,"vSize":21313375.59,"w":0.01635479221519362,"x0":0.8671394154177104,"y0":0.2883058062930644},{"name":"Home Team Science and Technology Agency","color":"#64A9D3","h":0.05280380002446086,"id":20,"size":88581293.73,"stdErr":88581293.73,"vColor":60,"vColorValue":60,"vSize":88581293.73,"w":0.01635479221519359,"x0":0.8671394154177104,"y0":0.3234642030048726},{"name":"Ministry of Home Affairs-Ministry Headquarter","color":"#509CCB","h":0.08796219673626898,"id":21,"size":1319919400.2,"stdErr":1319919400.2,"vColor":207,"vColorValue":207,"vSize":1319919400.2,"w":0.1462916489251524,"x0":0.720847766492558,"y0":0.2883058062930644},{"name":"Ministry of Home Affairs - Ministry Headquarter 1","color":"#3080BD","h":0.2127092269736609,"id":22,"size":3548646218.26,"stdErr":3548646218.26,"vColor":465,"vColorValue":465,"vSize":3548646218.26,"w":0.162646441140346,"x0":0.720847766492558,"y0":0.3762680030293334},{"name":"Yellow Ribbon Singapore","color":"#64A9D3","h":0.02245337542445886,"id":23,"size":37666778.58,"stdErr":37666778.58,"vColor":64,"vColorValue":64,"vSize":37666778.58,"w":0.01635479221519359,"x0":0.8671394154177104,"y0":0.3010108275804138}]},{"name":"MINDEF","color":"#4090C5","h":0.09302198690148712,"id":24,"size":341231874.48,"stdErr":341231874.48,"vColor":323,"vColorValue":323,"vSize":341231874.48,"w":0.03576285401658741,"x0":0.9381238542128275,"y0":0,"children":[{"name":"Defence Science and Technology Agency","color":"#61A7D2","h":0.02113276981945921,"id":25,"size":77521133.56999999,"stdErr":77521133.56999999,"vColor":81,"vColorValue":81,"vSize":77521133.56999999,"w":0.03576283027654176,"x0":0.9381238542128275,"y0":0},{"name":"Ministry of Defence 5","color":"#6BAED6","h":0.02113276981945929,"id":26,"size":51.46,"stdErr":51.46,"vColor":2,"vColorValue":2,"vSize":51.46,"w":2.374004564557771e-08,"x0":0.9738866844893693,"y0":0},{"name":"Ministry of Defence","color":"#4D99CA","h":0.07188921708202792,"id":27,"size":263710689.45,"stdErr":263710689.45,"vColor":240,"vColorValue":240,"vSize":263710689.45,"w":0.03576285401658741,"x0":0.9381238542128275,"y0":0.02113276981945912}]},{"name":"MINLAW","color":"#4D99CA","h":0.085369847360328,"id":28,"size":802720859.91,"stdErr":802720859.91,"vColor":228,"vColorValue":228,"vSize":802720859.91,"w":0.09167021156423988,"x0":0.8464536426485877,"y0":0.08253307428076027,"children":[{"name":"Intellectual Property Office of Singapore","color":"#67ABD4","h":0.02655175650662181,"id":29,"size":27265657.65,"stdErr":27265657.65,"vColor":29,"vColorValue":29,"vSize":27265657.65,"w":0.01001131001843002,"x0":0.9281125441943976,"y0":0.08253307428076033},{"name":"Ministry of Law-Ministry Headquarter","color":"#64A9D3","h":0.05881809085370621,"id":30,"size":60399541.87,"stdErr":60399541.87,"vColor":57,"vColorValue":57,"vSize":60399541.87,"w":0.01001131001843002,"x0":0.9281125441943976,"y0":0.1090848307873822},{"name":"Singapore Land Authority","color":"#5AA2CF","h":0.085369847360328,"id":31,"size":715055660.39,"stdErr":715055660.39,"vColor":142,"vColorValue":142,"vSize":715055660.39,"w":0.08165890154580986,"x0":0.8464536426485877,"y0":0.08253307428076027}]},{"name":"MND","color":"#08306B","h":0.6714102578872045,"id":32,"size":25698029270.58,"stdErr":25698029270.58,"vColor":2033,"vColorValue":2033,"vSize":25698029270.58,"w":0.3731470709429963,"x0":0.3477006955495617,"y0":0.3285897421127955,"children":[{"name":"Agri-food and Veterinary Authority","color":"#6BAED6","h":0.01506272499026406,"id":33,"size":582362.8,"stdErr":582362.8,"vColor":3,"vColorValue":3,"vSize":582362.8,"w":0.0003769278854554375,"x0":0.7204708386071027,"y0":0.3312329226047585},{"name":"Building and Construction Authority","color":"#5AA2CF","h":0.01770590548222714,"id":34,"size":103056142.25,"stdErr":103056142.25,"vColor":143,"vColorValue":143,"vSize":103056142.25,"w":0.05674452035320818,"x0":0.6538577589592341,"y0":0.3285897421127955},{"name":"Council for Estate Agencies","color":"#6BAED6","h":0.01770590548222714,"id":35,"size":17922711.2,"stdErr":17922711.2,"vColor":16,"vColorValue":16,"vSize":17922711.2,"w":0.009868559294660288,"x0":0.7106022793124424,"y0":0.3285897421127955},{"name":"Housing and Development Board","color":"#08306B","h":0.6537043524049774,"id":36,"size":24360961780.78,"stdErr":24360961780.78,"vColor":1218,"vColorValue":1218,"vSize":24360961780.78,"w":0.3633132556076,"x0":0.3477006955495617,"y0":0.3462956475950226},{"name":"Ministry of National Development-Ministry Headquarter","color":"#64A9D3","h":0.01770590548222714,"id":37,"size":433773873.46,"stdErr":433773873.46,"vColor":51,"vColorValue":51,"vSize":433773873.46,"w":0.2388435065959488,"x0":0.3477006955495617,"y0":0.3285897421127955},{"name":"National Parks Board","color":"#3686BF","h":0.6537043524049774,"id":38,"size":659379188.2,"stdErr":659379188.2,"vColor":433,"vColorValue":433,"vSize":659379188.2,"w":0.009833815335396312,"x0":0.7110139511571617,"y0":0.3462956475950226},{"name":"Professional Engineers Board","color":"#6BAED6","h":0.002643180491963,"id":39,"size":102192,"stdErr":102192,"vColor":12,"vColorValue":12,"vSize":102192,"w":0.0003769278854554375,"x0":0.7204708386071027,"y0":0.3285897421127956},{"name":"Urban Redevelopment Authority","color":"#57A0CE","h":0.01770590548222714,"id":40,"size":122251019.89,"stdErr":122251019.89,"vColor":156,"vColorValue":156,"vSize":122251019.89,"w":0.06731355681372363,"x0":0.5865442021455105,"y0":0.3285897421127955}]},{"name":"MOE","color":"#08306B","h":0.4110227699970056,"id":41,"size":5411058602.52,"stdErr":5411058602.52,"vColor":3011,"vColorValue":3011,"vSize":5411058602.52,"w":0.1283466522947606,"x0":0.8716533477052393,"y0":0.5889772300029944,"children":[{"name":"Anglo-Chinese School (Independent)","color":"#6BAED6","h":0.01062731299236617,"id":42,"size":5824182.24,"stdErr":5824182.24,"vColor":19,"vColorValue":19,"vSize":5824182.24,"w":0.005342932331562329,"x0":0.9897503185736354,"y0":0.6024595493921711},{"name":"Assumption Pathway School","color":"#64A9D3","h":0.006590859072682059,"id":43,"size":3997515.55,"stdErr":3997515.55,"vColor":55,"vColorValue":55,"vSize":3997515.55,"w":0.005913115007032259,"x0":0.9897503185736354,"y0":0.5889772300029944},{"name":"Institute of Technical Education","color":"#3B8BC2","h":0.0435029425365674,"id":44,"size":136462926.16,"stdErr":136462926.16,"vColor":374,"vColorValue":374,"vSize":136462926.16,"w":0.03058188392690764,"x0":0.9318928354392725,"y0":0.5889772300029944},{"name":"ISEAS - Yusof Ishak Institute","color":"#67ABD4","h":0.01062731299236608,"id":45,"size":5348711,"stdErr":5348711,"vColor":25,"vColorValue":25,"vSize":5348711,"w":0.004906749094802204,"x0":0.9950932509051976,"y0":0.6024595493921712},{"name":"Methodist Girls' School (Secondary)","color":"#6BAED6","h":0.006891460316494459,"id":46,"size":4179837.48,"stdErr":4179837.48,"vColor":12,"vColorValue":12,"vSize":4179837.48,"w":0.005913115007032239,"x0":0.9897503185736354,"y0":0.5955680890756764},{"name":"Ministry of Education - Schools","color":"#61A7D2","h":0.01189926290813171,"id":47,"size":9372288.58,"stdErr":9372288.58,"vColor":97,"vColorValue":97,"vSize":9372288.58,"w":0.007678807526433216,"x0":0.9820715110472021,"y0":0.5889772300029944},{"name":"Ministry of Education","color":"#1F6EB3","h":0.2648739175419362,"id":48,"size":3487028930.56,"stdErr":3487028930.56,"vColor":647,"vColorValue":647,"vSize":3487028930.56,"w":0.1283466522947606,"x0":0.8716533477052393,"y0":0.7351260824580638},{"name":"Nanyang Polytechnic","color":"#4695C7","h":0.06482803704195217,"id":49,"size":135887907.73,"stdErr":135887907.73,"vColor":292,"vColorValue":292,"vSize":135887907.73,"w":0.0204355405485573,"x0":0.9624747193661802,"y0":0.6130868623845371},{"name":"Nanyang Technological University","color":"#6BAED6","h":0.0004898615742168243,"id":50,"size":47244,"stdErr":47244,"vColor":12,"vColorValue":12,"vSize":47244,"w":0.0009402459613610059,"x0":0.9990597540386389,"y0":0.5889772300029944},{"name":"Ngee Ann Polytechnic","color":"#4695C7","h":0.0572111830315746,"id":51,"size":181963887.33,"stdErr":181963887.33,"vColor":283,"vColorValue":283,"vSize":181963887.33,"w":0.03100790804646019,"x0":0.9689920919535397,"y0":0.6779148994264893},{"name":"Northlight School","color":"#6BAED6","h":0.006579256521528938,"id":52,"size":634527,"stdErr":634527,"vColor":4,"vColorValue":4,"vSize":634527,"w":0.0009402459613610216,"x0":0.9990597540386389,"y0":0.5894670915772111},{"name":"Raffles Girls' School (Secondary)","color":"#67ABD4","h":0.01221036947341098,"id":53,"size":9617327.33,"stdErr":9617327.33,"vColor":39,"vColorValue":39,"vSize":9617327.33,"w":0.007678807526433276,"x0":0.9820715110472021,"y0":0.6008764929111261},{"name":"Republic Polytechnic","color":"#4A97C9","h":0.04543472688692746,"id":54,"size":142522675.91,"stdErr":142522675.91,"vColor":264,"vColorValue":264,"vSize":142522675.91,"w":0.03058188392690762,"x0":0.9318928354392725,"y0":0.6324801725395618},{"name":"School of Science and Technology, Singapore","color":"#6BAED6","h":0.007069118095745763,"id":55,"size":2462667.1,"stdErr":2462667.1,"vColor":7,"vColorValue":7,"vSize":2462667.1,"w":0.003396320457971271,"x0":0.9956634335806677,"y0":0.5889772300029944},{"name":"Science Centre Board","color":"#5DA5D0","h":0.09869629728705151,"id":56,"size":609837238.66,"stdErr":609837238.66,"vColor":100,"vColorValue":100,"vSize":609837238.66,"w":0.06023948773403325,"x0":0.8716533477052393,"y0":0.6364297851710122},{"name":"Singapore Chinese Girls' School","color":"#6BAED6","h":0.006413201293430755,"id":57,"size":2852677.55,"stdErr":2852677.55,"vColor":15,"vColorValue":15,"vSize":2852677.55,"w":0.004336566419332293,"x0":0.9956634335806677,"y0":0.5960463480987401},{"name":"Singapore Examinations and Assessment Board","color":"#67ABD4","h":0.02410963238154268,"id":58,"size":48462674.16,"stdErr":48462674.16,"vColor":37,"vColorValue":37,"vSize":48462674.16,"w":0.01959679168102193,"x0":0.9624747193661802,"y0":0.5889772300029944},{"name":"Singapore Polytechnic","color":"#4695C7","h":0.05721118303157453,"id":59,"size":217709783.01,"stdErr":217709783.01,"vColor":270,"vColorValue":270,"vSize":217709783.01,"w":0.03709925651426717,"x0":0.9318928354392725,"y0":0.6779148994264893},{"name":"SkillsFuture Singapore","color":"#549ECD","h":0.06482803704195207,"id":60,"size":113639715.98,"stdErr":113639715.98,"vColor":185,"vColorValue":185,"vSize":113639715.98,"w":0.01708974008526244,"x0":0.9829102599147376,"y0":0.6130868623845372},{"name":"Temasek Polytechnic","color":"#4695C7","h":0.04745255516801788,"id":61,"size":293205885.19,"stdErr":293205885.19,"vColor":274,"vColorValue":274,"vSize":293205885.19,"w":0.06023948773403321,"x0":0.8716533477052393,"y0":0.5889772300029944}]},{"name":"MOF","color":"#0F59A3","h":0.1012213847044651,"id":62,"size":1304109449.38,"stdErr":1304109449.38,"vColor":846,"vColorValue":846,"vSize":1304109449.38,"w":0.1256058761560297,"x0":0.720847766492558,"y0":0,"children":[{"name":"Accounting And Corporate Regulatory Authority","color":"#6BAED6","h":0.05759672986540915,"id":63,"size":166046740.74,"stdErr":166046740.74,"vColor":18,"vColorValue":18,"vSize":166046740.74,"w":0.02810610851100538,"x0":0.8183475341375824,"y0":0.04362465483905584},{"name":"Inland Revenue Authority of Singapore","color":"#64A9D3","h":0.05894601885776313,"id":64,"size":313529204.86,"stdErr":313529204.86,"vColor":66,"vColorValue":66,"vSize":313529204.86,"w":0.05185512816393362,"x0":0.7664924059736488,"y0":0.04227536584670192},{"name":"Ministry of Finance-Accountant-General's Department","color":"#6BAED6","h":0.03466794390476353,"id":65,"size":55261584.08,"stdErr":55261584.08,"vColor":22,"vColorValue":22,"vSize":55261584.08,"w":0.01554044441631029,"x0":0.8309131982322775,"y0":0.008956710934292299},{"name":"Ministry of Finance-Ministry Headquarter","color":"#67ABD4","h":0.04362465483905589,"id":66,"size":56227562.91,"stdErr":56227562.91,"vColor":25,"vColorValue":25,"vSize":56227562.91,"w":0.01256566409469508,"x0":0.8183475341375824,"y0":0},{"name":"Ministry of Finance - Singapore Customs","color":"#64A9D3","h":0.04227536584670192,"id":67,"size":224859322.07,"stdErr":224859322.07,"vColor":65,"vColorValue":65,"vSize":224859322.07,"w":0.05185512816393364,"x0":0.7664924059736488,"y0":0},{"name":"Ministry of Finance - Vital","color":"#2171B5","h":0.1012213847044651,"id":68,"size":473907809.75,"stdErr":473907809.75,"vColor":626,"vColorValue":626,"vSize":473907809.75,"w":0.04564463948109067,"x0":0.720847766492558,"y0":0},{"name":"Tote Board","color":"#6BAED6","h":0.008956710934292367,"id":69,"size":14277224.97,"stdErr":14277224.97,"vColor":24,"vColorValue":24,"vSize":14277224.97,"w":0.01554044441631031,"x0":0.8309131982322775,"y0":0}]},{"name":"MOH","color":"#083A7A","h":0.3006714237099299,"id":70,"size":3593118019.57,"stdErr":3593118019.57,"vColor":1142,"vColorValue":1142,"vSize":3593118019.57,"w":0.1165057923670959,"x0":0.8834942076329041,"y0":0.2883058062930643,"children":[{"name":"Health Promotion Board","color":"#3B8BC2","h":0.05950114542672684,"id":71,"size":429670584.87,"stdErr":429670584.87,"vColor":388,"vColorValue":388,"vSize":429670584.87,"w":0.07040094462807962,"x0":0.8834942076329041,"y0":0.2883058062930643},{"name":"Health Sciences Authority","color":"#3E8EC3","h":0.05950114542672684,"id":72,"size":278710882.22,"stdErr":278710882.22,"vColor":350,"vColorValue":350,"vSize":278710882.22,"w":0.04566640137199543,"x0":0.9538951522609836,"y0":0.2883058062930643},{"name":"Ministry of Health-Ministry Headquarter","color":"#3B8BC2","h":0.2411702782832031,"id":73,"size":2882060629.48,"stdErr":2882060629.48,"vColor":381,"vColorValue":381,"vSize":2882060629.48,"w":0.1165057923670959,"x0":0.8834942076329041,"y0":0.3478069517197912},{"name":"Singapore Medical Council","color":"#6BAED6","h":0.0595011454267269,"id":74,"size":2675923,"stdErr":2675923,"vColor":23,"vColorValue":23,"vSize":2675923,"w":0.0004384463670208987,"x0":0.9995615536329792,"y0":0.2883058062930643}]},{"name":"MOM","color":"#3B8BC2","h":0.1204028846519761,"id":75,"size":910500689.5,"stdErr":910500689.5,"vColor":383,"vColorValue":383,"vSize":910500689.5,"w":0.07372445599804628,"x0":0.9262755440019536,"y0":0.1679029216410882,"children":[{"name":"Central Provident Fund Board","color":"#509CCB","h":0.03420664792484692,"id":76,"size":196219856.24,"stdErr":196219856.24,"vColor":215,"vColorValue":215,"vSize":196219856.24,"w":0.05592430880977773,"x0":0.9262755440019536,"y0":0.1679029216410882},{"name":"Ministry of Manpower-Information Systems &amp; Technology Department","color":"#6BAED6","h":0.02649062833170028,"id":77,"size":30560816.59,"stdErr":30560816.59,"vColor":13,"vColorValue":13,"vSize":30560816.59,"w":0.0112471084973571,"x0":0.9821998528117313,"y0":0.1784640165652465},{"name":"Ministry of Manpower-Labour Relations Department","color":"#6BAED6","h":0.007643740000089266,"id":78,"size":4031041.68,"stdErr":4031041.68,"vColor":3,"vColorValue":3,"vSize":4031041.68,"w":0.00514137844083644,"x0":0.9948586215591634,"y0":0.1708202765651575},{"name":"Ministry of Manpower-Ministry Headquarter","color":"#61A7D2","h":0.08619623672712921,"id":79,"size":494448132.31,"stdErr":494448132.31,"vColor":82,"vColorValue":82,"vSize":494448132.31,"w":0.05592430880977779,"x0":0.9262755440019536,"y0":0.2021095695659351},{"name":"Ministry of Manpower - Foreign Manpower Management Division","color":"#6BAED6","h":0.02829826361649693,"id":80,"size":51667231.57,"stdErr":51667231.57,"vColor":9,"vColorValue":9,"vSize":51667231.57,"w":0.01780014718826848,"x0":0.9821998528117313,"y0":0.204954644896947},{"name":"Ministry of Manpower - Occupational Safety &amp; Health Division","color":"#6BAED6","h":0.01056109492415838,"id":81,"size":13712992,"stdErr":13712992,"vColor":3,"vColorValue":3,"vSize":13712992,"w":0.01265876874743204,"x0":0.9821998528117313,"y0":0.1679029216410882},{"name":"Ministry of Manpower - Work Pass Division","color":"#6BAED6","h":0.05505289777962054,"id":82,"size":100516090.2,"stdErr":100516090.2,"vColor":11,"vColorValue":11,"vSize":100516090.2,"w":0.01780014718826848,"x0":0.9821998528117313,"y0":0.2332529085134438},{"name":"Singapore Labour Foundation","color":"#6BAED6","h":0.002917354924069117,"id":83,"size":1538511.16,"stdErr":1538511.16,"vColor":4,"vColorValue":4,"vSize":1538511.16,"w":0.005141378440836471,"x0":0.9948586215591634,"y0":0.1679029216410882},{"name":"Workforce Singapore","color":"#67ABD4","h":0.02649062833170034,"id":84,"size":17806017.75,"stdErr":17806017.75,"vColor":43,"vColorValue":43,"vSize":17806017.75,"w":0.006553038690911383,"x0":0.9934469613090884,"y0":0.1784640165652465}]},{"name":"MOT","color":"#083776","h":1,"id":85,"size":35664601010.36,"stdErr":35664601010.36,"vColor":1163,"vColorValue":1163,"vSize":35664601010.36,"w":0.3477006955495617,"x0":0,"y0":0,"children":[{"name":"Civil Aviation Authority of Singapore","color":"#57A0CE","h":0.02631134233150165,"id":86,"size":613351858.28,"stdErr":613351858.28,"vColor":158,"vColorValue":158,"vSize":613351858.28,"w":0.2272662102045389,"x0":0,"y0":0},{"name":"Land Transport Authority","color":"#1664AB","h":0.9736886576684983,"id":87,"size":34726217484.06,"stdErr":34726217484.06,"vColor":753,"vColorValue":753,"vSize":34726217484.06,"w":0.3477006955495617,"x0":0,"y0":0.02631134233150165},{"name":"Maritime and Port Authority of Singapore","color":"#4D99CA","h":0.02631134233150165,"id":88,"size":265080292.52,"stdErr":265080292.52,"vColor":230,"vColorValue":230,"vSize":265080292.52,"w":0.09822060970006748,"x0":0.2272662102045389,"y0":0},{"name":"Ministry of Transport - Ministry Headquarter","color":"#6BAED6","h":0.02631134233150165,"id":89,"size":58839891,"stdErr":58839891,"vColor":20,"vColorValue":20,"vSize":58839891,"w":0.02180203557859536,"x0":0.3254868199046064,"y0":0},{"name":"Public Transport Council","color":"#6BAED6","h":0.02631134233150165,"id":90,"size":1111484.5,"stdErr":1111484.5,"vColor":2,"vColorValue":2,"vSize":1111484.5,"w":0.0004118400663600516,"x0":0.3472888554832018,"y0":0}]},{"name":"MSE","color":"#08306B","h":0.3285897421127955,"id":91,"size":12576675306.39,"stdErr":12576675306.39,"vColor":1712,"vColorValue":1712,"vSize":12576675306.39,"w":0.3731470709429963,"x0":0.3477006955495617,"y0":0,"children":[{"name":"Ministry of Sustainability and the Environment","color":"#6BAED6","h":0.02107199478723106,"id":92,"size":83117664.83,"stdErr":83117664.83,"vColor":14,"vColorValue":14,"vSize":83117664.83,"w":0.0384552706944476,"x0":0.6823924957981105,"y0":0},{"name":"National Environment Agency","color":"#2E7EBB","h":0.3075177473255644,"id":93,"size":5298569357.87,"stdErr":5298569357.87,"vColor":508,"vColorValue":508,"vSize":5298569357.87,"w":0.1679796331973824,"x0":0.5528681332951756,"y0":0.02107199478723106},{"name":"Public Utilities Board","color":"#084F9A","h":0.3285897421127955,"id":94,"size":6915032835.31,"stdErr":6915032835.31,"vColor":938,"vColorValue":938,"vSize":6915032835.31,"w":0.2051674377456139,"x0":0.3477006955495617,"y0":0},{"name":"Singapore Food Agency","color":"#4A97C9","h":0.02107199478723106,"id":95,"size":279955448.38,"stdErr":279955448.38,"vColor":252,"vColorValue":252,"vSize":279955448.38,"w":0.1295243625029348,"x0":0.5528681332951756,"y0":0}]},{"name":"MSF","color":"#4393C6","h":0.07488093473960115,"id":96,"size":475254591.63,"stdErr":475254591.63,"vColor":297,"vColorValue":297,"vSize":475254591.63,"w":0.06187614578717236,"x0":0.9381238542128275,"y0":0.09302198690148722,"children":[{"name":"Ministry of Social and Family Development - Ministry Headquarter","color":"#4D99CA","h":0.07488093473960115,"id":97,"size":408671019.33,"stdErr":408671019.33,"vColor":220,"vColorValue":220,"vSize":408671019.33,"w":0.05320724516164609,"x0":0.9381238542128275,"y0":0.09302198690148722},{"name":"National Council of Social Service","color":"#61A7D2","h":0.0748809347396011,"id":98,"size":66583572.3,"stdErr":66583572.3,"vColor":77,"vColorValue":77,"vSize":66583572.3,"w":0.008668900625526268,"x0":0.9913310993744736,"y0":0.09302198690148727}]},{"name":"MTI","color":"#08306B","h":0.4110227699970057,"id":99,"size":6357920701,"stdErr":6357920701,"vColor":2628,"vColorValue":2628,"vSize":6357920701,"w":0.1508055812126813,"x0":0.720847766492558,"y0":0.5889772300029943,"children":[{"name":"Agency for Science, Technology and Research","color":"#084F9A","h":0.1584689131914252,"id":100,"size":836894043.29,"stdErr":836894043.29,"vColor":931,"vColorValue":931,"vSize":836894043.29,"w":0.05148664427397689,"x0":0.720847766492558,"y0":0.5889772300029943},{"name":"Competition and Consumer Commission of Singapore (CCCS)","color":"#6BAED6","h":0.001242868112064766,"id":101,"size":1785807.56,"stdErr":1785807.56,"vColor":19,"vColorValue":19,"vSize":1785807.56,"w":0.01400805380570702,"x0":0.8576452938995321,"y0":0.5889772300029943},{"name":"Economic Development Board","color":"#5AA2CF","h":0.03219935486187376,"id":102,"size":46265449.07,"stdErr":46265449.07,"vColor":137,"vColorValue":137,"vSize":46265449.07,"w":0.01400805380570705,"x0":0.8576452938995321,"y0":0.6218350191804148},{"name":"Energy Market Authority of Singapore","color":"#57A0CE","h":0.0316149210653557,"id":103,"size":45425708.89,"stdErr":45425708.89,"vColor":157,"vColorValue":157,"vSize":45425708.89,"w":0.01400805380570705,"x0":0.8576452938995321,"y0":0.590220098115059},{"name":"Enterprise Singapore","color":"#5AA2CF","h":0.03877453770940834,"id":104,"size":89266728.51000001,"stdErr":89266728.51000001,"vColor":122,"vColorValue":122,"vSize":89266728.51000001,"w":0.02244456433481658,"x0":0.8352007295647156,"y0":0.6152598363328803},{"name":"Jurong Town Corporation","color":"#2373B6","h":0.2525538568055805,"id":105,"size":3906638540.52,"stdErr":3906638540.52,"vColor":589,"vColorValue":589,"vSize":3906638540.52,"w":0.1508055812126813,"x0":0.720847766492558,"y0":0.7474461431944195},{"name":"Ministry of Trade &amp; Industry-Department of Statistics","color":"#6BAED6","h":0.02628260632988589,"id":106,"size":60507808.02,"stdErr":60507808.02,"vColor":17,"vColorValue":17,"vSize":60507808.02,"w":0.02244456433481659,"x0":0.8352007295647156,"y0":0.5889772300029943},{"name":"Ministry of Trade &amp; Industry-Ministry Headquarter","color":"#6BAED6","h":0.05955628761320705,"id":107,"size":384040882.91,"stdErr":384040882.91,"vColor":24,"vColorValue":24,"vSize":384040882.91,"w":0.06286631879818072,"x0":0.7723344107665349,"y0":0.5889772300029943},{"name":"Sentosa Development Corporation","color":"#4D99CA","h":0.09891262557821813,"id":108,"size":637825048.88,"stdErr":637825048.88,"vColor":237,"vColorValue":237,"vSize":637825048.88,"w":0.06286631879818076,"x0":0.7723344107665349,"y0":0.6485335176162014},{"name":"Singapore Tourism Board","color":"#3888C1","h":0.09341176915213095,"id":109,"size":349270683.35,"stdErr":349270683.35,"vColor":395,"vColorValue":395,"vSize":349270683.35,"w":0.03645261814052363,"x0":0.8352007295647156,"y0":0.6540343740422886}]},{"name":"PMO","color":"#2676B7","h":0.08253307428076027,"id":110,"size":776047075.24,"stdErr":776047075.24,"vColor":569,"vColorValue":569,"vSize":776047075.24,"w":0.09167021156423982,"x0":0.8464536426485877,"y0":0,"children":[{"name":"Civil Service College","color":"#5DA5D0","h":0.02362812942223121,"id":111,"size":23637960.97,"stdErr":23637960.97,"vColor":110,"vColorValue":110,"vSize":23637960.97,"w":0.009753238848457236,"x0":0.9233461884043276,"y0":0.005492959933897599},{"name":"Monetary Authority of Singapore","color":"#4695C7","h":0.08253307428076027,"id":112,"size":384844263.37,"stdErr":384844263.37,"vColor":289,"vColorValue":289,"vSize":384844263.37,"w":0.04545955544191908,"x0":0.8464536426485877,"y0":0},{"name":"Prime Minister's Office-Corrupt Practices Investigation Bureau","color":"#6BAED6","h":0.01993577887513376,"id":113,"size":30218357.8,"stdErr":30218357.8,"vColor":22,"vColorValue":22,"vSize":30218357.8,"w":0.01477766580849995,"x0":0.9233461884043276,"y0":0.02912108935612895},{"name":"Prime Minister's Office-Elections Department","color":"#6BAED6","h":0.02643283043920699,"id":114,"size":85223855.79000001,"stdErr":85223855.79000001,"vColor":19,"vColorValue":19,"vSize":85223855.79000001,"w":0.03143299031382075,"x0":0.8919131980905068,"y0":0},{"name":"Prime Minister's Office-Ministry Headquarter","color":"#67ABD4","h":0.02362812942223112,"id":115,"size":12177207,"stdErr":12177207,"vColor":28,"vColorValue":28,"vSize":12177207,"w":0.005024426960042714,"x0":0.9330994272527848,"y0":0.005492959933897686},{"name":"Prime Minister's Office-Public Service Division","color":"#64A9D3","h":0.05610024384155328,"id":116,"size":180876546.76,"stdErr":180876546.76,"vColor":62,"vColorValue":62,"vSize":180876546.76,"w":0.0314329903138208,"x0":0.8919131980905068,"y0":0.02643283043920699},{"name":"Prime Minister's Office - National Research Foundation","color":"#67ABD4","h":0.03347620604949762,"id":117,"size":50742736.39,"stdErr":50742736.39,"vColor":25,"vColorValue":25,"vSize":50742736.39,"w":0.01477766580849995,"x0":0.9233461884043276,"y0":0.04905686823126272},{"name":"Prime Minister's Office - National Security Co-ordination Secretariat","color":"#6BAED6","h":0.005492959933897686,"id":118,"size":469284,"stdErr":469284,"vColor":2,"vColorValue":2,"vSize":469284,"w":0.000832908905885405,"x0":0.937290945306942,"y0":0},{"name":"Prime Minister's Office - Smart Nation and Digital Government Office","color":"#6BAED6","h":0.005492959933897697,"id":119,"size":1633553,"stdErr":1633553,"vColor":4,"vColorValue":4,"vSize":1633553,"w":0.002899312232967062,"x0":0.934391633073975,"y0":0},{"name":"Prime Minister's Office - Strategy Group","color":"#6BAED6","h":0.005492959933897697,"id":120,"size":6223310.16,"stdErr":6223310.16,"vColor":8,"vColorValue":8,"vSize":6223310.16,"w":0.01104544466964748,"x0":0.9233461884043276,"y0":0}]}]},"meta":{"type":"value","vSize":"total_award","vColor":"tender_count","stdErr":"total_award","algorithm":"pivotSize","vpCoorX":[0.02812148481439815,0.9718785151856019],"vpCoorY":[0.1716850393700787,0.9103149606299213],"aspRatio":1.788798157900348,"range":[0,1200],"mapping":[null,null,null],"draw":true},"options":{"id":"id","celltext":"name","valueField":"size"}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="time-series" class="level2">
+<h2 class="anchored" data-anchor-id="time-series">Time Series</h2>
+<p>Write a function for plotting custom time series data</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to plot time series graph</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>plot_ts <span class="ot">&lt;-</span> <span class="cf">function</span>(ydat, y, <span class="at">ministry =</span> <span class="cn">NULL</span>){</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>   p <span class="ot">&lt;-</span> ydat <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>({{y}}) <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">"Ministry:"</span>, ministry), <span class="at">x=</span><span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>     <span class="fu">theme</span>(<span class="at">axis.title.y=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">7</span>, <span class="at">angle=</span><span class="dv">0</span>, <span class="at">vjust=</span><span class="fl">0.5</span>),</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">axis.text=</span><span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">6</span>, <span class="at">angle=</span><span class="dv">0</span>, <span class="at">vjust=</span><span class="fl">0.5</span>))</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>   p</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>procurement_total <span class="ot">&lt;-</span> procurement <span class="sc">%&gt;%</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(award_date) <span class="sc">%&gt;%</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_award =</span> <span class="fu">sum</span>(awarded_amt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tsibble</span>(<span class="at">index =</span> award_date)</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ts</span>(procurement_total, total_award, <span class="st">"All Ministries"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="THE_03_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The data is has a very large range, and its recurrent sharp vertical lines reflects the noise in the data. It’s daily granularity makes it hard to see any pattern or to tell trends. The non-regularity of daily data also presents problems.</p>
+<p>Here, an attempt is made to group the data into monthly aggregates, and try to plot the time-series again.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>procurement_total <span class="ot">&lt;-</span> procurement <span class="sc">%&gt;%</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">yearmonth</span>(award_date)) <span class="sc">%&gt;%</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_award =</span> <span class="fu">sum</span>(awarded_amt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tsibble</span>(<span class="at">index =</span> month)</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ts</span>(procurement_total, total_award, <span class="st">"All Ministries"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="THE_03_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>procurement <span class="sc">%&gt;%</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">yearmonth</span>(award_date)) <span class="sc">%&gt;%</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_award =</span> <span class="fu">sum</span>(awarded_amt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> month, <span class="at">y =</span> total_award)) <span class="sc">+</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Monthly Procurement Awards"</span>,</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Month"</span>, <span class="at">y =</span> <span class="st">"Total Awarded Amount"</span>) <span class="sc">+</span></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="THE_03_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This looks better, which allows us to fit a ARIMA model</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>mdls <span class="ot">&lt;-</span> procurement_total <span class="sc">%&gt;%</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">model</span>(</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">search_bic =</span> <span class="fu">ARIMA</span>(total_award, <span class="at">ic=</span><span class="st">"bic"</span>),</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">search_aic =</span> <span class="fu">ARIMA</span>(total_award, <span class="at">ic=</span><span class="st">"aic"</span>)</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>mdls <span class="sc">%&gt;%</span> <span class="fu">select</span>(search_aic) <span class="sc">%&gt;%</span> <span class="fu">report</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Series: total_award 
+Model: ARIMA(0,0,0) w/ mean 
+
+Coefficients:
+        constant
+      1720846940
+s.e.    91158976
+
+sigma^2 estimated as 4.707e+17:  log likelihood=-1305.42
+AIC=2614.84   AICc=2615.05   BIC=2619.03</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>mdls <span class="sc">%&gt;%</span> <span class="fu">select</span>(search_bic) <span class="sc">%&gt;%</span> <span class="fu">report</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Series: total_award 
+Model: ARIMA(0,0,0) w/ mean 
+
+Coefficients:
+        constant
+      1720846940
+s.e.    91158976
+
+sigma^2 estimated as 4.707e+17:  log likelihood=-1305.42
+AIC=2614.84   AICc=2615.05   BIC=2619.03</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>selected_ministry <span class="ot">&lt;-</span> <span class="st">"MINISTRY OF TRANSPORT"</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>ministry_total <span class="ot">&lt;-</span> procurement <span class="sc">%&gt;%</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ministry <span class="sc">==</span> selected_ministry) <span class="sc">%&gt;%</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">yearmonth</span>(award_date)) <span class="sc">%&gt;%</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_award =</span> <span class="fu">sum</span>(awarded_amt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tsibble</span>(<span class="at">index =</span> month) <span class="sc">%&gt;%</span></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fill_gaps</span>(<span class="at">total_award =</span> <span class="dv">0</span>)</span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ts</span>(ministry_total, total_award, selected_ministry)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="THE_03_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">nrow</span>(ministry_total) <span class="sc">&gt;</span> <span class="dv">1</span>){</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  mdls <span class="ot">&lt;-</span> ministry_total <span class="sc">%&gt;%</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">model</span>(</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">search_bic =</span> <span class="fu">ARIMA</span>(total_award, <span class="at">ic=</span><span class="st">"bic"</span>),</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">search_aic =</span> <span class="fu">ARIMA</span>(total_award, <span class="at">ic=</span><span class="st">"aic"</span>)</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>  mdls <span class="sc">%&gt;%</span> <span class="fu">select</span>(search_aic) <span class="sc">%&gt;%</span> <span class="fu">report</span>()</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>  mdls <span class="sc">%&gt;%</span> <span class="fu">select</span>(search_bic) <span class="sc">%&gt;%</span> <span class="fu">report</span>()</span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Not enough data to fit a time-series"</span>)</span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Series: total_award 
+Model: ARIMA(0,0,0) w/ mean 
+
+Coefficients:
+       constant
+      594410017
+s.e.   53556888
+
+sigma^2 estimated as 2.243e+17:  log likelihood=-1283.19
+AIC=2570.37   AICc=2570.58   BIC=2574.56
+Series: total_award 
+Model: ARIMA(0,0,0) w/ mean 
+
+Coefficients:
+       constant
+      594410017
+s.e.   53556888
+
+sigma^2 estimated as 2.243e+17:  log likelihood=-1283.19
+AIC=2570.37   AICc=2570.58   BIC=2574.56</code></pre>
+</div>
+</div>
+<p>Ministry of National Development, Ministry of Defence, Ministry of Foreign Affairs, Ministry of Law, State Courts, Ministry of Finance are the ones that have non ARIMA(0,0,0) models</p>
+<p>We try the simpler ETS models for more potential insights.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>selected_ministry <span class="ot">&lt;-</span> <span class="st">"MINISTRY OF TRANSPORT"</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>ministry_total <span class="ot">&lt;-</span> procurement <span class="sc">%&gt;%</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ministry <span class="sc">==</span> selected_ministry) <span class="sc">%&gt;%</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">yearmonth</span>(award_date)) <span class="sc">%&gt;%</span></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_award =</span> <span class="fu">sum</span>(awarded_amt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tsibble</span>(<span class="at">index =</span> month) <span class="sc">%&gt;%</span></span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fill_gaps</span>(<span class="at">total_award =</span> <span class="dv">0</span>)</span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ts</span>(ministry_total, total_award, selected_ministry)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="THE_03_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">nrow</span>(ministry_total) <span class="sc">&gt;</span> <span class="dv">1</span>){</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  mdls <span class="ot">&lt;-</span> ministry_total <span class="sc">%&gt;%</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">model</span>(</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">ets =</span> <span class="fu">ETS</span>(total_award),</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">arima =</span> <span class="fu">ARIMA</span>(total_award, <span class="at">ic=</span><span class="st">"bic"</span>)</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>  mdls <span class="sc">%&gt;%</span> <span class="fu">select</span>(ets) <span class="sc">%&gt;%</span> <span class="fu">report</span>()</span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Not enough data to fit a time-series"</span>)</span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Series: total_award 
+Model: ETS(A,N,N) 
+  Smoothing parameters:
+    alpha = 0.007845534 
+
+  Initial states:
+      l[0]
+ 517995200
+
+  sigma^2:  2.337524e+17
+
+     AIC     AICc      BIC 
+2649.209 2649.637 2655.492 </code></pre>
+</div>
+</div>
+<p>ETS(A,N,N) confirms that the model is level and has no features to speak of.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>fc <span class="ot">&lt;-</span> mdls <span class="sc">%&gt;%</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">forecast</span>(<span class="at">h =</span> <span class="dv">6</span>)</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the forecast</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>fc <span class="sc">%&gt;%</span></span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>(ministry_total) <span class="sc">+</span></span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">paste</span>(<span class="st">"Forecast for"</span>, selected_ministry),</span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Awarded Amount"</span>,</span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Month"</span></span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="THE_03_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
